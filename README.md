@@ -8,3 +8,5 @@ The game is live on:
 The game works best on Google Chrome!
 
 [ketanhwr.github.io/reflexio]: <http://ketanhwr.github.io/reflexio>
+
+*Note: The game is currently under development. Levels 1-4 are working fine as of now
