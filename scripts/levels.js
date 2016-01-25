@@ -360,6 +360,8 @@ function level1_click()
 	{
 		if(mousex > midx-190 && mousex < midx-90 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level1 = false;
+			init_level1 = false;
 			sceneNumber = 2;
 			clearInterval(gameTimer);
 			update();
@@ -367,12 +369,16 @@ function level1_click()
 		}
 		if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level1 = false;
+			init_level1 = false;
 			clearInterval(gameTimer);
 			update();
 			menu_click.play();
 		}
 		if(mousex > midx+90 && mousex < midx+190 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level1 = false;
+			init_level1 = false;
 			levelNumber++;
 			clearInterval(gameTimer);
 			update();
@@ -838,6 +844,8 @@ function level2_click()
 	{
 		if(mousex > midx-190 && mousex < midx-90 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level2 = false;
+			init_level2 = false;
 			sceneNumber = 2;
 			clearInterval(gameTimer);
 			update();
@@ -845,12 +853,16 @@ function level2_click()
 		}
 		if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level2 = false;
+			init_level2 = false;
 			clearInterval(gameTimer);
 			update();
 			menu_click.play();
 		}
 		if(mousex > midx+90 && mousex < midx+190 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level2 = false;
+			init_level2 = false;
 			levelNumber++;
 			clearInterval(gameTimer);
 			update();
@@ -1352,6 +1364,8 @@ function level3_click()
 	{
 		if(mousex > midx-190 && mousex < midx-90 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level3 = false;
+			init_level3 = false;
 			sceneNumber = 2;
 			clearInterval(gameTimer);
 			update();
@@ -1360,6 +1374,8 @@ function level3_click()
 		}
 		if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level3 = false;
+			init_level3 = false;
 			clearInterval(gameTimer);
 			update();
 			lastClickCounter = 0;
@@ -1367,6 +1383,8 @@ function level3_click()
 		}
 		if(mousex > midx+90 && mousex < midx+190 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level3 = false;
+			init_level3 = false;
 			levelNumber++;
 			clearInterval(gameTimer);
 			update();
@@ -1832,6 +1850,8 @@ function level4_click()
 	{
 		if(mousex > midx-190 && mousex < midx-90 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level4 = false;
+			init_level4 = false;
 			sceneNumber = 2;
 			clearInterval(gameTimer);
 			update();
@@ -1840,6 +1860,8 @@ function level4_click()
 		}
 		if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level4 = false;
+			init_level4 = false;
 			clearInterval(gameTimer);
 			update();
 			lastClickCounter = 0;
@@ -1847,6 +1869,8 @@ function level4_click()
 		}
 		if(mousex > midx+90 && mousex < midx+190 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			enemyDestroyed_level4 = false;
+			init_level4 = false;
 			levelNumber++;
 			clearInterval(gameTimer);
 			update();
