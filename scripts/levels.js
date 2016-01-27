@@ -261,7 +261,7 @@ function intersection_level1(rayX, rayY, rayTheta)
 	};
 	var currX, currY;
 	var radians = (rayTheta*Math.PI)/180.0;
-	for(var r = 2;;r++)
+	for(var r = 12;;r++)
 	{
 		currX = rayX + r*Math.cos(radians);
 		currY = rayY - r*Math.sin(radians);
@@ -745,7 +745,7 @@ function intersection_level2(rayX, rayY, rayTheta)
 	};
 	var currX, currY;
 	var radians = (rayTheta*Math.PI)/180.0;
-	for(var r = 2;;r++)
+	for(var r = 12;;r++)
 	{
 		currX = rayX + r*Math.cos(radians);
 		currY = rayY - r*Math.sin(radians);
@@ -1261,7 +1261,7 @@ function intersection_level3(rayX, rayY, rayTheta)
 	};
 	var currX, currY;
 	var radians = (rayTheta*Math.PI)/180.0;
-	for(var r = 2;;r++)
+	for(var r = 12;;r++)
 	{
 		currX = rayX + r*Math.cos(radians);
 		currY = rayY - r*Math.sin(radians);
@@ -1747,7 +1747,7 @@ function intersection_level4(rayX, rayY, rayTheta)
 	};
 	var currX, currY;
 	var radians = (rayTheta*Math.PI)/180.0;
-	for(var r = 2;;r++)
+	for(var r = 12;;r++)
 	{
 		currX = rayX + r*Math.cos(radians);
 		currY = rayY - r*Math.sin(radians);
