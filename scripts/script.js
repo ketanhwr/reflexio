@@ -98,66 +98,21 @@ canvas.addEventListener('click', function(evt) {
 	}
 	if(sceneNumber == 6)
 	{
-		if(levelNumber == 1)
-		{
-			level1_click();
-		}
-		if(levelNumber == 2)
-		{
-			level2_click();
-		}
-		if(levelNumber == 3)
-		{
-			level3_click();
-		}
-		if(levelNumber == 4)
-		{
-			level4_click();
-		}
+		Level_click();
 	}
 })
 
 canvas.addEventListener('mousedown', function(evt) {
 	if(sceneNumber == 6)
 	{
-		if(levelNumber == 1)
-		{
-			level1_mousedown();
-		}
-		if(levelNumber == 2)
-		{
-			level2_mousedown();
-		}
-		if(levelNumber == 3)
-		{
-			level3_mousedown();
-		}
-		if(levelNumber == 4)
-		{
-			level4_mousedown();
-		}
+		Level_mousedown();
 	}
 })
 
 canvas.addEventListener('mouseup', function(evt) {
 	if(sceneNumber == 6)
 	{
-		if(levelNumber == 1)
-		{
-			level1_mouseup();
-		}
-		if(levelNumber == 2)
-		{
-			level2_mouseup();
-		}
-		if(levelNumber == 3)
-		{
-			level3_mouseup();
-		}
-		if(levelNumber == 4)
-		{
-			level4_mouseup();
-		}
+		Level_mouseup();
 	}
 })
 
@@ -199,22 +154,7 @@ function update()
 	}
 	if(sceneNumber == 6)
 	{
-		if(levelNumber == 1)
-		{
-			gameTimer = setInterval(level1, gameSpeed);
-		}
-		if(levelNumber == 2)
-		{
-			gameTimer = setInterval(level2, gameSpeed);
-		}
-		if(levelNumber == 3)
-		{
-			gameTimer = setInterval(level3, gameSpeed);
-		}
-		if(levelNumber == 4)
-		{
-			gameTimer = setInterval(level4, gameSpeed);
-		}
+		gameTimer = setInterval(Level, gameSpeed);
 	}
 }
 
