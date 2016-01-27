@@ -10,8 +10,11 @@ var runtime_level1 = 0;
 var mark_level1 = false;
 var ex_level1;
 var ey_level1 = 100;
+var fx_level1;
+var fy_level1 = 100;
 var enemyDestroyed_level1 = false;
 var a_level1 = [];
+var gameOver_level1 = false;
 
 function initialiseLevel1()
 {
@@ -22,7 +25,9 @@ function initialiseLevel1()
 	seconds_level1 = 0;
 	runtime_level1 = 0;
 	enemyDestroyed_level1 = false;
+	gameOver_level1 = false;
 	ex_level1 = width-140;
+	fx_level1 = midx-70;
 	myMirror = {
 		x: 200,
 		width: 100,
@@ -67,9 +72,18 @@ function drawGUI_level1()
 	gameArena.drawImage(mainShip, width-152, height-94, 150, 89);
 	gameArena.drawImage(restartIcon, width-40, 8, 30, 30);
 
-	gameArena.shadowBlur = 40*Math.abs(Math.sin(runtime_level1/20));
+	gameArena.shadowBlur = 50*Math.abs(Math.sin(runtime_level1/20));
 	gameArena.shadowColor = "#780000";
 	gameArena.drawImage(enemyShip, ex_level1, ey_level1, 120, 114.43);
+
+	gameArena.shadowBlur = 10;
+	gameArena.shadowColor = "#0DA114";
+	gameArena.drawImage(spaceStation, fx_level1, fy_level1);
+	gameArena.lineWidth = 0.05;
+	gameArena.beginPath();
+	gameArena.strokeStyle = "#0DA114";
+	gameArena.arc(fx_level1+76, fy_level1+83, 82, 0, 2*Math.PI);
+	gameArena.stroke();
 
 	gameArena.shadowBlur = 10;
 	gameArena.shadowColor = "#B32D00";
@@ -174,6 +188,11 @@ function level1()
 	if(enemyDestroyed_level1)
 	{
 		level1Finished();
+	}
+
+	if(gameOver_level1)
+	{
+		level1_gameOver();
 	}
 }
 
@@ -310,6 +329,13 @@ function intersection_level1(rayX, rayY, rayTheta)
 				return returnValue;
 			}
 		}
+		if(distancePoint(currX, currY, fx_level1+76, fy_level1+80) <= 82)
+		{
+			returnValue.x = currX;
+			returnValue.y = currY;
+			gameOver_level1 = true;
+			return returnValue;
+		}
 		if(currY < 0 || currY > height || currX < 0 || currX > width)
 		{
 			returnValue.x = currX;
@@ -321,10 +347,11 @@ function intersection_level1(rayX, rayY, rayTheta)
 
 function level1_click()
 {
-	if(!enemyDestroyed_level1)
+	if(!enemyDestroyed_level1 && !gameOver_level1)
 	{
 		if(mousex >= -40 && mousex <= 50 && mousey >= midy-350 && mousey <= midy-260) {
 			enemyDestroyed_level1 = false;
+			gameOver_level1 = false;
 			minutes_level1 = 0;
 			seconds_level1 = 0;
 			runtime_level1 = 0;
@@ -342,6 +369,7 @@ function level1_click()
 		}
 		if(mousex >= width-52 && mousex <= width+38 && mousey >= midy-350 && mousey <= midy-260) {
 			enemyDestroyed_level1 = false;
+			gameOver_level1 = false;
 			minutes_level1 = 0;
 			seconds_level1 = 0;
 			runtime_level1 = 0;
@@ -356,11 +384,12 @@ function level1_click()
 			menu_click.play();
 		}
 	}
-	else
+	else if(enemyDestroyed_level1)
 	{
 		if(mousex > midx-190 && mousex < midx-90 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
 			enemyDestroyed_level1 = false;
+			gameOver_level1 = false;
 			init_level1 = false;
 			sceneNumber = 2;
 			clearInterval(gameTimer);
@@ -370,6 +399,7 @@ function level1_click()
 		if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
 			enemyDestroyed_level1 = false;
+			gameOver_level1 = false;
 			init_level1 = false;
 			clearInterval(gameTimer);
 			update();
@@ -378,8 +408,31 @@ function level1_click()
 		if(mousex > midx+90 && mousex < midx+190 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
 			enemyDestroyed_level1 = false;
+			gameOver_level1 = false;
 			init_level1 = false;
 			levelNumber++;
+			clearInterval(gameTimer);
+			update();
+			menu_click.play();
+		}
+	}
+	else
+	{
+		if(mousex > midx-190+70 && mousex < midx-90+70 && mousey > midy-45+45 && mousey < midy-45+100)
+		{
+			enemyDestroyed_level1 = false;
+			gameOver_level1 = false;
+			init_level1 = false;
+			sceneNumber = 2;
+			clearInterval(gameTimer);
+			update();
+			menu_click.play();
+		}
+		if(mousex > midx-50+70 && mousex < midx+50+70 && mousey > midy-45+45 && mousey < midy-45+100)
+		{
+			enemyDestroyed_level1 = false;
+			gameOver_level1 = false;
+			init_level1 = false;
 			clearInterval(gameTimer);
 			update();
 			menu_click.play();
@@ -409,6 +462,30 @@ function level1Finished()
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.fillText("Level Completed!", midx, midy-45+15);
 	gameTimer = setInterval(drawLevel1Final, gameSpeed);
+}
+
+function level1_gameOver()
+{
+	canvas.style.cursor = "auto";
+	minutes_level1 = 0;
+	seconds_level1 = 0;
+	runtime_level1 = 0;
+	init_level1 = false;
+	clearInterval(gameTimer);
+	for(var i = 0;i < mirrorCount_level1;i++)
+	{
+		mirrorDrag_level1[i] = false;
+		canvas.removeEventListener("mousemove", level1_mousemove);
+	}
+	gameArena.clearRect(midx-220+2, midy-45-45+2, 440-4, 180-4);
+	gameArena.shadowBlur = 20;
+	gameArena.shadowColor = "#18CAE6";
+	drawRoundedRectangle(midx-220, midy-45-45, 440, 180, "#E6FFFF", 4);
+	gameArena.shadowBlur = 0;
+	gameArena.font = "40px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText("Game Over!", midx, midy-45+15);
+	gameTimer = setInterval(drawLevel1GO, gameSpeed);
 }
 
 function drawLevel1Final()
@@ -473,6 +550,62 @@ function drawLevel1Final()
 	gameArena.font = "50px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.fillText(">",midx+140,midy-45+92);
+
+	if(mark_level1)
+	{
+		canvas.style.cursor = "pointer";
+	}
+	else
+	{
+		canvas.style.cursor = "auto";
+	}
+}
+
+function drawLevel1GO()
+{
+	gameArena.clearRect(midx-220+14, midy-45+25, 440-28, 100);
+	mark_level1 = false;
+	var colorCheck;
+	var hoverCheck = 0;
+
+	if(mousex > midx-190+70 && mousex < midx-90+65 && mousey > midy-45+45 && mousey < midy-45+100)
+	{
+		mark_level1 = true;
+		hoverCheck = 1;
+	}
+	else
+	{
+		hoverCheck = 0;
+	}
+	gameArena.shadowBlur = 15;
+	gameArena.shadowColor = "#E6FFFF";
+	if(hoverCheck == 1) colorCheck = "#E6FFFF";
+	else colorCheck = "#18CAE6";
+	drawRoundedRectangle(midx-190+70, midy-45+45, 100, 60, colorCheck, 4);
+	gameArena.shadowBlur = 0;
+	gameArena.font = "50px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText("<",midx-143+70,midy-45+92);
+
+	if(mousex > midx-50+70 && mousex < midx+50+70 && mousey > midy-45+45 && mousey < midy-45+100)
+	{
+		mark_level1 = true;
+		hoverCheck = 1;
+	}
+	else
+	{
+		hoverCheck = 0;
+	}
+	gameArena.shadowBlur = 15;
+	gameArena.shadowColor = "#E6FFFF";
+	if(hoverCheck == 1) colorCheck = "#E6FFFF";
+	else colorCheck = "#18CAE6";
+	drawRoundedRectangle(midx-50+70, midy-45+45, 100, 60, colorCheck, 4);
+	gameArena.shadowBlur = 0;
+	gameArena.font = "50px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.shadowBlur = 0;
+	gameArena.drawImage(restartIcon, midx-15+70, midy-45+60, 30, 30);
 
 	if(mark_level1)
 	{

@@ -16,6 +16,9 @@ enemyShip.src = "sprites/spacestation2.png";
 var asteroid = new Image();
 asteroid.src = "sprites/asteroid.png";
 
+var spaceStation = new Image();
+spaceStation.src = "sprites/spacestation.png";
+
 var asteroidPoly = {
 	x1: 20,
 	y1: 0,
