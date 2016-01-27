@@ -2,7 +2,7 @@ var canvas = document.getElementById("arena");
 var gameArena = canvas.getContext("2d");
 var rect = canvas.getBoundingClientRect();
 
-var menu_click = document.getElementById("menu_click");
+var menu_click = new Audio("sounds/sound1.wav");
 
 var mainShip = new Image();
 mainShip.src = "sprites/turret1.png";
@@ -52,7 +52,6 @@ var mousex,mousey;
 //Most important Variables
 var sceneNumber = 1;
 var levelNumber = 1;
-var lastClickCounter = 0;
 //End
 
 canvas.addEventListener('mousemove', function(evt) {
@@ -153,13 +152,7 @@ for(var spaceOffset = 0;spaceOffset < 300;spaceOffset++)
 //End offset
 drawParticleFlag = true;
 
-clickCounter = setInterval(increaseCounter, gameSpeed);
 update();
-
-function increaseCounter()
-{
-	lastClickCounter++;
-}
 
 function update()
 {

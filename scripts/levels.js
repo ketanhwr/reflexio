@@ -15,6 +15,8 @@ var fy_level1 = 100;
 var enemyDestroyed_level1 = false;
 var a_level1 = [];
 var gameOver_level1 = false;
+var eh_level1 = 100;
+var fh_level1 = 100;
 
 function initialiseLevel1()
 {
@@ -28,6 +30,8 @@ function initialiseLevel1()
 	gameOver_level1 = false;
 	ex_level1 = width-140;
 	fx_level1 = midx-70;
+	eh_level1 = 100;
+	fh_level1 = 100;
 	myMirror = {
 		x: 200,
 		width: 100,
@@ -127,10 +131,43 @@ function drawGUI_level1()
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
 	drawRoundedRectangle(width-52, midy-350, 90, 90, colorCheck, 4);
-	gameArena.shadowBlur = 0;
-	gameArena.font = "50px Zorque";
-	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("<", 20, midy-270);
+
+	if(eh_level1 >= 2.0) {
+		gameArena.shadowBlur = 50;
+		gameArena.shadowColor = "#21E821";
+		gameArena.beginPath();
+		gameArena.lineWidth = 4;
+		gameArena.strokeStyle = "#21E821";
+		gameArena.moveTo(ex_level1+30, ey_level1-5);
+		gameArena.lineTo(ex_level1+30+50*(eh_level1/100.0), ey_level1-5);
+		gameArena.stroke();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(ex_level1+30, ey_level1-5, 2, 0, 2*Math.PI);
+		gameArena.fill();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(ex_level1+30+50*(eh_level1/100.0), ey_level1-5, 2, 0, 2*Math.PI);
+		gameArena.fill();
+	}
+	if(fh_level1 >= 2.0) {
+		gameArena.shadowBlur = 50;
+		gameArena.shadowColor = "#21E821";
+		gameArena.beginPath();
+		gameArena.lineWidth = 4;
+		gameArena.strokeStyle = "#21E821";
+		gameArena.moveTo(fx_level1+30+20, fy_level1-15);
+		gameArena.lineTo(fx_level1+30+20+50*(fh_level1/100.0), fy_level1-15);
+		gameArena.stroke();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(fx_level1+30+20, fy_level1-15, 2, 0, 2*Math.PI);
+		gameArena.fill();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(fx_level1+30+20+50*(fh_level1/100.0), fy_level1-15, 2, 0, 2*Math.PI);
+		gameArena.fill();
+	}
 }
 
 function level1()
@@ -148,6 +185,10 @@ function level1()
 
 	traceRay_level1();
 
+	if(eh_level1 <= 0)
+		enemyDestroyed_level1 = true;
+	if(fh_level1 <= 0)
+		gameOver_level1 = true;
 
 	if(runtime_level1%40 == 0)
 	{
@@ -303,21 +344,21 @@ function intersection_level1(rayX, rayY, rayTheta)
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level1 = true;
+			eh_level1 -= 0.3;
 			return returnValue;
 		}
 		if(checkLinePoint(currX, currY, ex_level1 + enemyTriangle.x2, ey_level1 + enemyTriangle.y2, ex_level1 + enemyTriangle.x3, ey_level1 + enemyTriangle.y3))
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level1 = true;
+			eh_level1 -= 0.3;
 			return returnValue;
 		}
 		if(checkLinePoint(currX, currY, ex_level1 + enemyTriangle.x3, ey_level1 + enemyTriangle.y3, ex_level1 + enemyTriangle.x1, ey_level1 + enemyTriangle.y1))
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level1 = true;
+			eh_level1 -= 0.3;
 			return returnValue;
 		}
 		for(var i = 0;i < a_level1.length;i++)
@@ -333,7 +374,7 @@ function intersection_level1(rayX, rayY, rayTheta)
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			gameOver_level1 = true;
+			fh_level1 -= 0.3;
 			return returnValue;
 		}
 		if(currY < 0 || currY > height || currX < 0 || currX > width)
@@ -634,6 +675,8 @@ var fy_level2 = 100;
 var enemyDestroyed_level2 = false;
 var a_level2 = [];
 var gameOver_level2 = false;
+var eh_level2 = 100;
+var fh_level2 = 100;
 
 function initialiseLevel2()
 {
@@ -648,6 +691,8 @@ function initialiseLevel2()
 	ey_level2 = 80;
 	fx_level2 = midx+100;
 	fy_level2 = 60;
+	eh_level2 = 100;
+	fh_level2 = 100;
 	myMirror = {
 		x: 200,
 		width: 0,
@@ -747,10 +792,43 @@ function drawGUI_level2()
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
 	drawRoundedRectangle(width-52, midy-350, 90, 90, colorCheck, 4);
-	gameArena.shadowBlur = 0;
-	gameArena.font = "50px Zorque";
-	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("<", 20, midy-270);
+
+	if(eh_level2 >= 2.0) {
+		gameArena.shadowBlur = 50;
+		gameArena.shadowColor = "#21E821";
+		gameArena.beginPath();
+		gameArena.lineWidth = 4;
+		gameArena.strokeStyle = "#21E821";
+		gameArena.moveTo(ex_level2+30, ey_level2-5);
+		gameArena.lineTo(ex_level2+30+50*(eh_level2/100.0), ey_level2-5);
+		gameArena.stroke();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(ex_level2+30, ey_level2-5, 2, 0, 2*Math.PI);
+		gameArena.fill();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(ex_level2+30+50*(eh_level2/100.0), ey_level2-5, 2, 0, 2*Math.PI);
+		gameArena.fill();
+	}
+	if(fh_level2 >= 2.0) {
+		gameArena.shadowBlur = 50;
+		gameArena.shadowColor = "#21E821";
+		gameArena.beginPath();
+		gameArena.lineWidth = 4;
+		gameArena.strokeStyle = "#21E821";
+		gameArena.moveTo(fx_level2+30+20, fy_level2-15);
+		gameArena.lineTo(fx_level2+30+20+50*(fh_level2/100.0), fy_level2-15);
+		gameArena.stroke();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(fx_level2+30+20, fy_level2-15, 2, 0, 2*Math.PI);
+		gameArena.fill();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(fx_level2+30+20+50*(fh_level2/100.0), fy_level2-15, 2, 0, 2*Math.PI);
+		gameArena.fill();
+	}
 }
 
 function level2()
@@ -767,6 +845,11 @@ function level2()
 	drawLevelSpace();
 
 	traceRay_level2();
+
+	if(eh_level2 <= 0)
+		enemyDestroyed_level2 = true;
+	if(fh_level2 <= 0)
+		gameOver_level2 = true;
 
 
 	if(runtime_level2%40 == 0)
@@ -923,21 +1006,21 @@ function intersection_level2(rayX, rayY, rayTheta)
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level2 = true;
+			eh_level2 -= 0.3;
 			return returnValue;
 		}
 		if(checkLinePoint(currX, currY, ex_level2 + enemyTriangle.x2, ey_level2 + enemyTriangle.y2, ex_level2 + enemyTriangle.x3, ey_level2 + enemyTriangle.y3))
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level2 = true;
+			eh_level2 -= 0.3;
 			return returnValue;
 		}
 		if(checkLinePoint(currX, currY, ex_level2 + enemyTriangle.x3, ey_level2 + enemyTriangle.y3, ex_level2 + enemyTriangle.x1, ey_level2 + enemyTriangle.y1))
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level2 = true;
+			eh_level2 -= 0.3;
 			return returnValue;
 		}
 		for(var i = 0;i < a_level2.length;i++)
@@ -953,7 +1036,7 @@ function intersection_level2(rayX, rayY, rayTheta)
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			gameOver_level2 = true;
+			fh_level2 -= 0.3;
 			return returnValue;
 		}
 		if(currY < 0 || currY > height || currX < 0 || currX > width)
@@ -1254,6 +1337,8 @@ var fy_level3 = 100;
 var enemyDestroyed_level3 = false;
 var a_level3 = [];
 var gameOver_level3 = false;
+var eh_level3 = 100;
+var fh_level3 = 100;
 
 function initialiseLevel3()
 {
@@ -1268,6 +1353,8 @@ function initialiseLevel3()
 	ey_level3 = 60;
 	fx_level3 = midx-20;
 	fy_level3 = midy-40;
+	eh_level3 = 100;
+	fh_level3 = 100;
 	myMirror = {
 		x: 200,
 		width: 0,
@@ -1398,10 +1485,43 @@ function drawGUI_level3()
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
 	drawRoundedRectangle(width-52, midy-350, 90, 90, colorCheck, 4);
-	gameArena.shadowBlur = 0;
-	gameArena.font = "50px Zorque";
-	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("<", 20, midy-270);
+
+	if(eh_level3 >= 2.0) {
+		gameArena.shadowBlur = 50;
+		gameArena.shadowColor = "#21E821";
+		gameArena.beginPath();
+		gameArena.lineWidth = 4;
+		gameArena.strokeStyle = "#21E821";
+		gameArena.moveTo(ex_level3+30, ey_level3-5);
+		gameArena.lineTo(ex_level3+30+50*(eh_level3/100.0), ey_level3-5);
+		gameArena.stroke();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(ex_level3+30, ey_level3-5, 2, 0, 2*Math.PI);
+		gameArena.fill();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(ex_level3+30+50*(eh_level3/100.0), ey_level3-5, 2, 0, 2*Math.PI);
+		gameArena.fill();
+	}
+	if(fh_level3 >= 2.0) {
+		gameArena.shadowBlur = 50;
+		gameArena.shadowColor = "#21E821";
+		gameArena.beginPath();
+		gameArena.lineWidth = 4;
+		gameArena.strokeStyle = "#21E821";
+		gameArena.moveTo(fx_level3+30+20, fy_level3-15);
+		gameArena.lineTo(fx_level3+30+20+50*(fh_level3/100.0), fy_level3-15);
+		gameArena.stroke();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(fx_level3+30+20, fy_level3-15, 2, 0, 2*Math.PI);
+		gameArena.fill();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(fx_level3+30+20+50*(fh_level3/100.0), fy_level3-15, 2, 0, 2*Math.PI);
+		gameArena.fill();
+	}
 }
 
 function level3()
@@ -1419,6 +1539,10 @@ function level3()
 
 	traceRay_level3();
 
+	if(eh_level3 <= 0)
+		enemyDestroyed_level3 = true;
+	if(fh_level3 <= 0)
+		gameOver_level3 = true;
 
 	if(runtime_level3%40 == 0)
 	{
@@ -1574,21 +1698,21 @@ function intersection_level3(rayX, rayY, rayTheta)
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level3 = true;
+			eh_level3 -= 0.3;
 			return returnValue;
 		}
 		if(checkLinePoint(currX, currY, ex_level3 + enemyTriangle.x2, ey_level3 + enemyTriangle.y2, ex_level3 + enemyTriangle.x3, ey_level3 + enemyTriangle.y3))
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level3 = true;
+			eh_level3 -= 0.3;
 			return returnValue;
 		}
 		if(checkLinePoint(currX, currY, ex_level3 + enemyTriangle.x3, ey_level3 + enemyTriangle.y3, ex_level3 + enemyTriangle.x1, ey_level3 + enemyTriangle.y1))
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level3 = true;
+			eh_level3 -= 0.3;
 			return returnValue;
 		}
 		for(var i = 0;i < a_level3.length;i++)
@@ -1604,7 +1728,7 @@ function intersection_level3(rayX, rayY, rayTheta)
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			gameOver_level3 = true;
+			fh_level3 -= 0.3;
 			return returnValue;
 		}
 		if(currY < 0 || currY > height || currX < 0 || currX > width)
@@ -1905,6 +2029,8 @@ var fy_level4 = 100;
 var enemyDestroyed_level4 = false;
 var a_level4 = [];
 var gameOver_level4 = false;
+var eh_level4 = 100;
+var fh_level4 = 100;
 
 function initialiseLevel4()
 {
@@ -1919,6 +2045,8 @@ function initialiseLevel4()
 	ey_level4 = 2;
 	fx_level4 = midx*(3/2);
 	fy_level4 = 200;
+	eh_level4 = 100;
+	fh_level4 = 100;
 	myMirror = {
 		x: 200,
 		width: 0,
@@ -2010,10 +2138,43 @@ function drawGUI_level4()
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
 	drawRoundedRectangle(width-52, midy-350, 90, 90, colorCheck, 4);
-	gameArena.shadowBlur = 0;
-	gameArena.font = "50px Zorque";
-	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("<", 20, midy-270);
+
+	if(eh_level4 >= 2.0) {
+		gameArena.shadowBlur = 50;
+		gameArena.shadowColor = "#21E821";
+		gameArena.beginPath();
+		gameArena.lineWidth = 4;
+		gameArena.strokeStyle = "#21E821";
+		gameArena.moveTo(ex_level4+30, ey_level4-5+130);
+		gameArena.lineTo(ex_level4+30+50*(eh_level4/100.0), ey_level4-5+130);
+		gameArena.stroke();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(ex_level4+30, ey_level4-5+130, 2, 0, 2*Math.PI);
+		gameArena.fill();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(ex_level4+30+50*(eh_level4/100.0), ey_level4-5+130, 2, 0, 2*Math.PI);
+		gameArena.fill();
+	}
+	if(fh_level4 >= 2.0) {
+		gameArena.shadowBlur = 50;
+		gameArena.shadowColor = "#21E821";
+		gameArena.beginPath();
+		gameArena.lineWidth = 4;
+		gameArena.strokeStyle = "#21E821";
+		gameArena.moveTo(fx_level4+30+20, fy_level4-15);
+		gameArena.lineTo(fx_level4+30+20+50*(fh_level4/100.0), fy_level4-15);
+		gameArena.stroke();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(fx_level4+30+20, fy_level4-15, 2, 0, 2*Math.PI);
+		gameArena.fill();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(fx_level4+30+20+50*(fh_level4/100.0), fy_level4-15, 2, 0, 2*Math.PI);
+		gameArena.fill();
+	}
 }
 
 function level4()
@@ -2031,6 +2192,10 @@ function level4()
 
 	traceRay_level4();
 
+	if(eh_level4 <= 0)
+		enemyDestroyed_level4 = true;
+	if(fh_level4 <= 0)
+		gameOver_level4 = true;
 
 	if(runtime_level4%40 == 0)
 	{
@@ -2186,21 +2351,21 @@ function intersection_level4(rayX, rayY, rayTheta)
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level4 = true;
+			eh_level4 -= 0.3;
 			return returnValue;
 		}
 		if(checkLinePoint(currX, currY, ex_level4 + enemyTriangle.x2, ey_level4 + enemyTriangle.y2, ex_level4 + enemyTriangle.x3, ey_level4 + enemyTriangle.y3))
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level4 = true;
+			eh_level4 -= 0.3;
 			return returnValue;
 		}
 		if(checkLinePoint(currX, currY, ex_level4 + enemyTriangle.x3, ey_level4 + enemyTriangle.y3, ex_level4 + enemyTriangle.x1, ey_level4 + enemyTriangle.y1))
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			enemyDestroyed_level4 = true;
+			eh_level4 -= 0.3;
 			return returnValue;
 		}
 		for(var i = 0;i < a_level4.length;i++)
@@ -2216,7 +2381,7 @@ function intersection_level4(rayX, rayY, rayTheta)
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			gameOver_level4 = true;
+			fh_level4 -= 0.3;
 			return returnValue;
 		}
 		if(currY < 0 || currY > height || currX < 0 || currX > width)

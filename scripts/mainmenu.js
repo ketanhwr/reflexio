@@ -77,8 +77,6 @@ function mainMenu()
 
 function mainMenu_click()
 {
-	if(lastClickCounter <= 20)
-		return;
 	if(mousex >= midx-200 && mousex <= midx+200 && mousey >= midy-130 && mousey <= midy-60)
 	{
 		sceneNumber = 6;
