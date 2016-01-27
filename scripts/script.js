@@ -65,10 +65,6 @@ canvas.addEventListener('click', function(evt) {
 	{
 		mainMenu_click();
 	}
-	if(sceneNumber == 2)
-	{
-		levelSelector_click();
-	}
 	if(sceneNumber == 3)
 	{
 		settings_click();
@@ -171,10 +167,7 @@ function update()
 	{
 		gameTimer = setInterval(mainMenu, gameSpeed);
 	}
-	if(sceneNumber == 2)
-	{
-		gameTimer = setInterval(levelSelector, gameSpeed);
-	}
+	//Scene Number 2 has been deleted
 	if(sceneNumber == 3)
 	{
 		gameTimer = setInterval(settings, gameSpeed);

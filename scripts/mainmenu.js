@@ -81,7 +81,8 @@ function mainMenu_click()
 		return;
 	if(mousex >= midx-200 && mousex <= midx+200 && mousey >= midy-130 && mousey <= midy-60)
 	{
-		sceneNumber = 2;
+		sceneNumber = 6;
+		levelNumber = 1;
 		clearInterval(gameTimer);
 		update();
 		lastClickCounter = 0;
