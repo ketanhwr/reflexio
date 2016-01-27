@@ -1,22 +1,42 @@
 var canvas = document.getElementById("arena");
 var gameArena = canvas.getContext("2d");
 var rect = canvas.getBoundingClientRect();
+var loading = 0;
 
-var menu_click = new Audio("sounds/sound1.wav");
+var menu_click = new Audio();
+menu_click.onload = function() {
+	loading++;
+}
+menu_click.src = "sounds/sound1.wav";
 
 var mainShip = new Image();
+mainShip.onload = function() {
+	loading++;
+}
 mainShip.src = "sprites/turret1.png";
 
 var restartIcon = new Image();
+restartIcon.onload = function() {
+	loading++;
+}
 restartIcon.src = "sprites/restart.png";
 
 var enemyShip = new Image();
+enemyShip.onload = function() {
+	loading++;
+}
 enemyShip.src = "sprites/spacestation2.png";
 
 var asteroid = new Image();
+asteroid.onload = function() {
+	loading++;
+}
 asteroid.src = "sprites/asteroid.png";
 
 var spaceStation = new Image();
+spaceStation.onload = function() {
+	loading++;
+}
 spaceStation.src = "sprites/spacestation.png";
 
 var asteroidPoly = {
@@ -50,7 +70,7 @@ var midy = height/2;
 var mousex,mousey;
 
 //Most important Variables
-var sceneNumber = 1;
+var sceneNumber = 0;
 var levelNumber = 1;
 //End
 
@@ -156,6 +176,10 @@ update();
 
 function update()
 {
+	if(sceneNumber == 0)
+	{
+		gameTimer = setInterval(loadingScreen, gameSpeed);
+	}
 	if(sceneNumber == 1)
 	{
 		gameTimer = setInterval(mainMenu, gameSpeed);
@@ -294,4 +318,30 @@ function checkLinePoint(x, y, x1, y1, x2, y2)
 		return true;
 	else
 		return false;
+}
+
+function loadingScreen()
+{
+	gameArena.clearRect(0, 0, width, height);
+	gameArena.font = "37px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.textAlign = "center";
+	gameArena.fillText("Loading...", midx, midy-30);
+	gameArena.shadowBlur = 20;
+	gameArena.shadowColor = "#18CAE6";
+	gameArena.beginPath();
+	gameArena.lineWidth = 5;
+	gameArena.strokeStyle = "#E6FFFF";
+	gameArena.rect(midx-100, midy-20, 200, 40);
+	gameArena.stroke();
+	gameArena.beginPath();
+	gameArena.fillStyle = "#18CAE6";
+	gameArena.rect(midx-100+5, midy-20+5, (200-10)*((loading/5)), 40-10);
+	gameArena.fill();
+	if(loading == 5)
+	{
+		clearInterval(gameTimer);
+		sceneNumber++;
+		update();
+	}
 }
