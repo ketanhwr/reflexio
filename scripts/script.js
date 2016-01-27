@@ -1,7 +1,7 @@
 var canvas = document.getElementById("arena");
 var gameArena = canvas.getContext("2d");
 var rect = canvas.getBoundingClientRect();
-var loading = 0, loadingIterations = 0;
+var loading = 0;
 
 var menu_click = new Audio();
 menu_click.onload = function() {
@@ -262,32 +262,26 @@ function checkLinePoint(x, y, x1, y1, x2, y2)
 
 function loadingScreen()
 {
-	loadingIterations++;
+	gameArena.clearRect(0, 0, width, height);
 	gameArena.font = "37px Zorque";
-	gameArena.font = "37px Complex";
-	if(loadingIterations >= 60)
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.textAlign = "center";
+	gameArena.fillText("Loading...", midx, midy-30);
+	gameArena.shadowBlur = 20;
+	gameArena.shadowColor = "#18CAE6";
+	gameArena.beginPath();
+	gameArena.lineWidth = 5;
+	gameArena.strokeStyle = "#E6FFFF";
+	gameArena.rect(midx-100, midy-20, 200, 40);
+	gameArena.stroke();
+	gameArena.beginPath();
+	gameArena.fillStyle = "#18CAE6";
+	gameArena.rect(midx-100+5, midy-20+5, (200-10)*((loading/5)), 40-10);
+	gameArena.fill();
+	if(loading == 5)
 	{
-		gameArena.clearRect(0, 0, width, height);
-		gameArena.font = "37px Zorque";
-		gameArena.fillStyle = "#E6FFFF";
-		gameArena.textAlign = "center";
-		gameArena.fillText("Loading...", midx, midy-30);
-		gameArena.shadowBlur = 20;
-		gameArena.shadowColor = "#18CAE6";
-		gameArena.beginPath();
-		gameArena.lineWidth = 5;
-		gameArena.strokeStyle = "#E6FFFF";
-		gameArena.rect(midx-100, midy-20, 200, 40);
-		gameArena.stroke();
-		gameArena.beginPath();
-		gameArena.fillStyle = "#18CAE6";
-		gameArena.rect(midx-100+5, midy-20+5, (200-10)*((loading/5)), 40-10);
-		gameArena.fill();
-		if(loading == 5)
-		{
-			clearInterval(gameTimer);
-			sceneNumber++;
-			update();
-		}
+		clearInterval(gameTimer);
+		sceneNumber++;
+		update();
 	}
 }
