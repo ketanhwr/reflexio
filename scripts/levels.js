@@ -600,7 +600,7 @@ function intersection(rayX, rayY, rayTheta)
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
-			fh -= 0.3;
+			fh -= 0.6;
 			return returnValue;
 		}
 		if(currY < 0 || currY > height || currX < 0 || currX > width)
