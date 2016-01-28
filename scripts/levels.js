@@ -340,7 +340,7 @@ function initialiseLevel()
 		ex = 10;
 		ey = 90;
 		fx = midx;
-		fy = midy-200;
+		fy = midy-230;
 		eh = 100;
 		if(!gameMode) fh = 100;
 		myMirror = {
@@ -362,7 +362,7 @@ function initialiseLevel()
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 100,
+			x: 10,
 			width: 16,
 			y: midy+200,
 			height: 90,
@@ -395,18 +395,23 @@ function initialiseLevel()
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 80,
-			y: 190
+			x: 85,
+			y: 210
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 110,
+			y: 130
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
 			x: midx+100,
-			y: 300
+			y: 270
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
 			x: midx-200,
-			y: 300
+			y: 270
 		};
 		a.push(myAsteroid);
 		
@@ -509,7 +514,7 @@ function drawGUI()
 		if(lives >= 2) gameArena.drawImage(life, midx+235-2, midy-305);
 		if(lives >= 3) gameArena.drawImage(life, midx+280-2, midy-305);
 	}
-	
+
 	if(eh >= 2.0) {
 		gameArena.shadowBlur = 50;
 		gameArena.shadowColor = "#21E821";
