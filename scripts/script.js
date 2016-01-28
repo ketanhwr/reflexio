@@ -3,7 +3,7 @@ var gameArena = canvas.getContext("2d");
 var rect = canvas.getBoundingClientRect();
 var loading = 0;
 var currentScore = 0;
-var iterations = 0;
+var lives = 3;
 
 var menu_click = new Audio();
 menu_click.onload = function() {
@@ -34,6 +34,12 @@ spaceStation.onload = function() {
 	loading++;
 }
 spaceStation.src = "sprites/spacestation.png";
+
+var life = new Image();
+life.onload = function() {
+	loading++;
+}
+life.src = "sprites/life.png";
 
 var asteroidPoly = {
 	x1: 20,
@@ -191,7 +197,7 @@ function drawRay(x1, y1, x2, y2)
 	gameArena.fill();
 }
 
-function drawMirror(x1, y1, x2, y2, flag)
+function drawMirror(x1, y1, x2, y2, flag, drag)
 {
 	gameArena.lineWidth = 4;
 	gameArena.beginPath();
@@ -210,11 +216,13 @@ function drawMirror(x1, y1, x2, y2, flag)
 	gameArena.stroke();
 	gameArena.beginPath();
 	gameArena.arc(x1, y1, 7, 0, 2*Math.PI, true);
-	gameArena.fillStyle = "#303030";
+	if(drag) gameArena.fillStyle = "#303030";
+	else gameArena.fillStyle = "#FF2727";
 	gameArena.fill();
 	gameArena.beginPath();
 	gameArena.arc(x2, y2, 7, 0, 2*Math.PI, true);
-	gameArena.fillStyle = "#303030";
+	if(drag) gameArena.fillStyle = "#303030";
+	else gameArena.fillStyle = "#FF2727";
 	gameArena.fill();
 }
 
@@ -272,9 +280,9 @@ function loadingScreen()
 	gameArena.stroke();
 	gameArena.beginPath();
 	gameArena.fillStyle = "#18CAE6";
-	gameArena.rect(midx-100+5, midy-20+5, (200-10)*((loading/4)), 40-10);
+	gameArena.rect(midx-100+5, midy-20+5, (200-10)*((loading/5)), 40-10);
 	gameArena.fill();
-	if(loading == 4)
+	if(loading == 5)
 	{
 		clearInterval(gameTimer);
 		sceneNumber++;

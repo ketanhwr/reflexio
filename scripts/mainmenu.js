@@ -82,6 +82,7 @@ function mainMenu_click()
 		currentScore = 0;
 		sceneNumber = 6;
 		levelNumber = 1;
+		lives = 3;
 		clearInterval(gameTimer);
 		update();
 		lastClickCounter = 0;

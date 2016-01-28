@@ -39,7 +39,8 @@ function initialiseLevel()
 			x: 200,
 			width: 100,
 			y: 150,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -47,7 +48,8 @@ function initialiseLevel()
 			x: 600,
 			width: 100,
 			y: 400,
-			height: -100
+			height: -100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -89,7 +91,8 @@ function initialiseLevel()
 			x: 200,
 			width: 0,
 			y: 150,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -97,7 +100,8 @@ function initialiseLevel()
 			x: 600,
 			width: 0,
 			y: 400,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -105,7 +109,8 @@ function initialiseLevel()
 			x: 600,
 			width: 0,
 			y: 150,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -113,7 +118,8 @@ function initialiseLevel()
 			x: 100,
 			width: 4,
 			y: 250,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -139,7 +145,8 @@ function initialiseLevel()
 			x: 200,
 			width: 0,
 			y: 150,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -147,7 +154,8 @@ function initialiseLevel()
 			x: 600,
 			width: 0,
 			y: 420,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -155,7 +163,8 @@ function initialiseLevel()
 			x: 700,
 			width: 0,
 			y: 150,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -163,7 +172,8 @@ function initialiseLevel()
 			x: 100,
 			width: 4,
 			y: 250,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -220,7 +230,8 @@ function initialiseLevel()
 			x: 200,
 			width: 0,
 			y: 150,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -228,7 +239,8 @@ function initialiseLevel()
 			x: 600,
 			width: 0,
 			y: 400,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -236,7 +248,8 @@ function initialiseLevel()
 			x: 100,
 			width: 4,
 			y: 250,
-			height: 100
+			height: 100,
+			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
@@ -315,6 +328,17 @@ function drawGUI()
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.fillText("Score: " + currentScore, midx-55-250, midy-273);
 
+	colorCheck = "#E6FFFF";
+	gameArena.shadowBlur = 20;
+	gameArena.shadowColor = "#18CAE6";
+	drawRoundedRectangle(midx+180, midy-350, 150, 90, colorCheck, 4);
+	gameArena.shadowBlur = 0;
+	gameArena.font = "40px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	if(lives >= 1) gameArena.drawImage(life, midx+190-2, midy-305);
+	if(lives >= 2) gameArena.drawImage(life, midx+235-2, midy-305);
+	if(lives >= 3) gameArena.drawImage(life, midx+280-2, midy-305);
+
 	if(eh >= 2.0) {
 		gameArena.shadowBlur = 50;
 		gameArena.shadowColor = "#21E821";
@@ -368,10 +392,28 @@ function Level()
 
 	traceRay();
 
+	if(fh <= 0)
+	{
+		lives--;
+		if(lives != 0)
+		{
+			enemyDestroyed = false;
+			gameOver = false;
+			minutes = 0;
+			seconds = 0;
+			runtime = 0;
+			init = false;
+			for(var i = 0;i < mirrorCount;i++)
+			{
+				mirrorDrag[i] = false;
+				canvas.removeEventListener("mousemove", Level_mousemove);
+			}
+			clearInterval(gameTimer);
+			update();
+		}
+	}
 	if(eh <= 0)
 		enemyDestroyed = true;
-	if(fh <= 0)
-		gameOver = true;
 
 	if(runtime%40 == 0)
 	{
@@ -386,7 +428,7 @@ function Level()
 	for(var i = 0;i < mirrorCount;i++)
 	{
 		var flag;
-		if(checkLine(mirrors[i].x, mirrors[i].y, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height) == 1)
+		if(checkLine(mirrors[i].x, mirrors[i].y, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height) == 1 && mirrors[i].drag == 1)
 		{
 			mark = true;
 			flag = true;
@@ -395,7 +437,7 @@ function Level()
 		{
 			flag = false;
 		}
-		drawMirror(mirrors[i].x, mirrors[i].y, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height, flag);
+		drawMirror(mirrors[i].x, mirrors[i].y, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height, flag, mirrors[i].drag);
 	}
 	
 	drawGUI();
@@ -414,8 +456,9 @@ function Level()
 		LevelFinished();
 	}
 
-	if(gameOver)
+	if(lives == 0)
 	{
+		gameOver = true;
 		Level_gameOver();
 	}
 }
@@ -425,7 +468,7 @@ function Level_mousedown()
 	for(var i = 0;i < mirrorCount;i++)
 	{
 		var flag;
-		if(checkLine(mirrors[i].x, mirrors[i].y, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height) == 1)
+		if(checkLine(mirrors[i].x, mirrors[i].y, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height) == 1 && mirrors[i].drag == 1)
 		{
 			flag = true;
 		}
