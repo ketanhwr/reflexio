@@ -127,6 +127,51 @@ function initialiseLevel()
 		mirrorCount = mirrors.length;
 		init = true;
 	}
+	else if(levelNumber == 3)
+	{
+		mirrors = [];
+		mirrorDrag = [];
+		a = [];
+		minutes = 0;
+		seconds = 0;
+		runtime = 0;
+		enemyDestroyed = false;
+		ex = width-300;
+		ey = 20;
+		fx = midx*(3/2);
+		fy = 200;
+		eh = 100;
+		fh = 100;
+		myMirror = {
+			x: 200,
+			width: 0,
+			y: 150,
+			height: 100,
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 600,
+			width: 0,
+			y: 400,
+			height: 100,
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 100,
+			width: 4,
+			y: 250,
+			height: 100,
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		mirrorCount = mirrors.length;
+		init = true;
+	}
 	else if(levelNumber == 4)
 	{
 		mirrors = [];
@@ -212,7 +257,7 @@ function initialiseLevel()
 		mirrorCount = mirrors.length;
 		init = true;
 	}
-	else if(levelNumber == 3)
+	else if(levelNumber == 5)
 	{
 		mirrors = [];
 		mirrorDrag = [];
@@ -221,23 +266,32 @@ function initialiseLevel()
 		seconds = 0;
 		runtime = 0;
 		enemyDestroyed = false;
-		ex = width-300;
-		ey = 20;
-		fx = midx*(3/2);
-		fy = 200;
+		ex = 10;
+		ey = 90;
+		fx = 180;
+		fy = midy-40;
 		eh = 100;
 		fh = 100;
 		myMirror = {
-			x: 200,
-			width: 0,
-			y: 150,
+			x: 150,
+			width: 100,
+			y: midy+200,
 			height: 100,
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 600,
+			x: 800,
+			width: 100,
+			y: midy-100,
+			height: -150,
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 700,
 			width: 0,
 			y: 400,
 			height: 100,
@@ -246,14 +300,116 @@ function initialiseLevel()
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 100,
-			width: 4,
-			y: 250,
+			x: 900,
+			width: 100,
+			y: 500,
+			height: 0,
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+
+		myAsteroid = {
+			x: 5,
+			y: 220
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 80,
+			y: 190
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 130,
+			y: 120
+		};
+		a.push(myAsteroid);
+		
+		mirrorCount = mirrors.length;
+		init = true;
+	}
+	else if(levelNumber == 6)
+	{
+		mirrors = [];
+		mirrorDrag = [];
+		a = [];
+		minutes = 0;
+		seconds = 0;
+		runtime = 0;
+		enemyDestroyed = false;
+		ex = 10;
+		ey = 90;
+		fx = midx;
+		fy = midy-200;
+		eh = 100;
+		fh = 100;
+		myMirror = {
+			x: 250,
+			width: 100,
+			y: midy,
 			height: 100,
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
+		myMirror = {
+			x: 1000,
+			width: 100,
+			y: midy-100,
+			height: 70,
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 100,
+			width: 16,
+			y: midy+200,
+			height: 90,
+			drag: 0
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 500,
+			width: 100,
+			y: midy+290,
+			height: -100,
+			drag: 0
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 450,
+			width: 100,
+			y: midy-250,
+			height: 100,
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+
+		myAsteroid = {
+			x: 5,
+			y: 220
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 80,
+			y: 190
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: midx+100,
+			y: 300
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: midx-200,
+			y: 300
+		};
+		a.push(myAsteroid);
+		
 		mirrorCount = mirrors.length;
 		init = true;
 	}
@@ -708,9 +864,11 @@ function Level_click()
 function LevelFinished()
 {
 	canvas.style.cursor = "auto";
-	var score = (Math.floor(fh+100*Math.pow(Math.E, -(minutes*60+seconds)/20)));
-	scoreToShow = currentScore;
-	currentScore += score;
+	if(levelNumber <= 6) {
+		var score = (Math.floor(fh+100*Math.pow(Math.E, -(minutes*60+seconds)/20)));
+		scoreToShow = currentScore;
+		currentScore += score;
+	}
 	minutes = 0;
 	seconds = 0;
 	runtime = 0;
