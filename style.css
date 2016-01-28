@@ -22,3 +22,8 @@ body
     font-family: Complex;
     src: url("fonts/complex promo.ttf");
 }
+
+@font-face {
+    font-family: DJB;
+    src: url("fonts/DJB Speak the Truth.ttf");
+}

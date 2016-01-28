@@ -41,6 +41,18 @@ life.onload = function() {
 }
 life.src = "sprites/life.png";
 
+var abtUs1 = new Image();
+abtUs1.onload = function() {
+	loading++;
+}
+abtUs1.src = "sprites/turret2.png";
+
+var abtUs2 = new Image();
+abtUs2.onload = function() {
+	loading++;
+}
+abtUs2.src = "sprites/turret1rot.png";
+
 var asteroidPoly = {
 	x1: 20,
 	y1: 0,
@@ -280,9 +292,9 @@ function loadingScreen()
 	gameArena.stroke();
 	gameArena.beginPath();
 	gameArena.fillStyle = "#18CAE6";
-	gameArena.rect(midx-100+5, midy-20+5, (200-10)*((loading/5)), 40-10);
+	gameArena.rect(midx-100+5, midy-20+5, (200-10)*((loading/7)), 40-10);
 	gameArena.fill();
-	if(loading == 5)
+	if(loading == 7)
 	{
 		clearInterval(gameTimer);
 		sceneNumber++;
