@@ -5,6 +5,9 @@ var loading = 0;
 var currentScore = 0;
 var lives = 3;
 var iterations = 0;
+var gameMode = 0;	//0 -> Arcade		1 -> Survival
+var volume = 1;
+var particles = 1;
 
 var menu_click = new Audio();
 menu_click.onload = function() {
@@ -280,7 +283,7 @@ function checkLinePoint(x, y, x1, y1, x2, y2)
 function loadingScreen()
 {
 	iterations++;
-	
+
 	gameArena.clearRect(0, 0, width, height);
 	gameArena.font = "37px Times New Roman";
 	gameArena.fillStyle = "#E6FFFF";
@@ -319,4 +322,34 @@ function loadingScreen()
 		sceneNumber++;
 		update();
 	}
+}
+
+function drawLeftRoundedRectangle(x, y, width, height, color, lineWidth)
+{
+	gameArena.lineWidth = lineWidth;
+	gameArena.beginPath();
+	gameArena.strokeStyle = color;
+	gameArena.moveTo(x+cornerRadius, y);
+	gameArena.lineTo(x+width, y);
+	gameArena.lineTo(x+width, y+height);
+	gameArena.lineTo(x+cornerRadius, y+height);
+	gameArena.arcTo(x, y+height, x, y+height-cornerRadius, cornerRadius);
+	gameArena.lineTo(x, y+cornerRadius);
+	gameArena.arcTo(x,y, x+cornerRadius, y, cornerRadius);
+	gameArena.stroke();
+}
+
+function drawRightRoundedRectangle(x, y, width, height, color, lineWidth)
+{
+	gameArena.lineWidth = lineWidth;
+	gameArena.beginPath();
+	gameArena.strokeStyle = color;
+	gameArena.moveTo(x, y);
+	gameArena.lineTo(x+width-cornerRadius, y);
+	gameArena.arcTo(x+width, y, x+width, y+cornerRadius, cornerRadius);
+	gameArena.lineTo(x+width, y+height-cornerRadius);
+	gameArena.arcTo(x+width, y+height, x+width-cornerRadius, y+height, cornerRadius);
+	gameArena.lineTo(x, y+height);
+	gameArena.lineTo(x, y);
+	gameArena.stroke();
 }

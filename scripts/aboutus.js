@@ -83,6 +83,6 @@ function aboutUs_click()
 		sceneNumber = 1;
 		clearInterval(gameTimer);
 		update();
-		menu_click.play();
+		if(volume) menu_click.play();
 	}
 }

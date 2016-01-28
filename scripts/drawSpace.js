@@ -21,7 +21,7 @@ function initSpace()
 
 function drawParticles()
 {
-	if(drawParticleFlag)
+	if(drawParticleFlag && particles)
 	{
 		for (var i = 0; i < particleCount; i++)
 		{
@@ -33,7 +33,7 @@ function drawParticles()
 		}
 		gameArena.arc(midx, midy, 90, 0, 2*Math.PI, true);
 		gameArena.shadowBlur = 200;
-		gameArena.shadowColor = "black";
+		gameArena.shadowColor = "BLAcK";
 		gameArena.fillStyle = "#000000";
 		gameArena.fill();
 	}
@@ -41,7 +41,7 @@ function drawParticles()
 
 function drawParticlesLevel()
 {
-	if(drawParticleFlag)
+	if(drawParticleFlag && particles)
 	{
 		for (var i = 0; i < 50; i++)
 		{
@@ -53,7 +53,7 @@ function drawParticlesLevel()
 		}
 		gameArena.arc(midx, midy, 90, 0, 2*Math.PI, true);
 		gameArena.shadowBlur = 200;
-		gameArena.shadowColor = "black";
+		gameArena.shadowColor = "BLACK";
 		gameArena.fillStyle = "#000000";
 		gameArena.fill();
 	}

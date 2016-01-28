@@ -87,7 +87,7 @@ function initialiseLevel()
 		fx = midx+100;
 		fy = 60;
 		eh = 100;
-		fh = 100;
+		if(!gameMode) if(!gameMode) fh = 100;
 		myMirror = {
 			x: 200,
 			width: 0,
@@ -141,7 +141,7 @@ function initialiseLevel()
 		fx = midx*(3/2);
 		fy = 200;
 		eh = 100;
-		fh = 100;
+		if(!gameMode) fh = 100;
 		myMirror = {
 			x: 200,
 			width: 0,
@@ -186,7 +186,7 @@ function initialiseLevel()
 		fx = midx-20;
 		fy = midy-40;
 		eh = 100;
-		fh = 100;
+		if(!gameMode) fh = 100;
 		myMirror = {
 			x: 200,
 			width: 0,
@@ -271,7 +271,7 @@ function initialiseLevel()
 		fx = 180;
 		fy = midy-40;
 		eh = 100;
-		fh = 100;
+		if(!gameMode) fh = 100;
 		myMirror = {
 			x: 150,
 			width: 100,
@@ -342,7 +342,7 @@ function initialiseLevel()
 		fx = midx;
 		fy = midy-200;
 		eh = 100;
-		fh = 100;
+		if(!gameMode) fh = 100;
 		myMirror = {
 			x: 250,
 			width: 100,
@@ -497,17 +497,19 @@ function drawGUI()
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.fillText("Score: " + currentScore, midx-55-250, midy-273);
 
-	colorCheck = "#E6FFFF";
-	gameArena.shadowBlur = 20;
-	gameArena.shadowColor = "#18CAE6";
-	drawRoundedRectangle(midx+180, midy-350, 150, 90, colorCheck, 4);
-	gameArena.shadowBlur = 0;
-	gameArena.font = "40px Zorque";
-	gameArena.fillStyle = "#E6FFFF";
-	if(lives >= 1) gameArena.drawImage(life, midx+190-2, midy-305);
-	if(lives >= 2) gameArena.drawImage(life, midx+235-2, midy-305);
-	if(lives >= 3) gameArena.drawImage(life, midx+280-2, midy-305);
-
+	if(!gameMode) {
+		colorCheck = "#E6FFFF";
+		gameArena.shadowBlur = 20;
+		gameArena.shadowColor = "#18CAE6";
+		drawRoundedRectangle(midx+180, midy-350, 150, 90, colorCheck, 4);
+		gameArena.shadowBlur = 0;
+		gameArena.font = "40px Zorque";
+		gameArena.fillStyle = "#E6FFFF";
+		if(lives >= 1) gameArena.drawImage(life, midx+190-2, midy-305);
+		if(lives >= 2) gameArena.drawImage(life, midx+235-2, midy-305);
+		if(lives >= 3) gameArena.drawImage(life, midx+280-2, midy-305);
+	}
+	
 	if(eh >= 2.0) {
 		gameArena.shadowBlur = 50;
 		gameArena.shadowColor = "#21E821";
@@ -806,7 +808,7 @@ function Level_click()
 			}
 			clearInterval(gameTimer);
 			update();
-			menu_click.play();
+			if(volume) menu_click.play();
 		}
 	}
 	else if(enemyDestroyed)
@@ -819,7 +821,7 @@ function Level_click()
 			sceneNumber = 1;
 			clearInterval(gameTimer);
 			update();
-			menu_click.play();
+			if(volume) menu_click.play();
 		}
 		if(mousex > midx-50+70 && mousex < midx+50+70 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
@@ -829,7 +831,7 @@ function Level_click()
 			levelNumber++;
 			clearInterval(gameTimer);
 			update();
-			menu_click.play();
+			if(volume) menu_click.play();
 		}
 	}
 	else if(gameOver)
@@ -842,7 +844,7 @@ function Level_click()
 			sceneNumber = 1;
 			clearInterval(gameTimer);
 			update();
-			menu_click.play();
+			if(volume) menu_click.play();
 		}
 	}
 	else
@@ -856,7 +858,7 @@ function Level_click()
 			sceneNumber = 1;
 			clearInterval(gameTimer);
 			update();
-			menu_click.play();
+			if(volume) menu_click.play();
 		}
 	}
 }

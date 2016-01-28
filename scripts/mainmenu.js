@@ -82,11 +82,12 @@ function mainMenu_click()
 		currentScore = 0;
 		sceneNumber = 6;
 		levelNumber = 1;
-		lives = 3;
+		if(gameMode) lives = 1;
+		else lives = 3;
 		clearInterval(gameTimer);
 		update();
 		lastClickCounter = 0;
-		menu_click.play();
+		if(volume) menu_click.play();
 	}
 	if(mousex >= midx-200 && mousex <= midx+200 && mousey >= midy-20 && mousey <= midy+50)
 	{
@@ -94,7 +95,7 @@ function mainMenu_click()
 		clearInterval(gameTimer);
 		update();
 		lastClickCounter = 0;
-		menu_click.play();
+		if(volume) menu_click.play();
 	}
 	if(mousex >= midx-200 && mousex <= midx+200 && mousey >= midy+90 && mousey <= midy+160)
 	{
@@ -102,7 +103,7 @@ function mainMenu_click()
 		clearInterval(gameTimer);
 		update();
 		lastClickCounter = 0;
-		menu_click.play();
+		if(volume) menu_click.play();
 	}
 	if(mousex >= midx-200 && mousex <= midx+200 && mousey >= midy+200 && mousey <= midy+270)
 	{
@@ -110,6 +111,6 @@ function mainMenu_click()
 		clearInterval(gameTimer);
 		update();
 		lastClickCounter = 0;
-		menu_click.play();
+		if(volume) menu_click.play();
 	}
 }
