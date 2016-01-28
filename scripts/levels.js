@@ -30,44 +30,44 @@ function initialiseLevel()
 		runtime = 0;
 		enemyDestroyed = false;
 		gameOver = false;
-		ex = width-140;
-		ey = 100;
-		fx = midx-70;
-		fy = 100;
+		ex = width-140*(width/1220);
+		ey = 100*(width/1220);
+		fx = midx-70*(width/1220);
+		fy = 100*(width/1220);
 		eh = 100;
 		fh = 100;
 		myMirror = {
-			x: 200,
-			width: 100,
-			y: 150,
-			height: 100,
+			x: 200*(width/1220),
+			width: 100*(width/1220),
+			y: 150*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 600,
-			width: 100,
-			y: 400,
-			height: -100,
+			x: 600*(width/1220),
+			width: 100*(width/1220),
+			y: 400*(width/1220),
+			height: -100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 
 		myAsteroid = {
-			x: 1000,
-			y: 100
+			x: 1000*(width/1220),
+			y: 100*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 1000,
-			y: 200
+			x: 1000*(width/1220),
+			y: 200*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 1100,
-			y: 240
+			x: 1100*(width/1220),
+			y: 240*(width/1220)
 		};
 		a.push(myAsteroid);
 		mirrorCount = mirrors.length;
@@ -82,44 +82,44 @@ function initialiseLevel()
 		seconds = 0;
 		runtime = 0;
 		enemyDestroyed = false;
-		ex = 20;
-		ey = 80;
-		fx = midx+100;
-		fy = 60;
-		eh = 100;
+		ex = 20*(width/1220);
+		ey = 80*(width/1220);
+		fx = midx+100*(width/1220);
+		fy = 60*(width/1220);
+		eh = 100*(width/1220);
 		if(!gameMode) if(!gameMode) fh = 100;
 		myMirror = {
-			x: 200,
-			width: 0,
-			y: 150,
-			height: 100,
+			x: 200*(width/1220),
+			width: 0*(width/1220),
+			y: 150*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 600,
-			width: 0,
-			y: 400,
-			height: 100,
+			x: 600*(width/1220),
+			width: 0*(width/1220),
+			y: 400*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 600,
-			width: 0,
-			y: 150,
-			height: 100,
+			x: 600*(width/1220),
+			width: 0*(width/1220),
+			y: 150*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 100,
-			width: 4,
-			y: 250,
-			height: 100,
+			x: 100*(width/1220),
+			width: 4*(width/1220),
+			y: 250*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
@@ -136,35 +136,35 @@ function initialiseLevel()
 		seconds = 0;
 		runtime = 0;
 		enemyDestroyed = false;
-		ex = width-300;
-		ey = 20;
-		fx = midx*(3/2);
-		fy = 200;
+		ex = width-300*(width/1220);
+		ey = 20*(width/1220);
+		fx = midx*(3/2)*(width/1220);
+		fy = 200*(width/1220);
 		eh = 100;
 		if(!gameMode) fh = 100;
 		myMirror = {
-			x: 200,
-			width: 0,
-			y: 150,
-			height: 100,
+			x: 200*(width/1220),
+			width: 0*(width/1220),
+			y: 150*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 600,
-			width: 0,
-			y: 400,
-			height: 100,
+			x: 600*(width/1220),
+			width: 0*(width/1220),
+			y: 400*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 100,
-			width: 4,
-			y: 250,
-			height: 100,
+			x: 100*(width/1220),
+			width: 4*(width/1220),
+			y: 250*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
@@ -181,77 +181,77 @@ function initialiseLevel()
 		seconds = 0;
 		runtime = 0;
 		enemyDestroyed = false;
-		ex = midx-60;
-		ey = 60;
-		fx = midx-20;
-		fy = midy-40;
+		ex = midx-60*(width/1220);
+		ey = 60*(width/1220);
+		fx = midx-20*(width/1220);
+		fy = midy-40*(width/1220);
 		eh = 100;
 		if(!gameMode) fh = 100;
 		myMirror = {
-			x: 200,
-			width: 0,
-			y: 150,
-			height: 100,
+			x: 200*(width/1220),
+			width: 0*(width/1220),
+			y: 150*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 600,
-			width: 0,
-			y: 420,
-			height: 100,
+			x: 600*(width/1220),
+			width: 0*(width/1220),
+			y: 420*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 700,
-			width: 0,
-			y: 150,
-			height: 100,
+			x: 700*(width/1220),
+			width: 0*(width/1220),
+			y: 150*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 100,
-			width: 4,
-			y: 250,
-			height: 100,
+			x: 100*(width/1220),
+			width: 4*(width/1220),
+			y: 250*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 
 		myAsteroid = {
-			x: 1100,
-			y: 250
+			x: 1100*(width/1220),
+			y: 250*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 300,
-			y: 300
+			x: 300*(width/1220),
+			y: 300*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 1100,
-			y: 150
+			x: 1100*(width/1220),
+			y: 150*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 400,
-			y: 350
+			x: 400*(width/1220),
+			y: 350*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 400,
-			y: 250
+			x: 400*(width/1220),
+			y: 250*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 500,
-			y: 300
+			x: 500*(width/1220),
+			y: 300*(width/1220)
 		};
 		a.push(myAsteroid);
 		mirrorCount = mirrors.length;
@@ -266,62 +266,62 @@ function initialiseLevel()
 		seconds = 0;
 		runtime = 0;
 		enemyDestroyed = false;
-		ex = 10;
-		ey = 90;
-		fx = 180;
-		fy = midy-40;
+		ex = 10*(width/1220);
+		ey = 90*(width/1220);
+		fx = 180*(width/1220);
+		fy = midy-40*(width/1220);
 		eh = 100;
 		if(!gameMode) fh = 100;
 		myMirror = {
-			x: 150,
-			width: 100,
-			y: midy+200,
-			height: 100,
+			x: 150*(width/1220),
+			width: 100*(width/1220),
+			y: midy+200*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 800,
-			width: 100,
-			y: midy-100,
-			height: -150,
+			x: 800*(width/1220),
+			width: 100*(width/1220),
+			y: midy-100*(width/1220),
+			height: -150*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 700,
-			width: 0,
-			y: 400,
-			height: 100,
+			x: 700*(width/1220),
+			width: 0*(width/1220),
+			y: 400*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 900,
-			width: 100,
-			y: 500,
-			height: 0,
+			x: 900*(width/1220),
+			width: 100*(width/1220),
+			y: 500*(width/1220),
+			height: 0*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 
 		myAsteroid = {
-			x: 5,
-			y: 220
+			x: 5*(width/1220),
+			y: 220*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 80,
-			y: 190
+			x: 80*(width/1220),
+			y: 190*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 130,
-			y: 120
+			x: 130*(width/1220),
+			y: 120*(width/1220)
 		};
 		a.push(myAsteroid);
 		
@@ -337,81 +337,81 @@ function initialiseLevel()
 		seconds = 0;
 		runtime = 0;
 		enemyDestroyed = false;
-		ex = 10;
-		ey = 90;
+		ex = 10*(width/1220);
+		ey = 90*(width/1220);
 		fx = midx;
-		fy = midy-230;
+		fy = midy-230*(width/1220);
 		eh = 100;
 		if(!gameMode) fh = 100;
 		myMirror = {
-			x: 250,
-			width: 100,
+			x: 250*(width/1220),
+			width: 100*(width/1220),
 			y: midy,
-			height: 100,
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 1000,
-			width: 100,
-			y: midy-100,
-			height: 70,
+			x: 1000*(width/1220),
+			width: 100*(width/1220),
+			y: midy-100*(width/1220),
+			height: 70*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 10,
-			width: 16,
-			y: midy+200,
-			height: 90,
+			x: 10*(width/1220),
+			width: 16*(width/1220),
+			y: midy+200*(width/1220),
+			height: 90*(width/1220),
 			drag: 0
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 500,
-			width: 100,
-			y: midy+290,
-			height: -100,
+			x: 500*(width/1220),
+			width: 100*(width/1220),
+			y: midy+290*(width/1220),
+			height: -100*(width/1220),
 			drag: 0
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 		myMirror = {
-			x: 450,
-			width: 100,
-			y: midy-250,
-			height: 100,
+			x: 450*(width/1220),
+			width: 100*(width/1220),
+			y: midy-250*(width/1220),
+			height: 100*(width/1220),
 			drag: 1
 		};
 		mirrors.push(myMirror);
 		mirrorDrag.push(false);
 
 		myAsteroid = {
-			x: 5,
-			y: 220
+			x: 5*(width/1220),
+			y: 220*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 85,
-			y: 210
+			x: 85*(width/1220),
+			y: 210*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 110,
-			y: 130
+			x: 110*(width/1220),
+			y: 130*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: midx+100,
-			y: 270
+			x: midx+100*(width/1220),
+			y: 270*(width/1220)
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: midx-200,
-			y: 270
+			x: midx-200*(width/1220),
+			y: 270*(width/1220)
 		};
 		a.push(myAsteroid);
 		
@@ -437,11 +437,11 @@ function drawGUI()
 	var colorCheck;
 	gameArena.shadowBlur = 10;
 	gameArena.shadowColor = "#18CAE6";
-	gameArena.drawImage(mainShip, width-152, height-94, 150, 89);
+	gameArena.drawImage(mainShip, width-152*(width/1220), height-94*(width/1220), 150*(width/1220), 89*(width/1220));
 
 	gameArena.shadowBlur = 50*Math.abs(Math.sin(runtime/20));
 	gameArena.shadowColor = "#780000";
-	gameArena.drawImage(enemyShip, ex, ey, 120, 114.43);
+	gameArena.drawImage(enemyShip, ex, ey, 120*(width/1220), 114.43*(width/1220));
 
 	gameArena.shadowBlur = 10;
 	gameArena.shadowColor = "#0DA114";
@@ -449,7 +449,7 @@ function drawGUI()
 	gameArena.lineWidth = 0.05;
 	gameArena.beginPath();
 	gameArena.strokeStyle = "#0DA114";
-	gameArena.arc(fx+76, fy+83, 82, 0, 2*Math.PI);
+	gameArena.arc(fx+76*(width/1220), fy+83*(width/1220), 82*(width/1220), 0, 2*Math.PI);
 	gameArena.stroke();
 
 	gameArena.shadowBlur = 10;
@@ -461,7 +461,7 @@ function drawGUI()
 
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
-	drawRoundedRectangle(midx-80, midy-350, 160, 90, "#E6FFFF", 6);
+	drawRoundedRectangle(midx-80*(width/1220), midy-350*(width/1220), 160*(width/1220), 90*(width/1220), "#E6FFFF", 6);
 	gameArena.shadowBlur = 0;
 	gameArena.font = "40px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
@@ -472,47 +472,47 @@ function drawGUI()
 	gameArena.shadowBlur = 7;
 	gameArena.shadowColor = "#E6FFFF";
 	colorCheck = "#18CAE6";
-	if(mousex >= -40 && mousex <= 50 && mousey >= midy-350 && mousey <= midy-260) {
+	if(mousex >= -40*(width/1220) && mousex <= 50*(width/1220) && mousey >= midy-350*(width/1220) && mousey <= midy-260*(width/1220)) {
 		colorCheck = "#E6FFFF";
 		mark = true;
 	}
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
-	drawRoundedRectangle(-40, midy-350, 90, 90, colorCheck, 4);
+	drawRoundedRectangle(-40*(width/1220), midy-350*(width/1220), 90*(width/1220), 90*(width/1220), colorCheck, 4);
 	gameArena.shadowBlur = 0;
 	gameArena.font = "50px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("<", 20, midy-270);
+	gameArena.fillText("<", 20*(width/1220), midy-270*(width/1220));
 
 	colorCheck = "#E6FFFF";
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
-	drawRoundedRectangle(width-182, midy-350, 220, 90, colorCheck, 4);
+	drawRoundedRectangle(width-182*(width/1220), midy-350*(width/1220), 220*(width/1220), 90*(width/1220), colorCheck, 4);
 	gameArena.shadowBlur = 0;
 	gameArena.font = "40px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("Level " + levelNumber, width-90, midy-273);
+	gameArena.fillText("Level " + levelNumber, width-90*(width/1220), midy-273*(width/1220));
 
 	colorCheck = "#E6FFFF";
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
-	drawRoundedRectangle(midx-182-250-10, midy-350, 250+20, 90, colorCheck, 4);
+	drawRoundedRectangle(midx-(182+250+10)*(width/1220), midy-350*(width/1220), (250+20)*(width/1220), 90*(width/1220), colorCheck, 4);
 	gameArena.shadowBlur = 0;
 	gameArena.font = "40px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("Score: " + currentScore, midx-55-250, midy-273);
+	gameArena.fillText("Score: " + currentScore, midx-(55+250)*(width/1220), midy-273*(width/1220));
 
 	if(!gameMode) {
 		colorCheck = "#E6FFFF";
 		gameArena.shadowBlur = 20;
 		gameArena.shadowColor = "#18CAE6";
-		drawRoundedRectangle(midx+180, midy-350, 150, 90, colorCheck, 4);
+		drawRoundedRectangle(midx+180*(width/1220), midy-350*(width/1220), 150*(width/1220), 90*(width/1220), colorCheck, 4);
 		gameArena.shadowBlur = 0;
 		gameArena.font = "40px Zorque";
 		gameArena.fillStyle = "#E6FFFF";
-		if(lives >= 1) gameArena.drawImage(life, midx+190-2, midy-305);
-		if(lives >= 2) gameArena.drawImage(life, midx+235-2, midy-305);
-		if(lives >= 3) gameArena.drawImage(life, midx+280-2, midy-305);
+		if(lives >= 1) gameArena.drawImage(life, midx+(190-2)*(width/1220), midy-305*(width/1220));
+		if(lives >= 2) gameArena.drawImage(life, midx+(235-2)*(width/1220), midy-305*(width/1220));
+		if(lives >= 3) gameArena.drawImage(life, midx+(280-2)*(width/1220), midy-305*(width/1220));
 	}
 
 	if(eh >= 2.0) {
@@ -521,16 +521,16 @@ function drawGUI()
 		gameArena.beginPath();
 		gameArena.lineWidth = 4;
 		gameArena.strokeStyle = "#21E821";
-		gameArena.moveTo(ex+30, ey-5);
-		gameArena.lineTo(ex+30+50*(eh/100.0), ey-5);
+		gameArena.moveTo(ex+30*(width/1220), ey-5*(width/1220));
+		gameArena.lineTo(ex+(30+50*(eh/100.0))*(width/1220), ey-5*(width/1220));
 		gameArena.stroke();
 		gameArena.beginPath();
 		gameArena.fillStyle = "#21E821";
-		gameArena.arc(ex+30, ey-5, 2, 0, 2*Math.PI);
+		gameArena.arc(ex+30*(width/1220), ey-5*(width/1220), 2*(width/1220), 0, 2*Math.PI);
 		gameArena.fill();
 		gameArena.beginPath();
 		gameArena.fillStyle = "#21E821";
-		gameArena.arc(ex+30+50*(eh/100.0), ey-5, 2, 0, 2*Math.PI);
+		gameArena.arc(ex+(30+50*(eh/100.0))*(width/1220), ey-5*(width/1220), 2*(width/1220), 0, 2*Math.PI);
 		gameArena.fill();
 	}
 	if(fh >= 2.0) {
@@ -539,16 +539,16 @@ function drawGUI()
 		gameArena.beginPath();
 		gameArena.lineWidth = 4;
 		gameArena.strokeStyle = "#21E821";
-		gameArena.moveTo(fx+30+20, fy-15);
-		gameArena.lineTo(fx+30+20+50*(fh/100.0), fy-15);
+		gameArena.moveTo(fx+(30+20)*(width/1220), fy-15*(width/1220));
+		gameArena.lineTo(fx+(30+20+50*(fh/100.0))*(width/1220), fy-15*(width/1220));
 		gameArena.stroke();
 		gameArena.beginPath();
 		gameArena.fillStyle = "#21E821";
-		gameArena.arc(fx+30+20, fy-15, 2, 0, 2*Math.PI);
+		gameArena.arc(fx+(30+20)*(width/1220), fy-15*(width/1220), 2*(width/1220), 0, 2*Math.PI);
 		gameArena.fill();
 		gameArena.beginPath();
 		gameArena.fillStyle = "#21E821";
-		gameArena.arc(fx+30+20+50*(fh/100.0), fy-15, 2, 0, 2*Math.PI);
+		gameArena.arc(fx+(30+20+50*(fh/100.0))*(width/1220), fy-15*(width/1220), 2*(width/1220), 0, 2*Math.PI);
 		gameArena.fill();
 	}
 }
@@ -689,7 +689,7 @@ function Level_mousemove(evt)
 
 function traceRay()
 {
-	var rayX = width-150, rayY = height-50;
+	var rayX = width-150*(width/1220), rayY = height-50*(width/1220);
 	var currentAngle = 180.0;
 	var offset;
 	while(true)
@@ -728,7 +728,7 @@ function intersection(rayX, rayY, rayTheta)
 	};
 	var currX, currY;
 	var radians = (rayTheta*Math.PI)/180.0;
-	for(var r = 12;;r++)
+	for(var r = 12*(width/1220);;r++)
 	{
 		currX = rayX + r*Math.cos(radians);
 		currY = rayY - r*Math.sin(radians);
@@ -777,7 +777,7 @@ function intersection(rayX, rayY, rayTheta)
 				return returnValue;
 			}
 		}
-		if(distancePoint(currX, currY, fx+76, fy+80) <= 82)
+		if(distancePoint(currX, currY, fx+76*(width/1220), fy+80*(width/1220)) <= 82*(width/1220))
 		{
 			returnValue.x = currX;
 			returnValue.y = currY;
@@ -797,7 +797,7 @@ function Level_click()
 {
 	if(!enemyDestroyed && !gameOver && !GC)
 	{
-		if(mousex >= -40 && mousex <= 50 && mousey >= midy-350 && mousey <= midy-260) {
+		if(mousex >= -40*(width/1220) && mousex <= 50*(width/1220) && mousey >= midy-350*(width/1220) && mousey <= midy-260*(width/1220)) {
 			enemyDestroyed = false;
 			gameOver = false;
 			minutes = 0;
@@ -818,7 +818,7 @@ function Level_click()
 	}
 	else if(enemyDestroyed)
 	{
-		if(mousex > midx-190+70 && mousex < midx-90+65 && mousey > midy-45+45 && mousey < midy-45+100)
+		if(mousex > midx-120*(width/1220) && mousex < midx-(90-65)*(width/1220) && mousey > midy && mousey < midy+55*(width/1220))
 		{
 			enemyDestroyed = false;
 			gameOver = false;
@@ -828,7 +828,7 @@ function Level_click()
 			update();
 			if(volume) menu_click.play();
 		}
-		if(mousex > midx-50+70 && mousex < midx+50+70 && mousey > midy-45+45 && mousey < midy-45+100)
+		if(mousex > midx+20*(width/1220) && mousex < midx+120*(width/1220) && mousey > midy && mousey < midy+55*(width/1220))
 		{
 			enemyDestroyed = false;
 			gameOver = false;
@@ -841,7 +841,7 @@ function Level_click()
 	}
 	else if(gameOver)
 	{
-		if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
+		if(mousex > midx-50*(width/1220) && mousex < midx+50*(width/1220) && mousey > midy && mousey < midy+55*(width/1220))
 		{
 			enemyDestroyed = false;
 			gameOver = false;
@@ -854,7 +854,7 @@ function Level_click()
 	}
 	else
 	{
-		if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
+		if(mousex > midx-50*(width/1220) && mousex < midx+50*(width/1220) && mousey > midy && mousey < midy+55*(width/1220))
 		{
 			GC = false;
 			enemyDestroyed = false;
@@ -886,10 +886,10 @@ function LevelFinished()
 		mirrorDrag[i] = false;
 		canvas.removeEventListener("mousemove", Level_mousemove);
 	}
-	gameArena.clearRect(midx-220+2, midy-45-45+2, 440-4, 180-4);
+	gameArena.clearRect(midx-218*(width/1220), midy-88*(width/1220), (440-4)*(width/1220), (180-4)*(width/1220));
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
-	drawRoundedRectangle(midx-220, midy-45-45, 440, 180, "#E6FFFF", 4);
+	drawRoundedRectangle(midx-220*(width/1220), midy-90*(width/1220), 440*(width/1220), 180*(width/1220), "#E6FFFF", 4);
 
 	gameTimer = setInterval(drawLevelFinal, gameSpeed);
 }
@@ -907,14 +907,14 @@ function Level_gameOver()
 		mirrorDrag[i] = false;
 		canvas.removeEventListener("mousemove", Level_mousemove);
 	}
-	gameArena.clearRect(midx-220+2, midy-45-45+2, 440-4, 180-4);
+	gameArena.clearRect(midx-218*(width/1220), midy-88*(width/1220), (440-4)*(width/1220), (180-4)*(width/1220));
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
-	drawRoundedRectangle(midx-220, midy-45-45, 440, 180, "#E6FFFF", 4);
+	drawRoundedRectangle(midx-220*(width/1220), midy-90*(width/1220), 440*(width/1220), 180*(width/1220), "#E6FFFF", 4);
 	gameArena.shadowBlur = 0;
 	gameArena.font = "40px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("Game Over!", midx, midy-45+15);
+	gameArena.fillText("Game Over!", midx, midy-30*(width/1220));
 	gameTimer = setInterval(drawLevelGO, gameSpeed);
 }
 
@@ -936,22 +936,22 @@ function Level_GC()
 	gameArena.clearRect(0, 0, width, height);
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
-	drawRoundedRectangle(midx-220, midy-45-45, 440, 180, "#E6FFFF", 4);
+	drawRoundedRectangle(midx-220*(width/1220), midy-90*(width/1220), 440*(width/1220), 180*(width/1220), "#E6FFFF", 4);
 	gameArena.shadowBlur = 0;
 	gameArena.font = "40px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("Final Score: " + currentScore, midx, midy-45+15);
+	gameArena.fillText("Final Score: " + currentScore, midx, midy-30*(width/1220));
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
 	gameArena.font = "100px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("Game Completed!", midx, midy-170);
+	gameArena.fillText("Game Completed!", midx, midy-170*(width/1220));
 	gameTimer = setInterval(drawGC, gameSpeed);
 }
 
 function drawLevelFinal()
 {
-	gameArena.clearRect(midx-220+20, midy-45-25, 440-40, 150);
+	gameArena.clearRect(midx-200*(width/1220), midy-70*(width/1220), (440-40)*(width/1220), 150*(width/1220));
 	mark = false;
 	var colorCheck;
 	var hoverCheck = 0;
@@ -972,9 +972,9 @@ function drawLevelFinal()
 	gameArena.shadowBlur = 0;
 	gameArena.font = "40px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("Score: " + scoreToShow, midx, midy-45+15);
+	gameArena.fillText("Score: " + scoreToShow, midx, midy-30*(width/1220));
 
-	if(mousex > midx-190+70 && mousex < midx-90+65 && mousey > midy-45+45 && mousey < midy-45+100)
+	if(mousex > midx-(190-70)*(width/1220) && mousex < midx-(90-65)*(width/1220) && mousey > midy && mousey < midy+55*(width/1220))
 	{
 		mark = true;
 		hoverCheck = 1;
@@ -987,13 +987,13 @@ function drawLevelFinal()
 	gameArena.shadowColor = "#E6FFFF";
 	if(hoverCheck == 1) colorCheck = "#E6FFFF";
 	else colorCheck = "#18CAE6";
-	drawRoundedRectangle(midx-190+70, midy-45+45, 100, 60, colorCheck, 4);
+	drawRoundedRectangle(midx-120*(width/1220), midy, 100*(width/1220), 60*(width/1220), colorCheck, 4);
 	gameArena.shadowBlur = 0;
 	gameArena.font = "50px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.fillText("<",midx-143+70,midy-45+92);
 
-	if(mousex > midx-50+70 && mousex < midx+50+70 && mousey > midy-45+45 && mousey < midy-45+100)
+	if(mousex > midx+20*(width/1220) && mousex < midx+(50+70)*(width/1220) && mousey > midy && mousey < midy+55*(width/1220))
 	{
 		mark = true;
 		hoverCheck = 1;
@@ -1006,11 +1006,11 @@ function drawLevelFinal()
 	gameArena.shadowColor = "#E6FFFF";
 	if(hoverCheck == 1) colorCheck = "#E6FFFF";
 	else colorCheck = "#18CAE6";
-	drawRoundedRectangle(midx-50+70, midy-45+45, 100, 60, colorCheck, 4);
+	drawRoundedRectangle(midx+20*(width/1220), midy, 100*(width/1220), 60*(width/1220), colorCheck, 4);
 	gameArena.shadowBlur = 0;
 	gameArena.font = "50px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText(">",midx+140-70,midy-45+92);
+	gameArena.fillText(">",midx+(140-70)*(width/1220),midy-(45-92)*(width/1220));
 
 	if(mark)
 	{
@@ -1024,12 +1024,12 @@ function drawLevelFinal()
 
 function drawLevelGO()
 {
-	gameArena.clearRect(midx-220+20, midy-45+20, 440-40, 100);
+	gameArena.clearRect(midx-200*(width/1220), midy-25*(width/1220), (440-40)*(width/1220), 100*(width/1220));
 	mark = false;
 	var colorCheck;
 	var hoverCheck = 0;
 
-	if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
+	if(mousex > midx-50*(width/1220) && mousex < midx+50*(width/1220) && mousey > midy && mousey < midy+55*(width/1220))
 	{
 		mark = true;
 		hoverCheck = 1;
@@ -1042,11 +1042,11 @@ function drawLevelGO()
 	gameArena.shadowColor = "#E6FFFF";
 	if(hoverCheck == 1) colorCheck = "#E6FFFF";
 	else colorCheck = "#18CAE6";
-	drawRoundedRectangle(midx-50, midy-45+45, 100, 60, colorCheck, 4);
+	drawRoundedRectangle(midx-50*(width/1220), midy, 100*(width/1220), 60*(width/1220), colorCheck, 4);
 	gameArena.shadowBlur = 0;
 	gameArena.font = "50px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("<",midx,midy-45+92);
+	gameArena.fillText("<",midx,midy-(45-92)*(width/1220));
 
 	if(mark)
 	{
@@ -1064,21 +1064,21 @@ function drawGC()
 	drawLevelSpace();
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
-	drawRoundedRectangle(midx-220, midy-45-45, 440, 180, "#E6FFFF", 4);
+	drawRoundedRectangle(midx-220*(width/1220), midy-90*(width/1220), 440*(width/1220), 180*(width/1220), "#E6FFFF", 4);
 	gameArena.shadowBlur = 0;
 	gameArena.font = "40px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("Final Score: " + currentScore, midx, midy-45+15);
+	gameArena.fillText("Final Score: " + currentScore, midx, midy-30*(width/1220));
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
 	gameArena.font = "100px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("Game Completed!", midx, midy-170);
+	gameArena.fillText("Game Completed!", midx, midy-170*(width/1220));
 	mark = false;
 	var colorCheck;
 	var hoverCheck = 0;
 
-	if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
+	if(mousex > midx-50*(width/1220) && mousex < midx+50*(width/1220) && mousey > midy && mousey < midy+55*(width/1220))
 	{
 		mark = true;
 		hoverCheck = 1;
@@ -1091,11 +1091,11 @@ function drawGC()
 	gameArena.shadowColor = "#E6FFFF";
 	if(hoverCheck == 1) colorCheck = "#E6FFFF";
 	else colorCheck = "#18CAE6";
-	drawRoundedRectangle(midx-50, midy-45+45, 100, 60, colorCheck, 4);
+	drawRoundedRectangle(midx-50*(width/1220), midy, 100*(width/1220), 60*(width/1220), colorCheck, 4);
 	gameArena.shadowBlur = 0;
 	gameArena.font = "50px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("<",midx,midy-45+92);
+	gameArena.fillText("<",midx,midy-(45-92)*(width/1220));
 
 	if(mark)
 	{
