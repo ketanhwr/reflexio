@@ -15,6 +15,7 @@ var a = [];
 var gameOver = false;
 var eh = 100;
 var fh = 100;
+var scoreToShow;
 
 function initialiseLevel()
 {
@@ -209,8 +210,8 @@ function initialiseLevel()
 		seconds = 0;
 		runtime = 0;
 		enemyDestroyed = false;
-		ex = width-175;
-		ey = 2;
+		ex = width-300;
+		ey = 20;
 		fx = midx*(3/2);
 		fy = 200;
 		eh = 100;
@@ -250,7 +251,6 @@ function drawGUI()
 	gameArena.shadowBlur = 10;
 	gameArena.shadowColor = "#18CAE6";
 	gameArena.drawImage(mainShip, width-152, height-94, 150, 89);
-	gameArena.drawImage(restartIcon, width-40, 8, 30, 30);
 
 	gameArena.shadowBlur = 50*Math.abs(Math.sin(runtime/20));
 	gameArena.shadowColor = "#780000";
@@ -297,94 +297,59 @@ function drawGUI()
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.fillText("<", 20, midy-270);
 
-	gameArena.shadowBlur = 7;
-	gameArena.shadowColor = "#E6FFFF";
-	colorCheck = "#18CAE6";
-	if(mousex >= width-52 && mousex <= width+38 && mousey >= midy-350 && mousey <= midy-260) {
-		colorCheck = "#E6FFFF";
-		mark = true;
-	}
+	colorCheck = "#E6FFFF";
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
-	drawRoundedRectangle(width-52, midy-350, 90, 90, colorCheck, 4);
+	drawRoundedRectangle(width-182, midy-350, 220, 90, colorCheck, 4);
+	gameArena.shadowBlur = 0;
+	gameArena.font = "40px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText("Level " + levelNumber, width-90, midy-273);
 
-	if(levelNumber != 4)
-	{
-		if(eh >= 2.0) {
-			gameArena.shadowBlur = 50;
-			gameArena.shadowColor = "#21E821";
-			gameArena.beginPath();
-			gameArena.lineWidth = 4;
-			gameArena.strokeStyle = "#21E821";
-			gameArena.moveTo(ex+30, ey-5);
-			gameArena.lineTo(ex+30+50*(eh/100.0), ey-5);
-			gameArena.stroke();
-			gameArena.beginPath();
-			gameArena.fillStyle = "#21E821";
-			gameArena.arc(ex+30, ey-5, 2, 0, 2*Math.PI);
-			gameArena.fill();
-			gameArena.beginPath();
-			gameArena.fillStyle = "#21E821";
-			gameArena.arc(ex+30+50*(eh/100.0), ey-5, 2, 0, 2*Math.PI);
-			gameArena.fill();
-		}
-		if(fh >= 2.0) {
-			gameArena.shadowBlur = 50;
-			gameArena.shadowColor = "#21E821";
-			gameArena.beginPath();
-			gameArena.lineWidth = 4;
-			gameArena.strokeStyle = "#21E821";
-			gameArena.moveTo(fx+30+20, fy-15);
-			gameArena.lineTo(fx+30+20+50*(fh/100.0), fy-15);
-			gameArena.stroke();
-			gameArena.beginPath();
-			gameArena.fillStyle = "#21E821";
-			gameArena.arc(fx+30+20, fy-15, 2, 0, 2*Math.PI);
-			gameArena.fill();
-			gameArena.beginPath();
-			gameArena.fillStyle = "#21E821";
-			gameArena.arc(fx+30+20+50*(fh/100.0), fy-15, 2, 0, 2*Math.PI);
-			gameArena.fill();
-		}
+	colorCheck = "#E6FFFF";
+	gameArena.shadowBlur = 20;
+	gameArena.shadowColor = "#18CAE6";
+	drawRoundedRectangle(midx-182-250-10, midy-350, 250+20, 90, colorCheck, 4);
+	gameArena.shadowBlur = 0;
+	gameArena.font = "40px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText("Score: " + currentScore, midx-55-250, midy-273);
+
+	if(eh >= 2.0) {
+		gameArena.shadowBlur = 50;
+		gameArena.shadowColor = "#21E821";
+		gameArena.beginPath();
+		gameArena.lineWidth = 4;
+		gameArena.strokeStyle = "#21E821";
+		gameArena.moveTo(ex+30, ey-5);
+		gameArena.lineTo(ex+30+50*(eh/100.0), ey-5);
+		gameArena.stroke();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(ex+30, ey-5, 2, 0, 2*Math.PI);
+		gameArena.fill();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(ex+30+50*(eh/100.0), ey-5, 2, 0, 2*Math.PI);
+		gameArena.fill();
 	}
-	else
-	{
-		if(eh >= 2.0) {
-			gameArena.shadowBlur = 50;
-			gameArena.shadowColor = "#21E821";
-			gameArena.beginPath();
-			gameArena.lineWidth = 4;
-			gameArena.strokeStyle = "#21E821";
-			gameArena.moveTo(ex+30, ey-5+130);
-			gameArena.lineTo(ex+30+50*(eh/100.0), ey-5+130);
-			gameArena.stroke();
-			gameArena.beginPath();
-			gameArena.fillStyle = "#21E821";
-			gameArena.arc(ex+30, ey-5+130, 2, 0, 2*Math.PI);
-			gameArena.fill();
-			gameArena.beginPath();
-			gameArena.fillStyle = "#21E821";
-			gameArena.arc(ex+30+50*(eh/100.0), ey-5+130, 2, 0, 2*Math.PI);
-			gameArena.fill();
-		}
-		if(fh >= 2.0) {
-			gameArena.shadowBlur = 50;
-			gameArena.shadowColor = "#21E821";
-			gameArena.beginPath();
-			gameArena.lineWidth = 4;
-			gameArena.strokeStyle = "#21E821";
-			gameArena.moveTo(fx+30+20, fy-15);
-			gameArena.lineTo(fx+30+20+50*(fh/100.0), fy-15);
-			gameArena.stroke();
-			gameArena.beginPath();
-			gameArena.fillStyle = "#21E821";
-			gameArena.arc(fx+30+20, fy-15, 2, 0, 2*Math.PI);
-			gameArena.fill();
-			gameArena.beginPath();
-			gameArena.fillStyle = "#21E821";
-			gameArena.arc(fx+30+20+50*(fh/100.0), fy-15, 2, 0, 2*Math.PI);
-			gameArena.fill();
-		}
+	if(fh >= 2.0) {
+		gameArena.shadowBlur = 50;
+		gameArena.shadowColor = "#21E821";
+		gameArena.beginPath();
+		gameArena.lineWidth = 4;
+		gameArena.strokeStyle = "#21E821";
+		gameArena.moveTo(fx+30+20, fy-15);
+		gameArena.lineTo(fx+30+20+50*(fh/100.0), fy-15);
+		gameArena.stroke();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(fx+30+20, fy-15, 2, 0, 2*Math.PI);
+		gameArena.fill();
+		gameArena.beginPath();
+		gameArena.fillStyle = "#21E821";
+		gameArena.arc(fx+30+20+50*(fh/100.0), fy-15, 2, 0, 2*Math.PI);
+		gameArena.fill();
 	}
 }
 
@@ -626,58 +591,10 @@ function Level_click()
 			update();
 			menu_click.play();
 		}
-		if(mousex >= width-52 && mousex <= width+38 && mousey >= midy-350 && mousey <= midy-260) {
-			enemyDestroyed = false;
-			gameOver = false;
-			minutes = 0;
-			seconds = 0;
-			runtime = 0;
-			init = false;
-			for(var i = 0;i < mirrorCount;i++)
-			{
-				mirrorDrag[i] = false;
-				canvas.removeEventListener("mousemove", Level_mousemove);
-			}
-			clearInterval(gameTimer);
-			update();
-			menu_click.play();
-		}
 	}
 	else if(enemyDestroyed)
 	{
-		if(mousex > midx-190 && mousex < midx-90 && mousey > midy-45+45 && mousey < midy-45+100)
-		{
-			enemyDestroyed = false;
-			gameOver = false;
-			init = false;
-			sceneNumber = 1;
-			clearInterval(gameTimer);
-			update();
-			menu_click.play();
-		}
-		if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
-		{
-			enemyDestroyed = false;
-			gameOver = false;
-			init = false;
-			clearInterval(gameTimer);
-			update();
-			menu_click.play();
-		}
-		if(mousex > midx+90 && mousex < midx+190 && mousey > midy-45+45 && mousey < midy-45+100)
-		{
-			enemyDestroyed = false;
-			gameOver = false;
-			init = false;
-			levelNumber++;
-			clearInterval(gameTimer);
-			update();
-			menu_click.play();
-		}
-	}
-	else
-	{
-		if(mousex > midx-190+70 && mousex < midx-90+70 && mousey > midy-45+45 && mousey < midy-45+100)
+		if(mousex > midx-190+70 && mousex < midx-90+65 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
 			enemyDestroyed = false;
 			gameOver = false;
@@ -692,6 +609,20 @@ function Level_click()
 			enemyDestroyed = false;
 			gameOver = false;
 			init = false;
+			levelNumber++;
+			clearInterval(gameTimer);
+			update();
+			menu_click.play();
+		}
+	}
+	else
+	{
+		if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
+		{
+			enemyDestroyed = false;
+			gameOver = false;
+			init = false;
+			sceneNumber = 1;
 			clearInterval(gameTimer);
 			update();
 			menu_click.play();
@@ -702,6 +633,9 @@ function Level_click()
 function LevelFinished()
 {
 	canvas.style.cursor = "auto";
+	var score = (Math.floor(fh+100*Math.pow(Math.E, -(minutes*60+seconds)/20)));
+	scoreToShow = currentScore;
+	currentScore += score;
 	minutes = 0;
 	seconds = 0;
 	runtime = 0;
@@ -716,10 +650,7 @@ function LevelFinished()
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
 	drawRoundedRectangle(midx-220, midy-45-45, 440, 180, "#E6FFFF", 4);
-	gameArena.shadowBlur = 0;
-	gameArena.font = "40px Zorque";
-	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("Level Completed!", midx, midy-45+15);
+
 	gameTimer = setInterval(drawLevelFinal, gameSpeed);
 }
 
@@ -749,83 +680,28 @@ function Level_gameOver()
 
 function drawLevelFinal()
 {
-	gameArena.clearRect(midx-220+14, midy-45+25, 440-28, 100);
+	gameArena.clearRect(midx-220+20, midy-45-25, 440-40, 150);
 	mark = false;
 	var colorCheck;
 	var hoverCheck = 0;
 
-	if(mousex > midx-190 && mousex < midx-90 && mousey > midy-45+45 && mousey < midy-45+100)
+	if(scoreToShow == currentScore-1)
 	{
-		mark = true;
-		hoverCheck = 1;
+		scoreToShow++;
 	}
-	else
+	else if(scoreToShow == currentScore-2)
 	{
-		hoverCheck = 0;
+		scoreToShow+=2;
 	}
-	gameArena.shadowBlur = 15;
-	gameArena.shadowColor = "#E6FFFF";
-	if(hoverCheck == 1) colorCheck = "#E6FFFF";
-	else colorCheck = "#18CAE6";
-	drawRoundedRectangle(midx-190, midy-45+45, 100, 60, colorCheck, 4);
-	gameArena.shadowBlur = 0;
-	gameArena.font = "50px Zorque";
-	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText("<",midx-143,midy-45+92);
-	if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
+	else if(scoreToShow != currentScore)
 	{
-		mark = true;
-		hoverCheck = 1;
+		scoreToShow+=3;
 	}
-	else
-	{
-		hoverCheck = 0;
-	}
-	gameArena.shadowBlur = 15;
-	gameArena.shadowColor = "#E6FFFF";
-	if(hoverCheck == 1) colorCheck = "#E6FFFF";
-	else colorCheck = "#18CAE6";
-	drawRoundedRectangle(midx-50, midy-45+45, 100, 60, colorCheck, 4);
-	gameArena.shadowBlur = 0;
-	gameArena.font = "50px Zorque";
-	gameArena.fillStyle = "#E6FFFF";
-	gameArena.shadowBlur = 0;
-	gameArena.drawImage(restartIcon, midx-15, midy-45+60, 30, 30);
-	if(mousex > midx+90 && mousex < midx+190 && mousey > midy-45+45 && mousey < midy-45+100)
-	{
-		mark = true;
-		hoverCheck = 1;
-	}
-	else
-	{
-		hoverCheck = 0;
-	}
-	gameArena.shadowBlur = 15;
-	gameArena.shadowColor = "#E6FFFF";
-	if(hoverCheck == 1) colorCheck = "#E6FFFF";
-	else colorCheck = "#18CAE6";
-	drawRoundedRectangle(midx+90, midy-45+45, 100, 60, colorCheck, 4);
-	gameArena.shadowBlur = 0;
-	gameArena.font = "50px Zorque";
-	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText(">",midx+140,midy-45+92);
 
-	if(mark)
-	{
-		canvas.style.cursor = "pointer";
-	}
-	else
-	{
-		canvas.style.cursor = "auto";
-	}
-}
-
-function drawLevelGO()
-{
-	gameArena.clearRect(midx-220+20, midy-45+20, 440-40, 100);
-	mark = false;
-	var colorCheck;
-	var hoverCheck = 0;
+	gameArena.shadowBlur = 0;
+	gameArena.font = "40px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText("Score: " + scoreToShow, midx, midy-45+15);
 
 	if(mousex > midx-190+70 && mousex < midx-90+65 && mousey > midy-45+45 && mousey < midy-45+100)
 	{
@@ -863,8 +739,43 @@ function drawLevelGO()
 	gameArena.shadowBlur = 0;
 	gameArena.font = "50px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText(">",midx+140-70,midy-45+92);
+
+	if(mark)
+	{
+		canvas.style.cursor = "pointer";
+	}
+	else
+	{
+		canvas.style.cursor = "auto";
+	}
+}
+
+function drawLevelGO()
+{
+	gameArena.clearRect(midx-220+20, midy-45+20, 440-40, 100);
+	mark = false;
+	var colorCheck;
+	var hoverCheck = 0;
+
+	if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
+	{
+		mark = true;
+		hoverCheck = 1;
+	}
+	else
+	{
+		hoverCheck = 0;
+	}
+	gameArena.shadowBlur = 15;
+	gameArena.shadowColor = "#E6FFFF";
+	if(hoverCheck == 1) colorCheck = "#E6FFFF";
+	else colorCheck = "#18CAE6";
+	drawRoundedRectangle(midx-50, midy-45+45, 100, 60, colorCheck, 4);
 	gameArena.shadowBlur = 0;
-	gameArena.drawImage(restartIcon, midx-15+70, midy-45+60, 30, 30);
+	gameArena.font = "50px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText("<",midx,midy-45+92);
 
 	if(mark)
 	{

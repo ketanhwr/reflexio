@@ -2,6 +2,8 @@ var canvas = document.getElementById("arena");
 var gameArena = canvas.getContext("2d");
 var rect = canvas.getBoundingClientRect();
 var loading = 0;
+var currentScore = 0;
+var iterations = 0;
 
 var menu_click = new Audio();
 menu_click.onload = function() {
@@ -14,12 +16,6 @@ mainShip.onload = function() {
 	loading++;
 }
 mainShip.src = "sprites/turret1.png";
-
-var restartIcon = new Image();
-restartIcon.onload = function() {
-	loading++;
-}
-restartIcon.src = "sprites/restart.png";
 
 var enemyShip = new Image();
 enemyShip.onload = function() {
@@ -276,9 +272,9 @@ function loadingScreen()
 	gameArena.stroke();
 	gameArena.beginPath();
 	gameArena.fillStyle = "#18CAE6";
-	gameArena.rect(midx-100+5, midy-20+5, (200-10)*((loading/5)), 40-10);
+	gameArena.rect(midx-100+5, midy-20+5, (200-10)*((loading/4)), 40-10);
 	gameArena.fill();
-	if(loading == 5)
+	if(loading == 4)
 	{
 		clearInterval(gameTimer);
 		sceneNumber++;
