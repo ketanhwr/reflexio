@@ -7,6 +7,6 @@ The game is live on:
 
 The game works best on Google Chrome!
 
-*Note: The game is currently under development. Levels 1-4 are working fine as of now.*
+*Note: The game is currently under development. The game has 6 levels as of now*
 
 [ketanhwr.github.io/reflexio]: <http://ketanhwr.github.io/reflexio>
