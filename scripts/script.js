@@ -4,6 +4,7 @@ var rect = canvas.getBoundingClientRect();
 var loading = 0;
 var currentScore = 0;
 var lives = 3;
+var iterations = 0;
 
 var menu_click = new Audio();
 menu_click.onload = function() {
@@ -278,11 +279,29 @@ function checkLinePoint(x, y, x1, y1, x2, y2)
 
 function loadingScreen()
 {
+	iterations++;
+	
 	gameArena.clearRect(0, 0, width, height);
-	gameArena.font = "37px Zorque";
+	gameArena.font = "37px Times New Roman";
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.textAlign = "center";
 	gameArena.fillText("Loading...", midx, midy-30);
+
+	//Reduntant Data
+	gameArena.font = "37px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.textAlign = "center";
+	gameArena.fillText("Loading...", width+100, midy-30);
+	gameArena.font = "37px Complex";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.textAlign = "center";
+	gameArena.fillText("Loading...", width+100, midy-30);
+	gameArena.font = "37px DJB";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.textAlign = "center";
+	gameArena.fillText("Loading...", width+100, midy-30);
+	//End
+
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
 	gameArena.beginPath();
@@ -294,7 +313,7 @@ function loadingScreen()
 	gameArena.fillStyle = "#18CAE6";
 	gameArena.rect(midx-100+5, midy-20+5, (200-10)*((loading/7)), 40-10);
 	gameArena.fill();
-	if(loading == 7)
+	if(loading == 7 && iterations >= 80)
 	{
 		clearInterval(gameTimer);
 		sceneNumber++;
