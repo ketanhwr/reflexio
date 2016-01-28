@@ -395,8 +395,13 @@ function initialiseLevel()
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
-			x: 80,
-			y: 190
+			x: 85,
+			y: 210
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 110,
+			y: 130
 		};
 		a.push(myAsteroid);
 		myAsteroid = {
@@ -509,7 +514,7 @@ function drawGUI()
 		if(lives >= 2) gameArena.drawImage(life, midx+235-2, midy-305);
 		if(lives >= 3) gameArena.drawImage(life, midx+280-2, midy-305);
 	}
-	
+
 	if(eh >= 2.0) {
 		gameArena.shadowBlur = 50;
 		gameArena.shadowColor = "#21E821";
