@@ -1,4 +1,7 @@
 var canvas = document.getElementById("arena");
+canvas.width = (0.9377402)*window.innerWidth;
+canvas.height = (0.508196721)*canvas.width;
+
 var gameArena = canvas.getContext("2d");
 var rect = canvas.getBoundingClientRect();
 var loading = 0;
@@ -8,6 +11,7 @@ var iterations = 0;
 var gameMode = 0;	//0 -> Arcade		1 -> Survival
 var volume = 1;
 var particles = 1;
+var runtime1 = 0;
 
 var menu_click = new Audio();
 menu_click.onload = function() {
@@ -79,9 +83,9 @@ var enemyTriangle = {
 	y3: 114.43
 };
 
-var width = 1220;
-var height = 620;
-var cornerRadius = 20;
+var width = canvas.width;
+var height = canvas.height;
+var cornerRadius = 20*(width/1220);
 var midx = width/2;
 var midy = height/2;
 
@@ -231,12 +235,12 @@ function drawMirror(x1, y1, x2, y2, flag, drag)
 	gameArena.lineTo(x2, y2);
 	gameArena.stroke();
 	gameArena.beginPath();
-	gameArena.arc(x1, y1, 7, 0, 2*Math.PI, true);
+	gameArena.arc(x1, y1, 7*(width/1220), 0, 2*Math.PI, true);
 	if(drag) gameArena.fillStyle = "#303030";
 	else gameArena.fillStyle = "#FF2727";
 	gameArena.fill();
 	gameArena.beginPath();
-	gameArena.arc(x2, y2, 7, 0, 2*Math.PI, true);
+	gameArena.arc(x2, y2, 7*(width/1220), 0, 2*Math.PI, true);
 	if(drag) gameArena.fillStyle = "#303030";
 	else gameArena.fillStyle = "#FF2727";
 	gameArena.fill();
@@ -288,21 +292,21 @@ function loadingScreen()
 	gameArena.font = "37px Times New Roman";
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.textAlign = "center";
-	gameArena.fillText("Loading...", midx, midy-30);
+	gameArena.fillText("Loading...", midx, midy-30*(width/1220));
 
 	//Reduntant Data
 	gameArena.font = "37px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.textAlign = "center";
-	gameArena.fillText("Loading...", width+100, midy-30);
+	gameArena.fillText("Loading...", width+100*(width/1220), midy-30*(width/1220));
 	gameArena.font = "37px Complex";
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.textAlign = "center";
-	gameArena.fillText("Loading...", width+100, midy-30);
+	gameArena.fillText("Loading...", width+100*(width/1220), midy-30*(width/1220));
 	gameArena.font = "37px DJB";
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.textAlign = "center";
-	gameArena.fillText("Loading...", width+100, midy-30);
+	gameArena.fillText("Loading...", width+100*(width/1220), midy-30*(width/1220));
 	//End
 
 	gameArena.shadowBlur = 20;
@@ -310,11 +314,11 @@ function loadingScreen()
 	gameArena.beginPath();
 	gameArena.lineWidth = 5;
 	gameArena.strokeStyle = "#E6FFFF";
-	gameArena.rect(midx-100, midy-20, 200, 40);
+	gameArena.rect(midx-100*(width/1220), midy-20*(width/1220), 200*(width/1220), 40*(width/1220));
 	gameArena.stroke();
 	gameArena.beginPath();
 	gameArena.fillStyle = "#18CAE6";
-	gameArena.rect(midx-100+5, midy-20+5, (200-10)*((loading/7)), 40-10);
+	gameArena.rect(midx-95*(width/1220), midy-15*(width/1220), (200-10)*((loading/7)*(width/1220)), 30*(width/1220));
 	gameArena.fill();
 	if(loading == 7 && iterations >= 80)
 	{
