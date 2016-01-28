@@ -15,6 +15,7 @@ var a = [];
 var gameOver = false;
 var eh = 100;
 var fh = 100;
+var GC = false;
 var scoreToShow;
 
 function initialiseLevel()
@@ -126,7 +127,7 @@ function initialiseLevel()
 		mirrorCount = mirrors.length;
 		init = true;
 	}
-	else if(levelNumber == 3)
+	else if(levelNumber == 4)
 	{
 		mirrors = [];
 		mirrorDrag = [];
@@ -211,7 +212,7 @@ function initialiseLevel()
 		mirrorCount = mirrors.length;
 		init = true;
 	}
-	else if(levelNumber == 4)
+	else if(levelNumber == 3)
 	{
 		mirrors = [];
 		mirrorDrag = [];
@@ -255,6 +256,18 @@ function initialiseLevel()
 		mirrorDrag.push(false);
 		mirrorCount = mirrors.length;
 		init = true;
+	}
+	else
+	{
+		mirrors = [];
+		mirrorDrag = [];
+		a = [];
+		minutes = 0;
+		seconds = 0;
+		runtime = 0;
+		enemyDestroyed = false;
+		mirrorCount = mirrors.length;
+		GC = true;
 	}
 }
 
@@ -461,6 +474,11 @@ function Level()
 		gameOver = true;
 		Level_gameOver();
 	}
+
+	if(GC)
+	{
+		Level_GC();
+	}
 }
 
 function Level_mousedown()
@@ -614,7 +632,7 @@ function intersection(rayX, rayY, rayTheta)
 
 function Level_click()
 {
-	if(!enemyDestroyed && !gameOver)
+	if(!enemyDestroyed && !gameOver && !GC)
 	{
 		if(mousex >= -40 && mousex <= 50 && mousey >= midy-350 && mousey <= midy-260) {
 			enemyDestroyed = false;
@@ -658,10 +676,24 @@ function Level_click()
 			menu_click.play();
 		}
 	}
+	else if(gameOver)
+	{
+		if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
+		{
+			enemyDestroyed = false;
+			gameOver = false;
+			init = false;
+			sceneNumber = 1;
+			clearInterval(gameTimer);
+			update();
+			menu_click.play();
+		}
+	}
 	else
 	{
 		if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
 		{
+			GC = false;
 			enemyDestroyed = false;
 			gameOver = false;
 			init = false;
@@ -719,6 +751,37 @@ function Level_gameOver()
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.fillText("Game Over!", midx, midy-45+15);
 	gameTimer = setInterval(drawLevelGO, gameSpeed);
+}
+
+function Level_GC()
+{
+	canvas.style.cursor = "auto";
+	minutes = 0;
+	seconds = 0;
+	runtime = 0;
+	init = false;
+	enemyDestroyed = false;
+	gameOver = false;
+	clearInterval(gameTimer);
+	for(var i = 0;i < mirrorCount;i++)
+	{
+		mirrorDrag[i] = false;
+		canvas.removeEventListener("mousemove", Level_mousemove);
+	}
+	gameArena.clearRect(0, 0, width, height);
+	gameArena.shadowBlur = 20;
+	gameArena.shadowColor = "#18CAE6";
+	drawRoundedRectangle(midx-220, midy-45-45, 440, 180, "#E6FFFF", 4);
+	gameArena.shadowBlur = 0;
+	gameArena.font = "40px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText("Final Score: " + currentScore, midx, midy-45+15);
+	gameArena.shadowBlur = 20;
+	gameArena.shadowColor = "#18CAE6";
+	gameArena.font = "100px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText("Game Completed!", midx, midy-170);
+	gameTimer = setInterval(drawGC, gameSpeed);
 }
 
 function drawLevelFinal()
@@ -797,6 +860,55 @@ function drawLevelFinal()
 function drawLevelGO()
 {
 	gameArena.clearRect(midx-220+20, midy-45+20, 440-40, 100);
+	mark = false;
+	var colorCheck;
+	var hoverCheck = 0;
+
+	if(mousex > midx-50 && mousex < midx+50 && mousey > midy-45+45 && mousey < midy-45+100)
+	{
+		mark = true;
+		hoverCheck = 1;
+	}
+	else
+	{
+		hoverCheck = 0;
+	}
+	gameArena.shadowBlur = 15;
+	gameArena.shadowColor = "#E6FFFF";
+	if(hoverCheck == 1) colorCheck = "#E6FFFF";
+	else colorCheck = "#18CAE6";
+	drawRoundedRectangle(midx-50, midy-45+45, 100, 60, colorCheck, 4);
+	gameArena.shadowBlur = 0;
+	gameArena.font = "50px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText("<",midx,midy-45+92);
+
+	if(mark)
+	{
+		canvas.style.cursor = "pointer";
+	}
+	else
+	{
+		canvas.style.cursor = "auto";
+	}
+}
+
+function drawGC()
+{
+	gameArena.clearRect(0, 0, width, height);
+	drawLevelSpace();
+	gameArena.shadowBlur = 20;
+	gameArena.shadowColor = "#18CAE6";
+	drawRoundedRectangle(midx-220, midy-45-45, 440, 180, "#E6FFFF", 4);
+	gameArena.shadowBlur = 0;
+	gameArena.font = "40px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText("Final Score: " + currentScore, midx, midy-45+15);
+	gameArena.shadowBlur = 20;
+	gameArena.shadowColor = "#18CAE6";
+	gameArena.font = "100px Zorque";
+	gameArena.fillStyle = "#E6FFFF";
+	gameArena.fillText("Game Completed!", midx, midy-170);
 	mark = false;
 	var colorCheck;
 	var hoverCheck = 0;
