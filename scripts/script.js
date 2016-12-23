@@ -3,7 +3,7 @@ canvas.width = (0.9377402)*window.innerWidth;
 canvas.height = (0.508196721)*canvas.width;
 
 var gameArena = canvas.getContext("2d");
-var rect = canvas.getBoundingClientRect();
+var rect = canvas.getBoundingClientRect();        
 var loading = 0;
 var currentScore = 0;
 var lives = 3;
@@ -13,8 +13,9 @@ var volume = 1;
 var particles = 1;
 var runtime1 = 0;
 
-var menu_click = new Audio();
-menu_click.onload = function() {
+
+var menu_click = new Audio();                     
+menu_click.onload = function() {          
 	loading++;
 }
 menu_click.src = "sounds/sound1.wav";
@@ -25,11 +26,24 @@ mainShip.onload = function() {
 }
 mainShip.src = "sprites/turret1.png";
 
+
 var enemyShip = new Image();
 enemyShip.onload = function() {
 	loading++;
 }
 enemyShip.src = "sprites/spacestation2.png";
+
+var secondShip = new Image();
+secondShip.onload = function() {
+	loading++;
+}
+secondShip.src = "sprites/turret_angle.png"; 
+
+var secondShip2 = new Image();
+secondShip2.onload = function() {
+	loading++;
+}
+secondShip2.src = "sprites/turret_angle2.png";  
 
 var asteroid = new Image();
 asteroid.onload = function() {
@@ -61,7 +75,7 @@ abtUs2.onload = function() {
 }
 abtUs2.src = "sprites/turret1rot.png";
 
-var asteroidPoly = {
+var asteroidPoly = {                
 	x1: 20,
 	y1: 0,
 	x2: 72,
@@ -74,7 +88,7 @@ var asteroidPoly = {
 	y5: 60,
 };
 
-var enemyTriangle = {
+var enemyTriangle = {                 
 	x1: 0,
 	y1: 0,
 	x2: 120,
@@ -85,23 +99,22 @@ var enemyTriangle = {
 
 var width = canvas.width;
 var height = canvas.height;
-var cornerRadius = 20*(width/1220);
-var midx = width/2;
+var cornerRadius = 20*(width/1220);  
+var midx = width/2;          
 var midy = height/2;
 
-var mousex,mousey;
-
+var mousex,mousey;                            
 //Most important Variables
 var sceneNumber = 0;
 var levelNumber = 1;
 //End
 
-canvas.addEventListener('mousemove', function(evt) {
+canvas.addEventListener('mousemove', function(evt) {          
 	mousex = evt.clientX - rect.left;
 	mousey = evt.clientY - rect.top;
 }, false)
 
-canvas.addEventListener('click', function(evt) {
+canvas.addEventListener('click', function(evt) {              
 	if(sceneNumber == 1)
 	{
 		mainMenu_click();
@@ -127,14 +140,14 @@ canvas.addEventListener('click', function(evt) {
 canvas.addEventListener('mousedown', function(evt) {
 	if(sceneNumber == 6)
 	{
-		Level_mousedown();
+		Level_mousedown();    
 	}
 })
 
 canvas.addEventListener('mouseup', function(evt) {
 	if(sceneNumber == 6)
 	{
-		Level_mouseup();
+		Level_mouseup();      
 	}
 })
 
@@ -144,7 +157,7 @@ var gameSpeed = 25;
 //Adding initial offset to drawMovingSpace() functioj
 for(var spaceOffset = 0;spaceOffset < 300;spaceOffset++)
 {
-	drawMovingSpace();
+	drawMovingSpace();         
 }
 //End offset
 drawParticleFlag = true;
@@ -176,7 +189,7 @@ function update()
 	}
 	if(sceneNumber == 6)
 	{
-		gameTimer = setInterval(Level, gameSpeed);
+		gameTimer = setInterval(Level, gameSpeed);   
 	}
 }
 
@@ -208,7 +221,7 @@ function drawRay(x1, y1, x2, y2)
 	gameArena.lineTo(x2, y2);
 	gameArena.stroke();
 	gameArena.beginPath();
-	gameArena.arc(x1, y1, 7, 0, 2*Math.PI, true);
+	gameArena.arc(x1, y1, 7, 0, 2*Math.PI,true, true);
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.fill();
 	gameArena.beginPath();
@@ -216,6 +229,7 @@ function drawRay(x1, y1, x2, y2)
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.fill();
 }
+
 
 function drawMirror(x1, y1, x2, y2, flag, drag)
 {
@@ -237,7 +251,7 @@ function drawMirror(x1, y1, x2, y2, flag, drag)
 	gameArena.beginPath();
 	gameArena.arc(x1, y1, 7*(width/1220), 0, 2*Math.PI, true);
 	if(drag) gameArena.fillStyle = "#303030";
-	else gameArena.fillStyle = "#FF2727";
+	else gameArena.fillStyle = "#FF2727";                  
 	gameArena.fill();
 	gameArena.beginPath();
 	gameArena.arc(x2, y2, 7*(width/1220), 0, 2*Math.PI, true);
@@ -246,21 +260,21 @@ function drawMirror(x1, y1, x2, y2, flag, drag)
 	gameArena.fill();
 }
 
-function calculateAngle(x1, y1, x2, y2, x3, y3, x4, y4)
+function calculateAngle(x1, y1, x2, y2, x3, y3, x4, y4)          
 {
 	return (180.0/Math.PI)*(Math.atan2((((y2-y1)*(x3-x4))-((x2-x1)*(y3-y4))) ,(((x2-x1)*(x3-x4))+((y2-y1)*(y3-y4))) ));
 }
 
-function distancePoint(x1, y1, x2, y2)
+function distancePoint(x1, y1, x2, y2)                          
 {
 	return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
 }
 
-function checkLine(x, y, x2, y2)
+function checkLine(x, y, x2, y2)               
 {
 	if(mousex < Math.min(x,x2)-5.0 || mousex > Math.max(x,x2)+5.0 || mousey < Math.min(y,y2)-5.0 || mousey > Math.max(y,y2)+5.0)
 		return false;
-	var a = y2-y;
+	var a = y2-y;                       
 	var b = x-x2;
 	var c = y*(x2-x)-x*(y2-y);
 	var distance = Math.abs((mousex*a+mousey*b+c)/Math.sqrt(a*a+b*b));
@@ -270,7 +284,7 @@ function checkLine(x, y, x2, y2)
 		return false;
 }
 
-function checkLinePoint(x, y, x1, y1, x2, y2)
+function checkLinePoint(x, y, x1, y1, x2, y2)             
 {
 	if(x <= Math.min(x1,x2)-5.0 || x >= Math.max(x1,x2)+5.0 || y <= Math.min(y1,y2)-5.0 || y >= Math.max(y1,y2)+5.0)
 		return false;
@@ -294,7 +308,7 @@ function loadingScreen()
 	gameArena.textAlign = "center";
 	gameArena.fillText("Loading...", midx, midy-30*(width/1220));
 
-	//Reduntant Data
+	//Reduntant Data                // why ??
 	gameArena.font = "37px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.textAlign = "center";
@@ -318,9 +332,9 @@ function loadingScreen()
 	gameArena.stroke();
 	gameArena.beginPath();
 	gameArena.fillStyle = "#18CAE6";
-	gameArena.rect(midx-95*(width/1220), midy-15*(width/1220), (200-10)*((loading/7)*(width/1220)), 30*(width/1220));
+	gameArena.rect(midx-95*(width/1220), midy-15*(width/1220), (200-10)*((loading/9)*(width/1220)), 30*(width/1220));
 	gameArena.fill();
-	if(loading == 7 && iterations >= 80)
+	if(loading == 9 && iterations >= 80)        
 	{
 		clearInterval(gameTimer);
 		sceneNumber++;
@@ -328,7 +342,7 @@ function loadingScreen()
 	}
 }
 
-function drawLeftRoundedRectangle(x, y, width, height, color, lineWidth)
+function drawLeftRoundedRectangle(x, y, width, height, color, lineWidth)   
 {
 	gameArena.lineWidth = lineWidth;
 	gameArena.beginPath();
@@ -341,7 +355,7 @@ function drawLeftRoundedRectangle(x, y, width, height, color, lineWidth)
 	gameArena.lineTo(x, y+cornerRadius);
 	gameArena.arcTo(x,y, x+cornerRadius, y, cornerRadius);
 	gameArena.stroke();
-}
+}   
 
 function drawRightRoundedRectangle(x, y, width, height, color, lineWidth)
 {
