@@ -3,7 +3,7 @@ canvas.width = (0.9377402)*window.innerWidth;
 canvas.height = (0.508196721)*canvas.width;
 
 var gameArena = canvas.getContext("2d");
-var rect = canvas.getBoundingClientRect();        
+var rect = canvas.getBoundingClientRect();         // which rect area it gives
 var loading = 0;
 var currentScore = 0;
 var lives = 3;
@@ -14,7 +14,7 @@ var particles = 1;
 var runtime1 = 0;
 
 
-var menu_click = new Audio();                     
+var menu_click = new Audio();                     // why loading ??
 menu_click.onload = function() {          
 	loading++;
 }
@@ -75,7 +75,7 @@ abtUs2.onload = function() {
 }
 abtUs2.src = "sprites/turret1rot.png";
 
-var asteroidPoly = {                
+var asteroidPoly = {                 //??
 	x1: 20,
 	y1: 0,
 	x2: 72,
@@ -88,7 +88,7 @@ var asteroidPoly = {
 	y5: 60,
 };
 
-var enemyTriangle = {                 
+var enemyTriangle = {                 //??
 	x1: 0,
 	y1: 0,
 	x2: 120,
@@ -99,17 +99,18 @@ var enemyTriangle = {
 
 var width = canvas.width;
 var height = canvas.height;
-var cornerRadius = 20*(width/1220);  
-var midx = width/2;          
+var cornerRadius = 20*(width/1220);            // any specific reason for choosing this radius 
+var midx = width/2;
 var midy = height/2;
 
-var mousex,mousey;                            
+var mousex,mousey;                            // ??
+
 //Most important Variables
 var sceneNumber = 0;
-var levelNumber = 1;
+var levelNumber = -1;
 //End
 
-canvas.addEventListener('mousemove', function(evt) {          
+canvas.addEventListener('mousemove', function(evt) {          // ??
 	mousex = evt.clientX - rect.left;
 	mousey = evt.clientY - rect.top;
 }, false)
@@ -133,21 +134,21 @@ canvas.addEventListener('click', function(evt) {
 	}
 	if(sceneNumber == 6)
 	{
-		Level_click();
+		Level_click();      // ??
 	}
 })
 
 canvas.addEventListener('mousedown', function(evt) {
 	if(sceneNumber == 6)
 	{
-		Level_mousedown();    
+		Level_mousedown();     //??
 	}
 })
 
 canvas.addEventListener('mouseup', function(evt) {
 	if(sceneNumber == 6)
 	{
-		Level_mouseup();      
+		Level_mouseup();       //??
 	}
 })
 
@@ -157,7 +158,7 @@ var gameSpeed = 25;
 //Adding initial offset to drawMovingSpace() functioj
 for(var spaceOffset = 0;spaceOffset < 300;spaceOffset++)
 {
-	drawMovingSpace();         
+	drawMovingSpace();          // ??
 }
 //End offset
 drawParticleFlag = true;
@@ -189,7 +190,7 @@ function update()
 	}
 	if(sceneNumber == 6)
 	{
-		gameTimer = setInterval(Level, gameSpeed);   
+		gameTimer = setInterval(Level, gameSpeed);    //
 	}
 }
 
@@ -251,7 +252,7 @@ function drawMirror(x1, y1, x2, y2, flag, drag)
 	gameArena.beginPath();
 	gameArena.arc(x1, y1, 7*(width/1220), 0, 2*Math.PI, true);
 	if(drag) gameArena.fillStyle = "#303030";
-	else gameArena.fillStyle = "#FF2727";                  
+	else gameArena.fillStyle = "#FF2727";                 //??   
 	gameArena.fill();
 	gameArena.beginPath();
 	gameArena.arc(x2, y2, 7*(width/1220), 0, 2*Math.PI, true);
@@ -260,21 +261,51 @@ function drawMirror(x1, y1, x2, y2, flag, drag)
 	gameArena.fill();
 }
 
-function calculateAngle(x1, y1, x2, y2, x3, y3, x4, y4)          
+function drawMirrorCircular(x1, y1, flag, drag) 
+{
+	gameArena.lineWidth = 4;
+	gameArena.beginPath();
+	gameArena.strokeStyle = "#D0D0D0";
+	if(flag)
+	{
+		gameArena.shadowBlur = 10;
+		gameArena.shadowColor = "#E0E0E0";
+	}
+	else
+	{
+		gameArena.shadowBlur = 0;
+	}
+	gameArena.moveTo(x1, y1);
+	gameArena.arcTo(x1-50, y1, x1-50, y1+50, 50);
+	gameArena.arcTo(x1-50, y1+100, x1, y1+100, 50);
+	gameArena.stroke();
+	gameArena.beginPath();
+	gameArena.arc(x1, y1, 7*(width/1220), 0, 2*Math.PI, true);
+	if(drag) gameArena.fillStyle = "#303030";
+	else gameArena.fillStyle = "#FF2727";                 //??   
+	gameArena.fill();
+	gameArena.beginPath();
+	gameArena.arc(x1, y1+100, 7*(width/1220), 0, 2*Math.PI, true);
+	if(drag) gameArena.fillStyle = "#303030";
+	else gameArena.fillStyle = "#FF2727";
+	gameArena.fill();
+}
+
+function calculateAngle(x1, y1, x2, y2, x3, y3, x4, y4)          // for angle calculation 
 {
 	return (180.0/Math.PI)*(Math.atan2((((y2-y1)*(x3-x4))-((x2-x1)*(y3-y4))) ,(((x2-x1)*(x3-x4))+((y2-y1)*(y3-y4))) ));
 }
 
-function distancePoint(x1, y1, x2, y2)                          
+function distancePoint(x1, y1, x2, y2)                          // for distance
 {
 	return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
 }
 
-function checkLine(x, y, x2, y2)               
+function checkLine(x, y, x2, y2)               // use                  // check if mousepointer is in between x,y  and  x2,y2
 {
 	if(mousex < Math.min(x,x2)-5.0 || mousex > Math.max(x,x2)+5.0 || mousey < Math.min(y,y2)-5.0 || mousey > Math.max(y,y2)+5.0)
 		return false;
-	var a = y2-y;                       
+	var a = y2-y;                        // ax + by + c = 0 eq. of line 
 	var b = x-x2;
 	var c = y*(x2-x)-x*(y2-y);
 	var distance = Math.abs((mousex*a+mousey*b+c)/Math.sqrt(a*a+b*b));
@@ -284,7 +315,7 @@ function checkLine(x, y, x2, y2)
 		return false;
 }
 
-function checkLinePoint(x, y, x1, y1, x2, y2)             
+function checkLinePoint(x, y, x1, y1, x2, y2)            // it gives the true if distance between x,y and line x1,y1 and x2,y2 is less then 5 
 {
 	if(x <= Math.min(x1,x2)-5.0 || x >= Math.max(x1,x2)+5.0 || y <= Math.min(y1,y2)-5.0 || y >= Math.max(y1,y2)+5.0)
 		return false;
@@ -296,6 +327,46 @@ function checkLinePoint(x, y, x1, y1, x2, y2)
 		return true;
 	else
 		return false;
+}
+
+function checkCirclePoint(xc, yc, x1, y1, x2, y2, r)            // it gives the true if distance between x,y and line x1,y1 and x2,y2 is less then 5 
+{
+	if(x1 == x2)  
+	    return false; 
+    else 
+        var m = (y2-y1)/(x2-x1);
+
+	var c = y1 - m*x1;
+	var b = m*(c-yc)-xc;
+	var a = m*m+1 ;
+	var D = 2*m*xc*(yc-c)-(c-yc)*(c-yc)-m*m*xc*xc+a*r*r;
+	if(D>0)
+		var d = Math.sqrt(D);
+    else
+    	return false;
+
+    var x_int1 = (-b+d)/a; 
+    var x_int2 = (-b-d)/a;
+    var y_int1 = m*x_int1 + c;
+    var y_int2 = m*x_int2 + c;
+    if(x_int1 < xc){
+    	var distance1 = distancePoint(x_int1, y_int1, x2, y2);
+    	if(distance1 <= 5)
+    		return true;
+    	else 
+    		return false;
+    }
+    else {
+    	var distance2 = distancePoint(x_int2, y_int2, x2, y2);
+    	if(distance2 <= 5)
+    		return true;
+    	else 
+    		return false;
+    }
+}
+function calculateCircleAngle(x1, y1, x2, y2, x3, y3)          // if not working then use mod
+{
+	return (180.0/Math.PI)*(Math.atan2((y1-y2)*(x3-x2)-(y3-y2)*(x1-x2), (y1-y2)*(y3-y2)+(x1-x2)*(x3-x2)));
 }
 
 function loadingScreen()
@@ -334,7 +405,7 @@ function loadingScreen()
 	gameArena.fillStyle = "#18CAE6";
 	gameArena.rect(midx-95*(width/1220), midy-15*(width/1220), (200-10)*((loading/9)*(width/1220)), 30*(width/1220));
 	gameArena.fill();
-	if(loading == 9 && iterations >= 80)        
+	if(loading == 9 && iterations >= 80)       // why loading is 7 here ?? not much clear 
 	{
 		clearInterval(gameTimer);
 		sceneNumber++;
@@ -342,7 +413,7 @@ function loadingScreen()
 	}
 }
 
-function drawLeftRoundedRectangle(x, y, width, height, color, lineWidth)   
+function drawLeftRoundedRectangle(x, y, width, height, color, lineWidth)     // for which it is used
 {
 	gameArena.lineWidth = lineWidth;
 	gameArena.beginPath();
