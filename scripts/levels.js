@@ -140,6 +140,7 @@ function initialiseLevel()
 		CircMirrors = [];     //n
 		CircMirrorDrag = [];
 		a = [];
+		a1 = [];
 		ss = [];
 		minutes = 0;
 		seconds = 0;
@@ -235,7 +236,8 @@ function initialiseLevel()
 	{
 		mirrors = [];
 		mirrorDrag = [];
-		CircMirrors = [];     
+		CircMirrors = []; 
+		a1 = [];    
 		CircMirrorDrag = [];
 		a = [];
 		ss =[];
@@ -299,6 +301,7 @@ function initialiseLevel()
 		CircMirrors = [];     
 		CircMirrorDrag = [];
 		a = [];
+		a1 =[];
 		ss = [];
 		minutes = 0;
 		seconds = 0;
@@ -360,6 +363,7 @@ function initialiseLevel()
 		CircMirrors = [];     
 		CircMirrorDrag = [];
 		a = [];
+		a1 =[];
 		ss =[];
 		minutes = 0;
 		seconds = 0;
@@ -412,6 +416,7 @@ function initialiseLevel()
 		CircMirrors = [];     
 		CircMirrorDrag = [];
 		a = [];
+		a1 =[];
 		ss =[];
 		minutes = 0;
 		seconds = 0;
@@ -504,6 +509,7 @@ function initialiseLevel()
 		CircMirrors = [];     
 		CircMirrorDrag = [];
 		a = [];
+		a1 =[];
 		ss= [];
 		minutes = 0;
 		seconds = 0;
@@ -582,6 +588,7 @@ function initialiseLevel()
 		CircMirrors = [];     
 		CircMirrorDrag = [];
 		a = [];
+		a1 =[];
 		ss = [];
 		minutes = 0;
 		seconds = 0;
@@ -680,6 +687,7 @@ function initialiseLevel()
 		CircMirrors = [];     //n
 		CircMirrorDrag = [];
 		a = [];
+		a1 =[];
 		ss = [];
 		minutes = 0;
 		seconds = 0;
@@ -767,6 +775,7 @@ function initialiseLevel()
 		CircMirrors = [];     
 		CircMirrorDrag = [];
 		a = [];
+		a1 =[];
 		ss = [];
 		minutes = 0;
 		seconds = 0;
@@ -867,6 +876,7 @@ function initialiseLevel()
 		mirrors = [];
 		mirrorDrag = [];
 		a = [];
+		a1 =[];
 		ss = [];
 		minutes = 0;
 		seconds = 0;
