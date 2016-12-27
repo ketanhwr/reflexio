@@ -29,111 +29,11 @@ var v6 = 0.73;
 var v7 = 0.73;
 var v8 = 0.73;
 var ss = [];
-var time = new Date();
+
 
 function initialiseLevel()
 {
-	if(levelNumber == -1)
-	{
-
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 = [];        // do for every levels 
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		gameOver = false;
-		ex = width-110*(width/1220);       // ex,ey is the position of enemytriangle
-		ey = 515*(width/1220);
-		eh = 100; 
-
-		mySpacestation = {
-        	x: 1*(width/1220),
-        	y: 270*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                      
-        mySpacestation = {
-        	x: 210*(width/1220),
-        	y: 30*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation)
-        mySpacestation = {
-        	x: (1080)*(width/1220),    
-        	y: 240*(width/1220),     
-        	fh: 100
-        };
-        ss.push(mySpacestation)
-        myMirror = {
-			x: 400*(width/1220),
-			width: 70*(width/1220),
-			y: 250*(width/1220),
-			height: 0*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 300*(width/1220),
-			width: 50*(width/1220),
-			y: 250*(width/1220),
-			height: 50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 50*(width/1220),
-			y: 400*(width/1220),
-			height: 50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: -50*(width/1220),
-			y: 150*(width/1220),
-			height: 50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myAsteroid = {
-			x: 1145*(width/1220),
-			y: 425*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1075*(width/1220),
-			y: 445*(width/1220)
-		};
-		a.push(myAsteroid);
-		/*myAsteroid = {
-			x: 1100*(width/1220),
-			y: 240*(width/1220)
-		};
-		a.push(myAsteroid); */
-		myMovingAsteroid = {
-			x1: 870*(width/1220),
-			y1: 345*(width/1220),
-			x2: 300*(width/1220),
-			y2: 245*(width/1220)
-		};
-		a1.push(myMovingAsteroid);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-	}
-	else if(levelNumber == 0)
+    if(levelNumber == 0)
 	{
 		mirrors = [];
 		mirrorDrag = [];
@@ -871,6 +771,160 @@ function initialiseLevel()
 		CircMirrorCount = CircMirrors.length;
 		init = true;
 	}
+	else if(levelNumber == 9)
+	{
+
+		mirrors = [];
+		mirrorDrag = [];
+		CircMirrors = [];     
+		CircMirrorDrag = [];
+		a = [];
+		a1 = [];        
+		ss =[];
+		minutes = 0;
+		seconds = 0;
+		runtime = 0;
+		enemyDestroyed = false;
+		gameOver = false;
+		ex = width-110*(width/1220);       
+		ey = 515*(width/1220);
+		eh = 100; 
+
+		mySpacestation = {
+        	x: 1*(width/1220),
+        	y: 270*(width/1220),
+        	fh: 100
+        };
+        ss.push(mySpacestation);                      
+        mySpacestation = {
+        	x: 210*(width/1220),
+        	y: 30*(width/1220),
+        	fh: 100
+        };
+        ss.push(mySpacestation)
+        mySpacestation = {
+        	x: (1080)*(width/1220),    
+        	y: 240*(width/1220),     
+        	fh: 100
+        };
+        ss.push(mySpacestation)
+        myMirror = {
+			x: 1135*(width/1220),
+			width: 70*(width/1220),
+			y: 360*(width/1220),
+			height: 0*(width/1220),
+			drag: 0
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 1135*(width/1220),
+			width: 50*(width/1220),
+			y: 390*(width/1220),
+			height: 50*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 700*(width/1220),
+			width: 50*(width/1220),
+			y: 550*(width/1220),
+			height: 50*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 750*(width/1220),
+			width: -50*(width/1220),
+			y: 380*(width/1220),
+			height: 50*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+
+		myAsteroid = {
+			x: 1152*(width/1220),
+			y: 425*(width/1220)
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 1082*(width/1220),
+			y: 435*(width/1220)
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 1007*(width/1220),
+			y: 480*(width/1220)
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 1005*(width/1220),
+			y: 580*(width/1220)
+		};
+		a.push(myAsteroid);
+		myMovingAsteroid = {
+			x1: 230*(width/1220),
+			y1: 283*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+		myMovingAsteroid = {
+			x1: 300*(width/1220),
+			y1: 283*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+		myMovingAsteroid = {
+			x1: 370*(width/1220),
+			y1: 283*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+		myMovingAsteroid = {
+			x1: 440*(width/1220),
+			y1: 283*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+		myMovingAsteroid = {
+			x1: 510*(width/1220),
+			y1: 283*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+		myMovingAsteroid = {
+			x1: 580*(width/1220),
+			y1: 283*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+		myMovingAsteroid = {
+			x1: 650*(width/1220),
+			y1: 283*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+		myMovingAsteroid = {
+			x1: 720*(width/1220),
+			y1: 285*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+		myMovingAsteroid = {
+			x1: 790*(width/1220),
+			y1: 285*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+		myMovingAsteroid = {
+			x1: 860*(width/1220),
+			y1: 285*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+		myMovingAsteroid = {
+			x1: 930*(width/1220),
+			y1: 287*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+
+		mirrorCount = mirrors.length;
+		CircMirrorCount = CircMirrors.length;
+		init = true;
+	}
 	else
 	{
 		mirrors = [];
@@ -894,18 +948,11 @@ function drawGUI()
 {
 	var colorCheck;  
 
-	if(levelNumber != -1) 
+	if(levelNumber != 9) 
 	{                              
 	gameArena.shadowBlur = 10;
 	gameArena.shadowColor = "#18CAE6";
 	gameArena.drawImage(mainShip, width-152*(width/1220), height-94*(width/1220), 150*(width/1220), 89*(width/1220)); 
-    }
-
-    if(levelNumber == -1)
-    {
-    gameArena.shadowBlur = 10;
-    gameArena.shadowColor = "#18CAE6";
-    gameArena.drawImage(mainShip, width-250*(width/1220), height-94*(width/1220), 150*(width/1220), 89*(width/1220))	
     }
 
 	if(levelNumber == 7)
@@ -932,6 +979,27 @@ function drawGUI()
 	{
 		gameArena.drawImage(asteroid, a[i].x, a[i].y);
 	}
+
+	gameArena.shadowBlur = 1;                   // for asteroids_location_change
+	gameArena.shadowColor = "#ff0707";
+	for(var i = 0;i < a1.length;i++)
+	{
+		var condition=((0<=seconds)&&(seconds<3))||((6<=seconds)&&(seconds<9))||((12<=seconds)&&(seconds<15))||((18<=seconds)&&(seconds<21))||((24<=seconds)&&(seconds<27))||
+		((30<=seconds)&&(seconds<33))||((36<=seconds)&&(seconds<39))||((42<=seconds)&&(seconds<45))||((48<=seconds)&&(seconds<51))||((54<=seconds)&&(seconds<57));
+		if(condition)     
+		    gameArena.drawImage(asteroid, a1[i].x1, a1[i].y1);   
+	    else
+	    	gameArena.drawImage(asteroid, 1600, 1000);
+
+	}
+
+	if(levelNumber == 9)   
+    {
+    gameArena.shadowBlur = 10;
+    gameArena.shadowColor = "#18CAE6";
+    gameArena.drawImage(mainShip, width-250*(width/1220), height-94*(width/1220), 150*(width/1220), 89*(width/1220))	
+    }
+
 
     if(levelNumber == 0)
 	{
@@ -980,7 +1048,7 @@ function drawGUI()
 		}
 	}
 
-	if(levelNumber == -1) 
+	if(levelNumber == 9) 
 	{
 		ss[0].y += v6;
 		ss[0].x += v6;
@@ -1008,17 +1076,6 @@ function drawGUI()
 	var displayMinutes = (minutes<10)?("0"+minutes):(minutes);
 	var displaySeconds = (seconds<10)?("0"+seconds):(seconds);
 	gameArena.fillText(displayMinutes + ":" + displaySeconds, midx, midy-305);     // move time inside the rectangle   //change
-
-    var sec = time.getSeconds();
-	gameArena.shadowBlur = 1;                   // for asteroids_location_change
-	gameArena.shadowColor = "#ff0707";
-	for(var i = 0;i < a1.length;i++)
-	{
-		if(((0 < seconds)&&(seconds <= 5)) ||((15 < seconds)&&(seconds <= 20))||((25 < seconds)&&(seconds <= 30))||((35 < seconds)&&(seconds <= 40))||((45 < seconds)&&(seconds <= 50))||((55 < seconds)&&(seconds <= 60)))     
-		    gameArena.drawImage(asteroid, a1[i].x2, a1[i].y2);   
-	    else
-	    	gameArena.drawImage(asteroid, a1[i].x1, a1[i].y1);
-	}
 
 	gameArena.shadowBlur = 7;                            // at top left corner on hovring the mouse on < then color changes 
 	gameArena.shadowColor = "#E6FFFF";         
@@ -1320,10 +1377,10 @@ function Level_mousemove(evt)
 
 function traceRay()                
 {
-    if( levelNumber != -1)
+    if( levelNumber != 9)
 	var rayX = width-150*(width/1220), rayY = height-50*(width/1220); 
     
-    if(levelNumber == -1)
+    if(levelNumber == 9)
     var rayX = width-248*(width/1220), rayY = height-50*(width/1220);
 
 	var currentAngle = 180.0;
@@ -1517,6 +1574,21 @@ function intersection(rayX, rayY, rayTheta)
 				return returnValue;
 			}
 		}
+		var condition=((0<=seconds)&&(seconds<3))||((6<=seconds)&&(seconds<9))||((12<=seconds)&&(seconds<15))||((18<=seconds)&&(seconds<21))||((24<=seconds)&&(seconds<27))||
+		((30<=seconds)&&(seconds<33))||((36<=seconds)&&(seconds<39))||((42<=seconds)&&(seconds<45))||((48<=seconds)&&(seconds<51))||((54<=seconds)&&(seconds<57));
+		for(var i = 0;i < a1.length;i++) 
+		{
+			if(condition){
+			if(checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x1, a1[i].y1+asteroidPoly.y1, a1[i].x1+asteroidPoly.x2, a1[i].y1+asteroidPoly.y2) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x2, a1[i].y1+asteroidPoly.y2, a1[i].x1+asteroidPoly.x3, a1[i].y1+asteroidPoly.y3) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x3, a1[i].y1+asteroidPoly.y3, a1[i].x1+asteroidPoly.x4, a1[i].y1+asteroidPoly.y4) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x4, a1[i].y1+asteroidPoly.y4, a1[i].x1+asteroidPoly.x5, a1[i].y1+asteroidPoly.y5) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x5, a1[i].y1+asteroidPoly.y5, a1[i].x1+asteroidPoly.x1, a1[i].y1+asteroidPoly.y1))
+			{
+				returnValue.x = currX;
+				returnValue.y = currY;
+				return returnValue;
+			}
+		    }
+		    else 
+		    	continue;
+		}
 		for(var i = 0;i < ss.length;i++) 
 		{
 			if(distancePoint(currX, currY, ss[i].x+76*(width/1220), ss[i].y+80*(width/1220)) <= 82*(width/1220))
@@ -1600,6 +1672,21 @@ function intersection0(rayX, rayY, rayTheta)
 				return returnValue;
 			}
 		}
+		var condition=((0<=seconds)&&(seconds<3))||((6<=seconds)&&(seconds<9))||((12<=seconds)&&(seconds<15))||((18<=seconds)&&(seconds<21))||((24<=seconds)&&(seconds<27))||
+		((30<=seconds)&&(seconds<33))||((36<=seconds)&&(seconds<39))||((42<=seconds)&&(seconds<45))||((48<=seconds)&&(seconds<51))||((54<=seconds)&&(seconds<57));
+		for(var i = 0;i < a1.length;i++) 
+		{
+			if(condition){
+			if(checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x1, a1[i].y1+asteroidPoly.y1, a1[i].x1+asteroidPoly.x2, a1[i].y1+asteroidPoly.y2) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x2, a1[i].y1+asteroidPoly.y2, a1[i].x1+asteroidPoly.x3, a1[i].y1+asteroidPoly.y3) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x3, a1[i].y1+asteroidPoly.y3, a1[i].x1+asteroidPoly.x4, a1[i].y1+asteroidPoly.y4) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x4, a1[i].y1+asteroidPoly.y4, a1[i].x1+asteroidPoly.x5, a1[i].y1+asteroidPoly.y5) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x5, a1[i].y1+asteroidPoly.y5, a1[i].x1+asteroidPoly.x1, a1[i].y1+asteroidPoly.y1))
+			{
+				returnValue.x = currX;
+				returnValue.y = currY;
+				return returnValue;
+			}
+		    }
+		    else 
+		    	continue;
+		}
 		for(var i = 0;i < ss.length;i++) 
 		{
 			if(distancePoint(currX, currY, ss[i].x+76*(width/1220), ss[i].y+80*(width/1220)) <= 82*(width/1220))
@@ -1682,6 +1769,21 @@ function intersection1(rayX, rayY, rayTheta)
 				returnValue.y = currY;
 				return returnValue;
 			}
+		}
+		var condition=((0<=seconds)&&(seconds<3))||((6<=seconds)&&(seconds<9))||((12<=seconds)&&(seconds<15))||((18<=seconds)&&(seconds<21))||((24<=seconds)&&(seconds<27))||
+		((30<=seconds)&&(seconds<33))||((36<=seconds)&&(seconds<39))||((42<=seconds)&&(seconds<45))||((48<=seconds)&&(seconds<51))||((54<=seconds)&&(seconds<57));
+		for(var i = 0;i < a1.length;i++) 
+		{
+			if(condition){
+			if(checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x1, a1[i].y1+asteroidPoly.y1, a1[i].x1+asteroidPoly.x2, a1[i].y1+asteroidPoly.y2) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x2, a1[i].y1+asteroidPoly.y2, a1[i].x1+asteroidPoly.x3, a1[i].y1+asteroidPoly.y3) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x3, a1[i].y1+asteroidPoly.y3, a1[i].x1+asteroidPoly.x4, a1[i].y1+asteroidPoly.y4) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x4, a1[i].y1+asteroidPoly.y4, a1[i].x1+asteroidPoly.x5, a1[i].y1+asteroidPoly.y5) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x5, a1[i].y1+asteroidPoly.y5, a1[i].x1+asteroidPoly.x1, a1[i].y1+asteroidPoly.y1))
+			{
+				returnValue.x = currX;
+				returnValue.y = currY;
+				return returnValue;
+			}
+		    }
+		    else 
+		    	continue;
 		}
 		for(var i = 0;i < ss.length;i++) 
 		{
