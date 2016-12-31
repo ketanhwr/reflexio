@@ -51,6 +51,12 @@ asteroid.onload = function() {
 }
 asteroid.src = "sprites/asteroid.png";
 
+var asteroid1 = new Image();
+asteroid1.onload = function() {
+	loading++;
+}
+asteroid1.src = "sprites/asteroid1.png";
+
 var spaceStation = new Image();
 spaceStation.onload = function() {
 	loading++;
@@ -62,6 +68,12 @@ life.onload = function() {
 	loading++;
 }
 life.src = "sprites/life.png";
+
+var life1 = new Image();
+life1.onload = function() {
+	loading++;
+}
+life1.src = "sprites/life1.png";
 
 var abtUs1 = new Image();
 abtUs1.onload = function() {
@@ -403,9 +415,9 @@ function loadingScreen()
 	gameArena.stroke();
 	gameArena.beginPath();
 	gameArena.fillStyle = "#18CAE6";
-	gameArena.rect(midx-95*(width/1220), midy-15*(width/1220), (200-10)*((loading/9)*(width/1220)), 30*(width/1220));
+	gameArena.rect(midx-95*(width/1220), midy-15*(width/1220), (200-10)*((loading/11)*(width/1220)), 30*(width/1220));
 	gameArena.fill();
-	if(loading == 9 && iterations >= 80)       // why loading is 7 here ?? not much clear 
+	if(loading == 11 && iterations >= 80)       // why loading is 7 here ?? not much clear 
 	{
 		clearInterval(gameTimer);
 		sceneNumber++;
