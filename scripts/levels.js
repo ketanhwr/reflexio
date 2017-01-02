@@ -28,13 +28,13 @@ var v5 = 0.73;
 var v6 = 0.73;
 var v7 = 0.73;
 var v8 = 0.73;
-var v10= 1.26;var v11= 0.3937;var v12= 0.3937;var v13= 1.26;   
+var v10= 1.26;var v11= 0.3937;var v12= 0.3937;var v13= 1.26; 
+var v21= 1.2; var v22= 1.2;  
 var ss = [];
 
 
 function initialiseLevel()
 {
-	
     if(levelNumber == 0)
 	{
 		mirrors = [];
@@ -775,6 +775,92 @@ function initialiseLevel()
 	}
 	else if(levelNumber == 9)
 	{
+        mirrors = [];
+		mirrorDrag = [];
+		CircMirrors = []; 
+		a1 = [];    
+		CircMirrorDrag = [];
+		a = [];
+		ss =[];
+		minutes = 0;
+		seconds = 0;
+		runtime = 0;
+		enemyDestroyed = false;
+		ex = -15*(width/1220);       
+		ey = 520*(width/1220);
+		eh = 100; 
+
+        mySpacestation = {
+        	x: 13*(width/1220),
+        	y: 90*(width/1220),
+        	fh: 100
+        };
+        ss.push(mySpacestation);  
+        mySpacestation = {
+        	x: 1067*(width/1220),
+        	y: 90*(width/1220),
+        	fh: 100
+        };
+        ss.push(mySpacestation);                    
+		myMirror = {
+			x: 350*(width/1220),
+			width: 17*(width/1220),
+			y: 520*(width/1220),
+			height: 80*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 1040*(width/1220),
+			width: -100*(width/1220),
+			y: 320*(width/1220),
+			height: -80*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+        myMirror = {
+			x: 910*(width/1220),
+			width: 100*(width/1220),
+			y: 480*(width/1220),
+			height: -50*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 250*(width/1220),
+			width: 47.8*(width/1220),
+			y: 170*(width/1220),
+			height: -100*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myAsteroid = {
+			x: 95*(width/1220),
+			y: 545*(width/1220)
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 105*(width/1220),
+			y: 465*(width/1220)
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 37*(width/1220),
+			y: 430*(width/1220)
+		};
+		a.push(myAsteroid); 
+
+		mirrorCount = mirrors.length;
+		CircMirrorCount = CircMirrors.length;
+		init = true;
+	}
+
+	else if(levelNumber == 10)
+	{
 		mirrors = [];
 		mirrorDrag = [];
 		CircMirrors = [];     
@@ -925,7 +1011,7 @@ function initialiseLevel()
 		CircMirrorCount = CircMirrors.length;
 		init = true;
 	}
-	else if(levelNumber == 10)
+	else if(levelNumber == 11)
 	{
 		mirrors = [];
 		mirrorDrag = [];
@@ -1062,7 +1148,7 @@ function drawGUI()
 {
 	var colorCheck;  
 
-	if(levelNumber != 9) 
+	if(levelNumber != 10) 
 	{                              
 	gameArena.shadowBlur = 10;
 	gameArena.shadowColor = "#18CAE6";
@@ -1097,7 +1183,7 @@ function drawGUI()
 	gameArena.shadowBlur = 1;                   // for asteroids_location_change
 	gameArena.shadowColor = "#ff0707";
 
-	if(levelNumber != 10) {
+	if(levelNumber != 11) {
 	for(var i = 0;i < a1.length;i++)
 	{
 		var condition=((0<=seconds)&&(seconds<3))||((6<=seconds)&&(seconds<9))||((12<=seconds)&&(seconds<15))||((18<=seconds)&&(seconds<21))||((24<=seconds)&&(seconds<27))||
@@ -1108,7 +1194,7 @@ function drawGUI()
 	    	gameArena.drawImage(asteroid1, 1600, 1000);
 	}
 }
-	if(levelNumber == 10)
+	if(levelNumber == 11)
 	{
 		for(var i = 0;i < a1.length;i++) {
 		var condition= ((0<=seconds)&&(seconds<5))||((8<=seconds)&&(seconds<15))||((20<=seconds)&&(seconds<25))||((30<=seconds)&&(seconds<35))
@@ -1120,7 +1206,7 @@ function drawGUI()
 	}
 	}
 
-	if(levelNumber == 9)   
+	if(levelNumber == 10)   
     {
     gameArena.shadowBlur = 10;
     gameArena.shadowColor = "#18CAE6";
@@ -1175,7 +1261,7 @@ function drawGUI()
 		}
 	}
 
-	if(levelNumber == 9) 
+	if(levelNumber == 10) 
 	{
 		ss[0].y += v6;
 		ss[0].x += v6;
@@ -1191,6 +1277,18 @@ function drawGUI()
 		ss[2].x -= v8;
 		if(ss[2].y<30*(width/1220) || ss[2].y>240*(width/1220 ) || ss[2].x<870*(width/1220 ) || ss[2].x>1080*(width/1220)){
 			v8 = v8*(-1);
+		}
+	}
+
+	if(levelNumber == 9)
+	{
+		ss[0].y += v21;
+		if(ss[0].y>270*(width/1220) || ss[0].y<90*(width/1220)){
+			v21 = v21*(-1);
+		}
+		ss[1].y += v22;
+		if(ss[1].y>270*(width/1220) || ss[1].y<90*(width/1220)){
+			v22 = v22*(-1);
 		}
 	}
 
@@ -1274,22 +1372,19 @@ function drawGUI()
 	}
 	for(var i = 0;i < ss.length;i++) {
 	if(ss[i].fh >= 2.0) {
-		gameArena.shadowBlur = 50;                // for making the yellow color life line of spacestation yellow.
+		gameArena.shadowBlur = 50;               
 		gameArena.shadowColor = "#21E821";
 		gameArena.beginPath();
 		gameArena.lineWidth = 4;
 		gameArena.strokeStyle = "#21E821";
-		gameArena.moveTo(ss[i].x+(30+20)*(width/1220), ss[i].y-15*(width/1220));
-		gameArena.lineTo(ss[i].x+(30+20+50*(ss[i].fh/100.0))*(width/1220), ss[i].y-15*(width/1220));
+		gameArena.arc(ss[i].x+(30+20+20)*(width/1220),ss[i].y-15*(width/1220)+100,90,0,2*Math.PI*(ss[i].fh/100));
 		gameArena.stroke();
+		if(ss[i].fh<99) {
 		gameArena.beginPath();
 		gameArena.fillStyle = "#21E821";
-		gameArena.arc(ss[i].x+(30+20)*(width/1220), ss[i].y-15*(width/1220), 2*(width/1220), 0, 2*Math.PI);
+		gameArena.arc(ss[i].x+(30+20+20)*(width/1220)+90, ss[i].y-15*(width/1220)+100, 2*(width/1220), 0, 2*Math.PI);
 		gameArena.fill();
-		gameArena.beginPath();
-		gameArena.fillStyle = "#21E821";
-		gameArena.arc(ss[i].x+(30+20+50*(ss[i].fh/100.0))*(width/1220), ss[i].y-15*(width/1220), 2*(width/1220), 0, 2*Math.PI);
-		gameArena.fill();
+	    }
 	}
 	}
 }
@@ -1370,7 +1465,7 @@ function Level()
 		}
 	}
 
-	if(levelNumber == 10)     
+	if(levelNumber == 11)     
 	{
 		mirrors[0].x += v10;
 		if(mirrors[0].x>800*(width/1220) || mirrors[0].x<120*(width/1220)) {
@@ -1527,10 +1622,10 @@ function Level_mousemove(evt)
 
 function traceRay()                
 {
-    if( levelNumber != 9)
+    if( levelNumber != 10)
 	var rayX = width-150*(width/1220), rayY = height-50*(width/1220); 
     
-    if(levelNumber == 9)
+    if(levelNumber == 10)
     var rayX = width-248*(width/1220), rayY = height-50*(width/1220);
 
 	var currentAngle = 180.0;
@@ -1724,7 +1819,7 @@ function intersection(rayX, rayY, rayTheta)
 				return returnValue;
 			}
 		}
-		if(levelNumber != 10){
+		if(levelNumber != 11){
 		var condition=((0<=seconds)&&(seconds<3))||((6<=seconds)&&(seconds<9))||((12<=seconds)&&(seconds<15))||((18<=seconds)&&(seconds<21))||((24<=seconds)&&(seconds<27))||
 		((30<=seconds)&&(seconds<33))||((36<=seconds)&&(seconds<39))||((42<=seconds)&&(seconds<45))||((48<=seconds)&&(seconds<51))||((54<=seconds)&&(seconds<57));
 		for(var i = 0;i < a1.length;i++) 
@@ -1741,7 +1836,7 @@ function intersection(rayX, rayY, rayTheta)
 		    	continue;
 		}
 	}
-	    if(levelNumber == 10)
+	    if(levelNumber == 11)
 	    {
 	    var condition=((0<=seconds)&&(seconds<5))||((8<=seconds)&&(seconds<15))||((20<=seconds)&&(seconds<25))||((30<=seconds)&&(seconds<35))
 	    ||((38<=seconds)&&(seconds<45))||((50<=seconds)&&(seconds<55));     
@@ -2060,7 +2155,7 @@ function LevelFinished()
 {
 	canvas.style.cursor = "auto";
 	var sco = 0;
-	if(levelNumber <= 10 ) {
+	if(levelNumber <= 11 ) {
 		for(var i = 0;i<ss.length;i++){
 			var sco = sco + ss[i].fh;
 		}
