@@ -119,7 +119,7 @@ var mousex,mousey;                            // ??
 
 //Most important Variables
 var sceneNumber = 0;
-var levelNumber = 0;
+var levelNumber = 1;
 //End
 
 canvas.addEventListener('mousemove', function(evt) {          // ??
