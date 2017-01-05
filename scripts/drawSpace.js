@@ -4,7 +4,7 @@ var drawParticleFlag = false;
 var spaceParticles = [];
 var particleCount = 150;
 
-function initSpace()
+function initSpace()                       // ??
 {
 	for (var i = 0; i < particleCount; i++)
 	{
