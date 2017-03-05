@@ -7,6 +7,4 @@ The game is live on:
 
 The game works best on Google Chrome!
 
-*Note: The game has 6 levels as of now.*
-
 [ketangupta.in/reflexio]: <http://ketangupta.in/reflexio>
