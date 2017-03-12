@@ -1,0 +1,14 @@
+How to make reflection calculation less intensive:
+>find equation of line that the ray is going to follow until it hits the wall(By=Ax+c) [where y and x are the coordinates
+on the x-y plane, B and A are the the coefficients of y and x respectively and c is the y-intercept].
+>find equation of surface of wall that the ray is going to hit (m,n)
+>find point of intersection of the ray and the surface of the wall that the ray hits
+>find coordinate that is the origin of the ray (r,s)
+>find angle (a1) at which the a ray that originates from such a point (r,s) will hit point (m,n)
+>calculate the path of reflection of a line that will now originate from point (r,s) [because it is the reflected ray] 
+and make an angle a1 [because angle of incidence = angle of reflection]
+
+
+Notes:
+Though this algorithm seems to have a lot of steps, it is much simpler than the algorithm described in the issue post. 
+Also the this is much less computing intensive and it wont require one to brute force unnecessary values.
