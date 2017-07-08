@@ -44,17 +44,6 @@ function mainMenu() {
     gameArena.fillStyle = "#E6FFFF";
     //gameArena.fillText("play", midx, midy - 83 * (width / 1220));
     gameArena.fillText("play", midx, midy - 115 * (width / 1220));
-    
-    //Rajdeep
-    gameArena.shadowBlur = 20;
-    gameArena.shadowColor = "#E6FFFF";
-    if (hoverCheck == 5) colorCheck = "#E6FFFF";
-    else colorCheck = "#18CAE6";
-    drawRoundedRectangle(midx - 200 * (width / 1220), midy + 200 * (width / 1220), 400 * (width / 1220), 60 * (width / 1220), colorCheck, 4);
-    gameArena.shadowBlur = 0;
-    gameArena.font = "40px Complex";
-    gameArena.fillStyle = "#E6FFFF";
-    gameArena.fillText("levels", midx, midy + 245 * (width / 1220));
 
     gameArena.shadowBlur = 20;
     gameArena.shadowColor = "#E6FFFF";
@@ -91,6 +80,16 @@ function mainMenu() {
     gameArena.fillStyle = "#E6FFFF";
     //gameArena.fillText("about us", midx, midy + 248 * (width / 1220));
     gameArena.fillText("about us", midx, midy + 155 * (width / 1220));
+
+    gameArena.shadowBlur = 20;
+    gameArena.shadowColor = "#E6FFFF";
+    if (hoverCheck == 5) colorCheck = "#E6FFFF";
+    else colorCheck = "#18CAE6";
+    drawRoundedRectangle(midx - 200 * (width / 1220), midy + 200 * (width / 1220), 400 * (width / 1220), 60 * (width / 1220), colorCheck, 4);
+    gameArena.shadowBlur = 0;
+    gameArena.font = "40px Complex";
+    gameArena.fillStyle = "#E6FFFF";
+    gameArena.fillText("levels", midx, midy + 245 * (width / 1220));
 }
 
 function mainMenu_click() {
@@ -133,4 +132,5 @@ function mainMenu_click() {
         lastClickCounter = 0;
         if (volume) menu_click.play();
     }
+
 }

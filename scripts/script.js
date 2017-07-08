@@ -132,6 +132,10 @@ canvas.addEventListener('click', function(evt) {
 	{
 		mainMenu_click();
 	}
+	if (sceneNumber == 2)
+	{
+	    levelSelects_click();
+	}
 	if(sceneNumber == 3)
 	{
 		settings_click();
@@ -187,7 +191,13 @@ function update()
 	{
 		gameTimer = setInterval(mainMenu, gameSpeed);
 	}
-	//Scene Number 2 has been deleted
+    //Scene Number 2 has been deleted
+    //Scene Number 2 added Rajdeep
+	if (sceneNumber == 2)
+	{
+	    gameTimer = setInterval(levelSelect, gameSpeed);
+	}
+
 	if(sceneNumber == 3)
 	{
 		gameTimer = setInterval(settings, gameSpeed);
@@ -376,6 +386,7 @@ function checkCirclePoint(xc, yc, x1, y1, x2, y2, r)            // it gives the 
     		return false;
     }
 }
+
 function calculateCircleAngle(x1, y1, x2, y2, x3, y3)          // if not working then use mod
 {
 	return (180.0/Math.PI)*(Math.atan2((y1-y2)*(x3-x2)-(y3-y2)*(x1-x2), (y1-y2)*(y3-y2)+(x1-x2)*(x3-x2)));
