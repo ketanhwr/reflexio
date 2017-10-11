@@ -354,10 +354,10 @@ function initialiseLevel()
         ss[1] = createSpaceStation(210*(width/1220), 30*(width/1220), 100);
 		ss[2] = createSpaceStation((1080)*(width/1220), 240*(width/1220), 100);
 		
-        mirrors[] = createMirror(1135*(width/1220), 70*(width/1220), 360*(width/1220), 0*(width/1220), 0);
-		mirrors[] = createMirror(1135*(width/1220), 50*(width/1220), 390*(width/1220), 50*(width/1220), 1);
-		mirrors[] = createMirror(700*(width/1220), 50*(width/1220), 550*(width/1220), 50*(width/1220), 1);
-		mirrors[] = createMirror(750*(width/1220), -50*(width/1220), 380*(width/1220), 50*(width/1220), 1);
+        mirrors[0] = createMirror(1135*(width/1220), 70*(width/1220), 360*(width/1220), 0*(width/1220), 0);
+		mirrors[1] = createMirror(1135*(width/1220), 50*(width/1220), 390*(width/1220), 50*(width/1220), 1);
+		mirrors[2] = createMirror(700*(width/1220), 50*(width/1220), 550*(width/1220), 50*(width/1220), 1);
+		mirrors[3] = createMirror(750*(width/1220), -50*(width/1220), 380*(width/1220), 50*(width/1220), 1);
 
 		setMirrorDrag(mirrors.length);
 
