@@ -212,7 +212,7 @@ function initialiseLevel()
 
 		setEnemy((width/1220), 250*(width/1220), 100);
 
-		s[0] = createSpaceStation(midx-400*(width/1220), 55*(width/1220), 100);
+		ss[0] = createSpaceStation(midx-400*(width/1220), 55*(width/1220), 100);
                       
 		mirrors[0] = createMirror(700*(width/1220), -15*(width/1220), 360*(width/1220), 100*(width/1220), 1);
 		mirrors[1] = createMirror(30*(width/1220), 13*(width/1220), 500*(width/1220), 100*(width/1220), 1);
