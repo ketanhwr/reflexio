@@ -1,10 +1,10 @@
-var mirrors = [];                         
-var CircMirrors = [];        //n
-var init = false;              
-var mirrorCount;                          
-var CircMirrorCount = 0;        //n
-var mirrorDrag = [];                      
-var CircMirrorDrag = [];     //n
+var mirrors = [];
+var CircMirrors = [];
+var init = false;
+var mirrorCount;
+var CircMirrorCount = 0;
+var mirrorDrag = [];
+var CircMirrorDrag = [];
 var minutes = 0;
 var seconds = 0;
 var runtime = 0;
@@ -12,8 +12,8 @@ var mark = false;
 var ex;
 var ey = 100;
 var enemyDestroyed = false;
-var a = []; 
-var a1 = [];              
+var a = [];
+var a1 = [];
 var gameOver = false;
 var eh = 100;
 var fh;
@@ -28,51 +28,17 @@ var v5 = 0.73;
 var v6 = 0.73;
 var v7 = 0.73;
 var v8 = 0.73;
-var v10= 1.26;var v11= 0.3937;var v12= 0.3937;var v13= 1.26; 
-var v21= 1.2; var v22= 1.2;  
+var v10= 1.26;
+var v11= 0.3937;
+var v12= 0.3937;
+var v13= 1.26;
+var v21= 1.2; 
+var v22= 1.2;
 var ss = [];
 
-function createSpaceStation(pointX, pointY, fullHealth){
-	return {
-		x: pointX,
-		y: pointY,
-		fh: fullHealth
-	}
-}
-
-function createMirror(pointX, mirrorWidth, pointY, mirrorHeight, dragable){
-	return{
-		x: pointX,
-		width: mirrorWidth,
-		y: pointY,
-		height: mirrorHeight,
-		drag: dragable
-	}
-}
-
-function createCircleMirror(pointX, pointY, dragable){
-	return {
-		x: pointX,
-		//width: 100*(width/1220),
-		y: pointY,
-		//height: -100*(width/1220),
-		drag: dragable
-	}
-}
-
-function createAsteroid(pointX, pointY){
-	return {
-		x: pointX,
-		y: pointY
-	};
-}
-
-function createMovingAsteroid(pointX, pointY){
-	return {
-		x1: pointX,
-		y1: pointY
-	}
-}
+var script = document.createElement('script');
+script.src = './scripts/createObjectsScript.js';
+document.head.appendChild(script);
 
 function setDefaults(){
 	mirrors = [];

@@ -4,7 +4,7 @@ var drawParticleFlag = false;
 var spaceParticles = [];
 var particleCount = 150;
 
-function initSpace()                       // ??
+function initSpace()
 {
 	for (var i = 0; i < particleCount; i++)
 	{
@@ -70,7 +70,7 @@ function drawMovingSpace()
 			spaceParticles[i].y = new_y;
 		}
 		else{
-			if((new_x > (width+5)) || (new_y > height+5) || (new_x < (-5)) || (new_y < (-5)))
+			if((new_x > (width+5)) || (new_x < (-5)) || (new_y > height+5) || (new_y < (-5)))
 			{
 				addSpaceParticle(i);
 			}
