@@ -8,14 +8,7 @@ function initSpace()                       // ??
 {
 	for (var i = 0; i < particleCount; i++)
 	{
-		myCircle = {
-			x : midx + (50*Math.random() - 25),
-			y : midy + (50*Math.random() - 25),
-			particleRadius : Math.ceil((Math.random()*1) + 0.5)/2,
-			vY : 4*((Math.random()) - 0.51),
-			vX : 4*((Math.random()) - 0.51)
-		};
-		spaceParticles.push(myCircle);
+		addSpaceParticle(i);
 	};
 }
 
@@ -77,49 +70,9 @@ function drawMovingSpace()
 			spaceParticles[i].y = new_y;
 		}
 		else{
-			if(new_x > (width+5))
+			if((new_x > (width+5)) || (new_y > height+5) || (new_x < (-5)) || (new_y < (-5)))
 			{
-				myCircle = {
-					x : midx + (50*Math.random() - 25),
-					y : midy + (50*Math.random() - 25),
-					particleRadius : Math.ceil((Math.random()*1) + 0.5)/2,
-					vY : 4*((Math.random()) - 0.51),
-					vX : 4*((Math.random()) - 0.51)
-				};
-				spaceParticles[i] = myCircle;
-			}
-			else if(new_y > height+5)
-			{
-				myCircle = {
-					x : midx + (50*Math.random() - 25),
-					y : midy + (50*Math.random() - 25),
-					particleRadius : Math.ceil((Math.random()*1) + 0.5)/2,
-					vY : 4*((Math.random()) - 0.51),
-					vX : 4*((Math.random()) - 0.51)
-				};
-				spaceParticles[i] = myCircle;
-			}
-			else if(new_x < (-5))
-			{
-				myCircle = {
-					x : midx + (50*Math.random() - 25),
-					y : midy + (50*Math.random() - 25),
-					particleRadius : Math.ceil((Math.random()*1) + 0.5)/2,
-					vY : 4*((Math.random()) - 0.51),
-					vX : 4*((Math.random()) - 0.51)
-				};
-				spaceParticles[i] = myCircle;
-			}
-			else if(new_y < (-5))
-			{
-				myCircle = {
-					x : midx + (50*Math.random() - 25),
-					y : midy + (50*Math.random() - 25),
-					particleRadius : Math.ceil((Math.random()*1) + 0.5)/2,
-					vY : 4*((Math.random()) - 0.51),
-					vX : 4*((Math.random()) - 0.51)
-				};
-				spaceParticles[i] = myCircle;
+				addSpaceParticle(i);
 			}
 		}
 	}
@@ -145,52 +98,22 @@ function drawLevelSpace()
 			spaceParticles[i].y = new_y;
 		}
 		else{
-			if(new_x > (width+5))
+			if((new_x > (width+5)) || (new_y > height+5) || (new_x < (-5)) || (new_y < (-5)))
 			{
-				myCircle = {
-					x : midx + (50*Math.random() - 25),
-					y : midy + (50*Math.random() - 25),
-					particleRadius : Math.ceil((Math.random()*1) + 0.5)/2,
-					vY : 4*((Math.random()) - 0.51),
-					vX : 4*((Math.random()) - 0.51)
-				};
-				spaceParticles[i] = myCircle;
-			}
-			else if(new_y > height+5)
-			{
-				myCircle = {
-					x : midx + (50*Math.random() - 25),
-					y : midy + (50*Math.random() - 25),
-					particleRadius : Math.ceil((Math.random()*1) + 0.5)/2,
-					vY : 4*((Math.random()) - 0.51),
-					vX : 4*((Math.random()) - 0.51)
-				};
-				spaceParticles[i] = myCircle;
-			}
-			else if(new_x < (-5))
-			{
-				myCircle = {
-					x : midx + (50*Math.random() - 25),
-					y : midy + (50*Math.random() - 25),
-					particleRadius : Math.ceil((Math.random()*1) + 0.5)/2,
-					vY : 4*((Math.random()) - 0.51),
-					vX : 4*((Math.random()) - 0.51)
-				};
-				spaceParticles[i] = myCircle;
-			}
-			else if(new_y < (-5))
-			{
-				myCircle = {
-					x : midx + (50*Math.random() - 25),
-					y : midy + (50*Math.random() - 25),
-					particleRadius : Math.ceil((Math.random()*1) + 0.5)/2,
-					vY : 4*((Math.random()) - 0.51),
-					vX : 4*((Math.random()) - 0.51)
-				};
-				spaceParticles[i] = myCircle;
+				addSpaceParticle(i);
 			}
 		}
 	}
 	initialOffset = 1;
 	drawParticlesLevel();
+}
+
+function addSpaceParticle(particleIndex){
+	spaceParticles[particleIndex] = {
+		x : midx + (50*Math.random() - 25),
+		y : midy + (50*Math.random() - 25),
+		particleRadius : Math.ceil((Math.random()*1) + 0.5)/2,
+		vY : 4*((Math.random()) - 0.51),
+		vX : 4*((Math.random()) - 0.51)
+	}
 }
