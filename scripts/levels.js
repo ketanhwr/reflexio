@@ -57,14 +57,14 @@ function BuildNonStandardMirror(mirror) {
 function BuildAsteroid(x, y)
 {
 	a.push({
-		x: x*magicWidth();
-		y: y*magicWidth();
+		x: x*magicWidth(),
+		y: y*magicWidth(),
 	});
 }
 function BuildMovingAsteroid(x,y) {
 	a1.push({
-		x: x*magicWidth();
-		y: y*magicWidth();
+		x: x*magicWidth(),
+		y: y*magicWidth(),
 	});
 }
 //This might be a little extra, but is good for establishing a convention
@@ -351,7 +351,8 @@ function initialiseLevel()
 
 		BuildAsteroid(5, 220);
 		BuildAsteroid(85, 210);
-		BuildAsteroid(110, 130)''
+		BuildAsteroid(110, 130);
+		
 		BuildNonStandardAsteroid({
 			x: midx+100*(magicWidth()),
 			y: 270*(magicWidth())
