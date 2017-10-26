@@ -1634,6 +1634,8 @@ function traceRay()
 
 	var currentAngle = 180.0;
 	var offset;
+
+	let secondLastAngle, lastAngle; // for preventing infinite ray tracing
 	while(true)
 	{
 		var wow = intersection(rayX, rayY, currentAngle);         
@@ -1671,6 +1673,14 @@ function traceRay()
 			wow = intersection(rayX, rayY, currentAngle);
 		}
 		drawRay(rayX, rayY, wow.x, wow.y);
+
+		if(lastAngle && secondLastAngle && Math.abs(currentAngle - secondLastAngle) < 0.1)
+		{ // ray would keep going back and forth
+			break;
+		}
+		// update last angles
+		secondLastAngle = lastAngle;
+		lastAngle = currentAngle;
 	}
 } 
 
@@ -1679,6 +1689,8 @@ function traceRay0()                // for tracing the ray path
 	var rayX = width-750*(width/1220), rayY = 110*(width/1220);         // position of starting point of ray
 	var currentAngle = 225.0;
 	var offset;
+
+	let secondLastAngle, lastAngle; // for preventing infinite ray tracing
 	while(true)
 	{
 		var wow = intersection0(rayX, rayY, currentAngle);          // checking the intersection
@@ -1703,6 +1715,14 @@ function traceRay0()                // for tracing the ray path
 			wow = intersection0(rayX, rayY, currentAngle);
 		}
 		drawRay(rayX, rayY, wow.x, wow.y);
+
+		if(lastAngle && secondLastAngle && Math.abs(currentAngle - secondLastAngle) < 0.1)
+		{ // ray would keep going back and forth
+			break;
+		}
+		// update last angles
+		secondLastAngle = lastAngle;
+		lastAngle = currentAngle;
 	}
 } 
 
@@ -1711,6 +1731,8 @@ function traceRay1()                // for tracing the ray path
 	var rayX = width-800*(width/1220), rayY = height-300*(width/1220);         // position of starting point of ray
 	var currentAngle = 300.0;
 	var offset;
+
+	let secondLastAngle, lastAngle; // for preventing infinite ray tracing
 	while(true)
 	{
 		var wow = intersection1(rayX, rayY, currentAngle);          // checking the intersection
@@ -1735,6 +1757,14 @@ function traceRay1()                // for tracing the ray path
 			wow = intersection1(rayX, rayY, currentAngle);
 		}
 		drawRay(rayX, rayY, wow.x, wow.y);
+
+		if(lastAngle && secondLastAngle && Math.abs(currentAngle - secondLastAngle) < 0.1)
+		{ // ray would keep going back and forth
+			break;
+		}
+		// update last angles
+		secondLastAngle = lastAngle;
+		lastAngle = currentAngle;
 	}
 } 
 
