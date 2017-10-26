@@ -1,4 +1,4 @@
-#Contributing
+# Contributing
 
 In order to contribute fork the repo and then clone your local copy.
 
