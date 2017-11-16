@@ -7,4 +7,4 @@ The game is live on:
 
 The game works best on Google Chrome!
 
-[ketangupta.in/reflexio]: <http://ketangupta.in/reflexio>
+[ketangupta.in/reflexio]: <https://harishnandan.github.io/reflexio/>
