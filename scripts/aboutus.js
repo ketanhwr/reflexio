@@ -2,8 +2,7 @@ var initX1=midx-500*(width/1220);
 var initY1=midy-130*(width/1220);
 var initX2=midx+500*(width/1220);
 var initY2=midy-130*(width/1220);
-
-function aboutUs()
+function aboutUs() //Removed a blank space
 {
 	var colorCheck;
 	var mark = false;
