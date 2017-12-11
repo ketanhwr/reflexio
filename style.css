@@ -29,3 +29,6 @@ body
     font-family: DJB;
     src: url("fonts/DJB Speak the Truth.ttf");
 }
+audio { 
+   display:none;
+}
