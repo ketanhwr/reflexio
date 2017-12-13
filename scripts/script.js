@@ -33,6 +33,19 @@ enemyShip.onload = function() {
 }
 enemyShip.src = "sprites/spacestation2.png";
 
+var enemyShipBurning = new Image();
+var enemyShipBurning2 = new Image();
+var enemyShipBurning3 = new Image();
+var enemyShipBurning4 = new Image();
+var enemyShipExplosion = new Image();
+
+enemyShipBurning.src = "sprites/spacestationBurning.png"
+enemyShipBurning2.src = "sprites/spacestationBurning2.png"
+enemyShipBurning3.src = "sprites/spacestationBurning3.png"
+enemyShipBurning4.src = "sprites/spacestationBurning4.png"
+enemyShipExplosion.src = "sprites/spacestationExplosion.jpg"
+
+
 var secondShip = new Image();
 secondShip.onload = function() {
 	loading++;

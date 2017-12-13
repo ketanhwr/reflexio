@@ -31,7 +31,9 @@ var v8 = 0.73;
 var v10= 1.26;var v11= 0.3937;var v12= 0.3937;var v13= 1.26; 
 var v21= 1.2; var v22= 1.2;  
 var ss = [];
-
+var explosion = new Audio('sounds/mothershipExplosion.mp3');
+var enemyExplosion = new Audio('sounds/enemyExplosion.mp3');
+var burning = new Audio('sounds/burning2.mp3');
 
 function initialiseLevel()
 { 
@@ -1421,6 +1423,7 @@ function Level()
     for(var i = 0;i<ss.length;i++){
 	if(ss[i].fh <= 0)
 	{
+		explosion.play()
 		lives--;
 		if(lives != 0)
 		{
@@ -1440,8 +1443,39 @@ function Level()
 		}
 	}
 }
+	
+	if(eh <= 95) {
+		burning.play();
+		gameArena.drawImage(enemyShipBurning, ex, ey, 120*(width/1220), 114.43*(width/1220));
+		
+		setTimeout(function(){ 
+			gameArena.drawImage(enemyShipBurning, ex, ey, 120*(width/1220), 114.43*(width/1220));
+		}, 1000);
+
+		setTimeout(function(){ 
+			gameArena.drawImage(enemyShipBurning2, ex, ey, 120*(width/1220), 114.43*(width/1220));	
+		}, 1000);
+
+		setTimeout(function(){ 
+			gameArena.drawImage(enemyShipBurning3, ex, ey, 120*(width/1220), 114.43*(width/1220));	
+		}, 1000);
+
+		setTimeout(function(){ 
+			gameArena.drawImage(enemyShipBurning4, ex, ey, 120*(width/1220), 114.43*(width/1220));	
+		}, 1000);
+
+
+	}
+
 	if(eh <= 0)
 		enemyDestroyed = true;
+
+	if(enemyDestroyed === true) {
+		enemyExplosion.play();
+		setTimeout(function(){ 
+			gameArena.drawImage(enemyShipExplosion, ex, ey, 120*(width/1220), 114.43*(width/1220));	
+		}, 1000);
+	}
 
 	if(runtime%40 == 0)
 	{
@@ -2194,7 +2228,7 @@ function Level_gameOver()
 	runtime = 0;
 	init = false;
 	clearInterval(gameTimer);
-	for(var i = 0;i < mirrorCount;i++)
+	for(var i = 0; i < mirrorCount; i++)
 	{
 		mirrorDrag[i] = false;
 		canvas.removeEventListener("mousemove", Level_mousemove);
@@ -2207,6 +2241,7 @@ function Level_gameOver()
 	gameArena.font = "40px Zorque";
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.fillText("Game Over!", midx, midy-30*(width/1220));
+
 	gameTimer = setInterval(drawLevelGO, gameSpeed);
 }
 
