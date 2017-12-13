@@ -31,6 +31,7 @@ var v8 = 0.73;
 var v10= 1.26;var v11= 0.3937;var v12= 0.3937;var v13= 1.26; 
 var v21= 1.2; var v22= 1.2;  
 var ss = [];
+var epsilon = .01;
 
 
 function initialiseLevel()
@@ -1635,7 +1636,7 @@ function traceRay()
 	var currentAngle = 180.0;
 	var offset;
 
-	let secondLastAngle, lastAngle; // for preventing infinite ray tracing
+	let lastAngle; // for preventing infinite ray tracing
 	while(true)
 	{
 		var wow = intersection(rayX, rayY, currentAngle);         
@@ -1674,12 +1675,16 @@ function traceRay()
 		}
 		drawRay(rayX, rayY, wow.x, wow.y);
 
-		if(lastAngle && secondLastAngle && Math.abs(currentAngle - secondLastAngle) < 0.1)
-		{ // ray would keep going back and forth
+		
+		if (
+			typeof lastAngle === 'number' &&
+			Math.abs((currentAngle - (lastAngle + 180)) % 360) < epsilon
+		) {
+			// don't send ray back where it came from, would go back and forth
 			break;
 		}
-		// update last angles
-		secondLastAngle = lastAngle;
+
+		// update last angle
 		lastAngle = currentAngle;
 	}
 } 
@@ -1690,7 +1695,7 @@ function traceRay0()                // for tracing the ray path
 	var currentAngle = 225.0;
 	var offset;
 
-	let secondLastAngle, lastAngle; // for preventing infinite ray tracing
+	let lastAngle; // for preventing infinite ray tracing
 	while(true)
 	{
 		var wow = intersection0(rayX, rayY, currentAngle);          // checking the intersection
@@ -1716,12 +1721,16 @@ function traceRay0()                // for tracing the ray path
 		}
 		drawRay(rayX, rayY, wow.x, wow.y);
 
-		if(lastAngle && secondLastAngle && Math.abs(currentAngle - secondLastAngle) < 0.1)
-		{ // ray would keep going back and forth
+
+		if (
+			typeof lastAngle === 'number' &&
+			Math.abs((currentAngle - (lastAngle + 180)) % 360) < epsilon
+		) {
+			// don't send ray back where it came from, would go back and forth
 			break;
 		}
-		// update last angles
-		secondLastAngle = lastAngle;
+
+		// update last angle
 		lastAngle = currentAngle;
 	}
 } 
@@ -1732,7 +1741,7 @@ function traceRay1()                // for tracing the ray path
 	var currentAngle = 300.0;
 	var offset;
 
-	let secondLastAngle, lastAngle; // for preventing infinite ray tracing
+	let lastAngle; // for preventing infinite ray tracing
 	while(true)
 	{
 		var wow = intersection1(rayX, rayY, currentAngle);          // checking the intersection
@@ -1758,12 +1767,16 @@ function traceRay1()                // for tracing the ray path
 		}
 		drawRay(rayX, rayY, wow.x, wow.y);
 
-		if(lastAngle && secondLastAngle && Math.abs(currentAngle - secondLastAngle) < 0.1)
-		{ // ray would keep going back and forth
+		
+		if (
+			typeof lastAngle === 'number' &&
+			Math.abs((currentAngle - (lastAngle + 180)) % 360) < epsilon
+		) {
+			// don't send ray back where it came from, would go back and forth
 			break;
 		}
-		// update last angles
-		secondLastAngle = lastAngle;
+
+		// update last angle
 		lastAngle = currentAngle;
 	}
 } 
