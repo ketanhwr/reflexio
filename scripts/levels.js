@@ -112,7 +112,7 @@ function initialiseLevel()
 		runtime = 0;
 		enemyDestroyed = false;
 		ex = 20*(width/1220);
-		ey = 80*(width/1220);
+		ey = 120*(width/1220);
 		eh = 100*(width/1220);
 		mySpacestation = {
         	x: midx+100*(width/1220),
