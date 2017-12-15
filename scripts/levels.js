@@ -1305,7 +1305,7 @@ function drawGUI()
 	gameArena.fillStyle = "#E6FFFF";
 	var displayMinutes = (minutes<10)?("0"+minutes):(minutes);
 	var displaySeconds = (seconds<10)?("0"+seconds):(seconds);
-	gameArena.fillText(displayMinutes + ":" + displaySeconds, midx, midy-305);     // move time inside the rectangle   //change
+	gameArena.fillText(displayMinutes + ":" + displaySeconds, midx, midy-400);     // move time inside the rectangle   //change
 
 	gameArena.shadowBlur = 7;                            // at top left corner on hovring the mouse on < then color changes 
 	gameArena.shadowColor = "#E6FFFF";         
