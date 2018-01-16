@@ -1692,7 +1692,97 @@ function traceRay()
 	}
 } 
 
+function traceRay0()                // for tracing the ray path
+{
+	var rayX = width-750*(width/1220), rayY = 110*(width/1220);         // position of starting point of ray
+	var currentAngle = 225.0;
+	var offset;
 
+	let lastAngle; // for preventing infinite ray tracing
+	while(true)
+	{
+		var wow = intersection0(rayX, rayY, currentAngle);          // checking the intersection
+
+		drawRay(rayX, rayY, wow.x, wow.y);                        // draw main ray first 
+		if(!wow.intersect)
+		{
+			break;
+		}
+		var x1 = mirrors[wow.mirrorIndex].x;
+		var x2 = mirrors[wow.mirrorIndex].width+x1;
+		var y1 = mirrors[wow.mirrorIndex].y;
+		var y2 = mirrors[wow.mirrorIndex].height+y1;
+		offset = 2*(90-calculateAngle(x1,y1,x2,y2,rayX,rayY,wow.x,wow.y));
+		currentAngle = ((-1)*(180/Math.PI)*Math.atan2((rayY-wow.y),(rayX-wow.x))) + offset;
+		rayX = wow.x;
+		rayY = wow.y;
+		wow = intersection0(rayX, rayY, currentAngle);
+		if(distancePoint(rayX, rayY, wow.x, wow.y) <= 5.0)
+		{
+			currentAngle -= 4*offset;
+			wow = intersection0(rayX, rayY, currentAngle);
+		}
+		drawRay(rayX, rayY, wow.x, wow.y);
+
+
+		if (
+			typeof lastAngle === 'number' &&
+			Math.abs((currentAngle - (lastAngle + 180)) % 360) < epsilon
+		) {
+			// don't send ray back where it came from, would go back and forth
+			break;
+		}
+
+		// update last angle
+		lastAngle = currentAngle;
+	}
+} 
+
+function traceRay1()                // for tracing the ray path
+{
+	var rayX = width-800*(width/1220), rayY = height-300*(width/1220);         // position of starting point of ray
+	var currentAngle = 300.0;
+	var offset;
+
+	let lastAngle; // for preventing infinite ray tracing
+	while(true)
+	{
+		var wow = intersection1(rayX, rayY, currentAngle);          // checking the intersection
+
+		drawRay(rayX, rayY, wow.x, wow.y);                        // draw main ray first 
+		if(!wow.intersect)
+		{
+			break;
+		}
+		var x1 = mirrors[wow.mirrorIndex].x;
+		var x2 = mirrors[wow.mirrorIndex].width+x1;
+		var y1 = mirrors[wow.mirrorIndex].y;
+		var y2 = mirrors[wow.mirrorIndex].height+y1; 
+		offset = 2*(90-calculateAngle(x1,y1,x2,y2,rayX,rayY,wow.x,wow.y));
+		currentAngle = ((-1)*(180/Math.PI)*Math.atan2((rayY-wow.y),(rayX-wow.x))) + offset;
+		rayX = wow.x;
+		rayY = wow.y;
+		wow = intersection1(rayX, rayY, currentAngle);
+		if(distancePoint(rayX, rayY, wow.x, wow.y) <= 5.0)
+		{
+			currentAngle -= 4*offset;
+			wow = intersection1(rayX, rayY, currentAngle);
+		}
+		drawRay(rayX, rayY, wow.x, wow.y);
+
+		
+		if (
+			typeof lastAngle === 'number' &&
+			Math.abs((currentAngle - (lastAngle + 180)) % 360) < epsilon
+		) {
+			// don't send ray back where it came from, would go back and forth
+			break;
+		}
+
+		// update last angle
+		lastAngle = currentAngle;
+	}
+} 
 
 function intersection(rayX, rayY, rayTheta)
 {
@@ -1832,6 +1922,203 @@ function intersection(rayX, rayY, rayTheta)
 		}
 	}
 }
+
+function intersection0(rayX, rayY, rayTheta)
+{
+	var returnValue = {
+		intersect : false,
+		x : 0,
+		y : 0,
+		mirrorIndex : 0         // jis mirror me intersect ho rahi hai 
+	};
+	var currX, currY;
+	var radians = (rayTheta*Math.PI)/180.0;
+	for(var r = 12*(width/1220);;r++)
+	{
+		currX = rayX + r*Math.cos(radians);      //point by point position of laser (x,y)
+		currY = rayY - r*Math.sin(radians);
+		
+		for(var i = 0;i < mirrorCount;i++)
+		{
+			if(checkLinePoint(currX, currY, mirrors[i].x, mirrors[i].y, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height)) // it gives true when ray touches the mirror
+			{
+				if(distancePoint(currX, currY, mirrors[i].x, mirrors[i].y) <= 10.0)   // jo mirror ke ends par gole hai unse rokne ke liye
+					returnValue.intersect = false;
+
+				else if(distancePoint(currX, currY, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height) <= 10.0)
+					returnValue.intersect = false;
+				else returnValue.intersect = true;
+				returnValue.x = currX;
+				returnValue.y = currY;
+				returnValue.mirrorIndex = i;
+				return returnValue;
+			}
+		}
+
+          // ASK THIS three******************************************************************  for the enemy triangle ray takarayegi 
+
+		if(checkLinePoint(currX, currY, ex + enemyTriangle.x1, ey + enemyTriangle.y1, ex + enemyTriangle.x2, ey + enemyTriangle.y2))
+		{
+			returnValue.x = currX;
+			returnValue.y = currY;
+			eh -= 0.3;
+			return returnValue;
+		}
+		if(checkLinePoint(currX, currY, ex + enemyTriangle.x2, ey + enemyTriangle.y2, ex + enemyTriangle.x3, ey + enemyTriangle.y3))
+		{
+			returnValue.x = currX;
+			returnValue.y = currY;
+			eh -= 0.3;
+			return returnValue;
+		}
+		if(checkLinePoint(currX, currY, ex + enemyTriangle.x3, ey + enemyTriangle.y3, ex + enemyTriangle.x1, ey + enemyTriangle.y1))
+		{
+			returnValue.x = currX;
+			returnValue.y = currY;
+			eh -= 0.3;
+			return returnValue;
+		}
+		for(var i = 0;i < a.length;i++)
+		{
+			if(checkLinePoint(currX, currY, a[i].x+asteroidPoly.x1, a[i].y+asteroidPoly.y1, a[i].x+asteroidPoly.x2, a[i].y+asteroidPoly.y2) || checkLinePoint(currX, currY, a[i].x+asteroidPoly.x2, a[i].y+asteroidPoly.y2, a[i].x+asteroidPoly.x3, a[i].y+asteroidPoly.y3) || checkLinePoint(currX, currY, a[i].x+asteroidPoly.x3, a[i].y+asteroidPoly.y3, a[i].x+asteroidPoly.x4, a[i].y+asteroidPoly.y4) || checkLinePoint(currX, currY, a[i].x+asteroidPoly.x4, a[i].y+asteroidPoly.y4, a[i].x+asteroidPoly.x5, a[i].y+asteroidPoly.y5) || checkLinePoint(currX, currY, a[i].x+asteroidPoly.x5, a[i].y+asteroidPoly.y5, a[i].x+asteroidPoly.x1, a[i].y+asteroidPoly.y1))
+			{
+				returnValue.x = currX;
+				returnValue.y = currY;
+				return returnValue;
+			}
+		}
+		var condition=((0<=seconds)&&(seconds<3))||((6<=seconds)&&(seconds<9))||((12<=seconds)&&(seconds<15))||((18<=seconds)&&(seconds<21))||((24<=seconds)&&(seconds<27))||
+		((30<=seconds)&&(seconds<33))||((36<=seconds)&&(seconds<39))||((42<=seconds)&&(seconds<45))||((48<=seconds)&&(seconds<51))||((54<=seconds)&&(seconds<57));
+		for(var i = 0;i < a1.length;i++) 
+		{
+			if(condition){
+			if(checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x1, a1[i].y1+asteroidPoly.y1, a1[i].x1+asteroidPoly.x2, a1[i].y1+asteroidPoly.y2) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x2, a1[i].y1+asteroidPoly.y2, a1[i].x1+asteroidPoly.x3, a1[i].y1+asteroidPoly.y3) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x3, a1[i].y1+asteroidPoly.y3, a1[i].x1+asteroidPoly.x4, a1[i].y1+asteroidPoly.y4) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x4, a1[i].y1+asteroidPoly.y4, a1[i].x1+asteroidPoly.x5, a1[i].y1+asteroidPoly.y5) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x5, a1[i].y1+asteroidPoly.y5, a1[i].x1+asteroidPoly.x1, a1[i].y1+asteroidPoly.y1))
+			{
+				returnValue.x = currX;
+				returnValue.y = currY;
+				return returnValue;
+			}
+		    }
+		    else 
+		    	continue;
+		}
+		for(var i = 0;i < ss.length;i++) 
+		{
+			if(distancePoint(currX, currY, ss[i].x+76*(width/1220), ss[i].y+80*(width/1220)) <= 82*(width/1220))
+		    {
+		    	returnValue.x = currX;
+			    returnValue.y = currY;
+			    ss[i].fh -= 0.6;
+			    return returnValue;
+		    }
+	    }
+		if(currY < 0 || currY > height-500 || currX < 0 || currX > width)
+		{
+			returnValue.x = currX;
+			returnValue.y = currY;
+			return returnValue;
+		}
+	}
+}
+
+function intersection1(rayX, rayY, rayTheta)
+{
+	var returnValue = {
+		intersect : false,
+		x : 0,
+		y : 0,
+		mirrorIndex : 0         // jis mirror me intersect ho rahi hai 
+	};
+	var currX, currY;
+	var radians = (rayTheta*Math.PI)/180.0;
+	for(var r = 12*(width/1220);;r++)
+	{
+		currX = rayX + r*Math.cos(radians);      //point by point position of laser (x,y)
+		currY = rayY - r*Math.sin(radians);
+		
+		for(var i = 0;i < mirrorCount;i++)
+		{
+			if(checkLinePoint(currX, currY, mirrors[i].x, mirrors[i].y, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height)) // it gives true when ray touches the mirror
+			{
+				if(distancePoint(currX, currY, mirrors[i].x, mirrors[i].y) <= 10.0)   // jo mirror ke ends par gole hai unse rokne ke liye
+					returnValue.intersect = false;
+
+				else if(distancePoint(currX, currY, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height) <= 10.0)
+					returnValue.intersect = false;
+				else returnValue.intersect = true;
+				returnValue.x = currX;
+				returnValue.y = currY;
+				returnValue.mirrorIndex = i;
+				return returnValue;
+			}
+		}
+
+          // ASK THIS three******************************************************************  for the enemy triangle ray takarayegi 
+
+		if(checkLinePoint(currX, currY, ex + enemyTriangle.x1, ey + enemyTriangle.y1, ex + enemyTriangle.x2, ey + enemyTriangle.y2))
+		{
+			returnValue.x = currX;
+			returnValue.y = currY;
+			eh -= 0.3;
+			return returnValue;
+		}
+		if(checkLinePoint(currX, currY, ex + enemyTriangle.x2, ey + enemyTriangle.y2, ex + enemyTriangle.x3, ey + enemyTriangle.y3))
+		{
+			returnValue.x = currX;
+			returnValue.y = currY;
+			eh -= 0.3;
+			return returnValue;
+		}
+		if(checkLinePoint(currX, currY, ex + enemyTriangle.x3, ey + enemyTriangle.y3, ex + enemyTriangle.x1, ey + enemyTriangle.y1))
+		{
+			returnValue.x = currX;
+			returnValue.y = currY;
+			eh -= 0.3;
+			return returnValue;
+		}
+		for(var i = 0;i < a.length;i++)
+		{
+			if(checkLinePoint(currX, currY, a[i].x+asteroidPoly.x1, a[i].y+asteroidPoly.y1, a[i].x+asteroidPoly.x2, a[i].y+asteroidPoly.y2) || checkLinePoint(currX, currY, a[i].x+asteroidPoly.x2, a[i].y+asteroidPoly.y2, a[i].x+asteroidPoly.x3, a[i].y+asteroidPoly.y3) || checkLinePoint(currX, currY, a[i].x+asteroidPoly.x3, a[i].y+asteroidPoly.y3, a[i].x+asteroidPoly.x4, a[i].y+asteroidPoly.y4) || checkLinePoint(currX, currY, a[i].x+asteroidPoly.x4, a[i].y+asteroidPoly.y4, a[i].x+asteroidPoly.x5, a[i].y+asteroidPoly.y5) || checkLinePoint(currX, currY, a[i].x+asteroidPoly.x5, a[i].y+asteroidPoly.y5, a[i].x+asteroidPoly.x1, a[i].y+asteroidPoly.y1))
+			{
+				returnValue.x = currX;
+				returnValue.y = currY;
+				return returnValue;
+			}
+		}
+		var condition=((0<=seconds)&&(seconds<3))||((6<=seconds)&&(seconds<9))||((12<=seconds)&&(seconds<15))||((18<=seconds)&&(seconds<21))||((24<=seconds)&&(seconds<27))||
+		((30<=seconds)&&(seconds<33))||((36<=seconds)&&(seconds<39))||((42<=seconds)&&(seconds<45))||((48<=seconds)&&(seconds<51))||((54<=seconds)&&(seconds<57));
+		for(var i = 0;i < a1.length;i++) 
+		{
+			if(condition){
+			if(checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x1, a1[i].y1+asteroidPoly.y1, a1[i].x1+asteroidPoly.x2, a1[i].y1+asteroidPoly.y2) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x2, a1[i].y1+asteroidPoly.y2, a1[i].x1+asteroidPoly.x3, a1[i].y1+asteroidPoly.y3) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x3, a1[i].y1+asteroidPoly.y3, a1[i].x1+asteroidPoly.x4, a1[i].y1+asteroidPoly.y4) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x4, a1[i].y1+asteroidPoly.y4, a1[i].x1+asteroidPoly.x5, a1[i].y1+asteroidPoly.y5) || checkLinePoint(currX, currY, a1[i].x1+asteroidPoly.x5, a1[i].y1+asteroidPoly.y5, a1[i].x1+asteroidPoly.x1, a1[i].y1+asteroidPoly.y1))
+			{
+				returnValue.x = currX;
+				returnValue.y = currY;
+				return returnValue;
+			}
+		    }
+		    else 
+		    	continue;
+		}
+		for(var i = 0;i < ss.length;i++) 
+		{
+			if(distancePoint(currX, currY, ss[i].x+76*(width/1220), ss[i].y+80*(width/1220)) <= 82*(width/1220))
+		    {
+		    	returnValue.x = currX;
+			    returnValue.y = currY;
+			    ss[i].fh -= 0.6;
+			    return returnValue;
+		    }
+	    }
+		if(currY < 0 || currY > height-200 || currX < 0 || currX > width)
+		{
+			returnValue.x = currX;
+			returnValue.y = currY;
+			return returnValue;
+		}
+	}
+}
+
 
 function Level_click()
 {
