@@ -1,3 +1,5 @@
+
+//asdf
 function instructions()
 {
 	var colorCheck;
