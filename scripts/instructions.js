@@ -2,6 +2,7 @@
 //asdf
 function instructions()
 {
+    var q;
 	var colorCheck;
 	runtime1++;
 	var mark = false;
