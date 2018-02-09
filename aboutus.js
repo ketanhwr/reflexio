@@ -48,25 +48,42 @@ function aboutUs() {
     drawRay(initX1, initY1, initX2, initY2);
     drawRay(initX1, initY1 + 400, initX2, initY2 + 400);
 
-    gameArena.drawImage(abtUs2, midx - 600 * (width / 1220), midy - 160 * (width / 1220));
-    gameArena.drawImage(abtUs2, midx - 600 * (width / 1220), midy + 240 * (width / 1220));
-    gameArena.drawImage(abtUs1, midx + 500 * (width / 1220), midy - 160 * (width / 1220));
-    gameArena.drawImage(abtUs1, midx + 500 * (width / 1220), midy + 240 * (width / 1220));
+    gameArena.drawImage(abtUs2,
+                        midx - 600 * (width / 1220),
+                        midy - 160 * (width / 1220));
+    gameArena.drawImage(abtUs2,
+                        midx - 600 * (width / 1220),
+                        midy + 240 * (width / 1220));
+    gameArena.drawImage(abtUs1,
+                        midx + 500 * (width / 1220),
+                        midy - 160 * (width / 1220));
+    gameArena.drawImage(abtUs1,
+                        midx + 500 * (width / 1220),
+                        midy + 240 * (width / 1220));
 
 
     gameArena.shadowBlur = 7;
     gameArena.shadowColor = "#E6FFFF";
     colorCheck = "#18CAE6";
-    if(mousex >= 30 * (width / 1220) && mousex <= 120 * (width / 1220) && mousey >= midy - 270 * (width / 1220) && mousey <= midy - 195 * (width / 1220)) {
+    if (mousex >= 30 * (width / 1220) &&
+        mousex <= 120 * (width / 1220) &&
+        mousey >= midy - 270 * (width / 1220) &&
+        mousey <= midy - 195 * (width / 1220)) {
         colorCheck = "#E6FFFF";
         mark = true;
     }
-    drawRoundedRectangle(30 * (width / 1220), midy - 270 * (width / 1220), 90 * (width / 1220), 75 * (width / 1220), colorCheck, 4);
+    drawRoundedRectangle(30 * (width / 1220),
+                         midy - 270 * (width / 1220),
+                         90 * (width / 1220),
+                         75 * (width / 1220),
+                         colorCheck, 4);
     gameArena.shadowBlur = 0;
     gameArena.font = "60px Zorque";
     gameArena.fillStyle = "#E6FFFF";
     gameArena.textAlign = "center";
-    gameArena.fillText("<", 73 * (width / 1220), midy - 212 * (width / 1220));
+    gameArena.fillText("<",
+                       73 * (width / 1220),
+                       midy - 212 * (width / 1220));
 
     if(!mark) {
         canvas.style.cursor = "auto";
@@ -77,7 +94,10 @@ function aboutUs() {
 }
 
 function aboutUs_click() {
-    if (mousex >= 30 * (width / 1220) && mousex <= 120 * (width / 1220) && mousey >= midy - 270 * (width / 1220) && mousey <= midy - 195 * (width / 1220)) {
+    if (mousex >= 30 * (width / 1220) &&
+        mousex <= 120 * (width / 1220) &&
+        mousey >= midy - 270 * (width / 1220) &&
+        mousey <= midy - 195 * (width / 1220)) {
         sceneNumber = 1;
         clearInterval(gameTimer);
         update();
