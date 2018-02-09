@@ -15,27 +15,27 @@ function mainMenu() {
     gameArena.fillText("REFLEXIO", midx, midy / 2.2);
 
     if (mousex >= midx - 200 * (width / 1220) &&
-            mousex <= midx + 200 * (width / 1220) &&
-            mousey >= midy - 130 * (width / 1220) &&
-            mousey <= midy - 60 * (width / 1220)) {
+        mousex <= midx + 200 * (width / 1220) &&
+        mousey >= midy - 130 * (width / 1220) &&
+        mousey <= midy - 60 * (width / 1220)) {
         hoverCheck = 1;
     }
     if (mousex >= midx - 200 * (width / 1220) &&
-            mousex <= midx + 200 * (width / 1220) &&
-            mousey >= midy - 20 * (width / 1220) &&
-            mousey <= midy + 50 * (width / 1220)) {
+        mousex <= midx + 200 * (width / 1220) &&
+        mousey >= midy - 20 * (width / 1220) &&
+        mousey <= midy + 50 * (width / 1220)) {
         hoverCheck = 2;
     }
     if (mousex >= midx - 200 * (width / 1220) &&
-            mousex <= midx + 200 * (width / 1220) &&
-            mousey >= midy + 90 * (width / 1220) &&
-            mousey <= midy + 160 * (width / 1220)) {
+        mousex <= midx + 200 * (width / 1220) &&
+        mousey >= midy + 90 * (width / 1220) &&
+        mousey <= midy + 160 * (width / 1220)) {
         hoverCheck = 3;
     }
     if (mousex >= midx - 200 * (width / 1220) &&
-            mousex <= midx + 200 * (width / 1220) &&
-            mousey >= midy + 200 * (width / 1220) &&
-            mousey <= midy + 270 * (width / 1220)) {
+        mousex <= midx + 200 * (width / 1220) &&
+        mousey >= midy + 200 * (width / 1220) &&
+        mousey <= midy + 270 * (width / 1220)) {
         hoverCheck = 4;
     }
     if (hoverCheck !== 0) {
@@ -53,10 +53,10 @@ function mainMenu() {
         colorCheck = "#18CAE6";
     }
     drawRoundedRectangle(midx - 200 * (width / 1220),
-                                             midy - 130 * (width / 1220),
-                                             400 * (width / 1220),
-                                             70 * (width / 1220),
-                                             colorCheck, 4);
+                         midy - 130 * (width / 1220),
+                         400 * (width / 1220),
+                         70 * (width / 1220),
+                         colorCheck, 4);
     gameArena.shadowBlur = 0;
     gameArena.font = "40px Complex";
     gameArena.fillStyle = "#E6FFFF";
@@ -70,10 +70,10 @@ function mainMenu() {
         colorCheck = "#18CAE6";
     }
     drawRoundedRectangle(midx - 200 * (width / 1220),
-                                             midy - 20 * (width / 1220),
-                                             400 * (width / 1220),
-                                             70 * (width / 1220),
-                                             colorCheck, 4);
+                         midy - 20 * (width / 1220),
+                         400 * (width / 1220),
+                         70 * (width / 1220),
+                         colorCheck, 4);
     gameArena.shadowBlur = 0;
     gameArena.font = "40px Complex";
     gameArena.fillStyle = "#E6FFFF";
@@ -87,10 +87,10 @@ function mainMenu() {
         colorCheck = "#18CAE6";
     }
     drawRoundedRectangle(midx - 200 * (width / 1220),
-                                             midy + 90 * (width / 1220),
-                                             400 * (width / 1220),
-                                             70 * (width / 1220),
-                                             colorCheck, 4);
+                         midy + 90 * (width / 1220),
+                         400 * (width / 1220),
+                         70 * (width / 1220),
+                         colorCheck, 4);
     gameArena.shadowBlur = 0;
     gameArena.font = "40px Complex";
     gameArena.fillStyle = "#E6FFFF";
@@ -104,10 +104,10 @@ function mainMenu() {
         colorCheck = "#18CAE6";
     }
     drawRoundedRectangle(midx - 200 * (width / 1220),
-                                             midy + 200 * (width / 1220),
-                                             400 * (width / 1220),
-                                             70 * (width / 1220),
-                                             colorCheck, 4);
+                         midy + 200 * (width / 1220),
+                         400 * (width / 1220),
+                         70 * (width / 1220),
+                         colorCheck, 4);
     gameArena.shadowBlur = 0;
     gameArena.font = "40px Complex";
     gameArena.fillStyle = "#E6FFFF";
@@ -116,9 +116,9 @@ function mainMenu() {
 
 function mainMenu_click() {
     if (mousex >= midx - 200 * (width / 1220) &&
-            mousex <= midx + 200 * (width / 1220) &&
-            mousey >= midy - 130 * (width / 1220) &&
-            mousey <= midy - 60 * (width / 1220)) {
+        mousex <= midx + 200 * (width / 1220) &&
+        mousey >= midy - 130 * (width / 1220) &&
+        mousey <= midy - 60 * (width / 1220)) {
         currentScore = 0;
         sceneNumber = 6;
         levelNumber = 1;
@@ -135,9 +135,9 @@ function mainMenu_click() {
         }
     }
     if (mousex >= midx - 200 * (width / 1220) &&
-            mousex <= midx + 200 * (width / 1220) &&
-            mousey >= midy - 20 * (width / 1220) &&
-            mousey <= midy + 50 * (width / 1220))    {
+        mousex <= midx + 200 * (width / 1220) &&
+        mousey >= midy - 20 * (width / 1220) &&
+        mousey <= midy + 50 * (width / 1220))    {
         sceneNumber = 3;
         clearInterval(gameTimer);
         update();
@@ -147,9 +147,9 @@ function mainMenu_click() {
         }
     }
     if (mousex >= midx - 200 * (width / 1220) &&
-            mousex <= midx + 200 * (width / 1220) &&
-            mousey >= midy + 90 * (width / 1220) &&
-            mousey <= midy + 160 * (width / 1220)) {
+        mousex <= midx + 200 * (width / 1220) &&
+        mousey >= midy + 90 * (width / 1220) &&
+        mousey <= midy + 160 * (width / 1220)) {
         sceneNumber = 4;
         clearInterval(gameTimer);
         update();
@@ -159,9 +159,9 @@ function mainMenu_click() {
         }
     }
     if (mousex >= midx - 200 * (width / 1220) &&
-            mousex <= midx + 200 * (width / 1220) &&
-            mousey >= midy + 200 * (width / 1220) &&
-            mousey <= midy + 270 * (width / 1220)) {
+        mousex <= midx + 200 * (width / 1220) &&
+        mousey >= midy + 200 * (width / 1220) &&
+        mousey <= midy + 270 * (width / 1220)) {
         sceneNumber = 5;
         clearInterval(gameTimer);
         update();

@@ -124,10 +124,10 @@ var levelNumber = 1;
 //End
 
 canvas.addEventListener('mousemove',
-                                                function(evt) {
-                                                    mousex = evt.clientX - rect.left;
-                                                    mousey = evt.clientY - rect.top;
-                                                }, false)
+                        function(evt) {
+    mousex = evt.clientX - rect.left;
+    mousey = evt.clientY - rect.top;
+    }, false)
 
 canvas.addEventListener('click', function(evt) {
     if (sceneNumber == 1) {
@@ -396,20 +396,20 @@ function loadingScreen() {
     gameArena.fillStyle = "#E6FFFF";
     gameArena.textAlign = "center";
     gameArena.fillText("Loading...",
-                                         width + 100 * (width / 1220),
-                                         midy - 30 * (width / 1220));
+                       width + 100 * (width / 1220),
+                       midy - 30 * (width / 1220));
     gameArena.font = "37px Complex";
     gameArena.fillStyle = "#E6FFFF";
     gameArena.textAlign = "center";
     gameArena.fillText("Loading...",
-                                         width + 100 * (width / 1220),
-                                         midy - 30 * (width / 1220));
+                       width + 100 * (width / 1220),
+                       midy - 30 * (width / 1220));
     gameArena.font = "37px DJB";
     gameArena.fillStyle = "#E6FFFF";
     gameArena.textAlign = "center";
     gameArena.fillText("Loading...",
-                                         width + 100 * (width / 1220),
-                                         midy - 30 * (width / 1220));
+                       width + 100 * (width / 1220),
+                       midy - 30 * (width / 1220));
     //End
 
     gameArena.shadowBlur = 20;
@@ -418,16 +418,16 @@ function loadingScreen() {
     gameArena.lineWidth = 5;
     gameArena.strokeStyle = "#E6FFFF";
     gameArena.rect(midx - 100 * (width / 1220),
-                                 midy - 20 * (width / 1220),
-                                 200 * (width / 1220),
-                                 40 * (width / 1220));
+                   midy - 20 * (width / 1220),
+                   200 * (width / 1220),
+                   40 * (width / 1220));
     gameArena.stroke();
     gameArena.beginPath();
     gameArena.fillStyle = "#18CAE6";
     gameArena.rect(midx - 95 * (width / 1220),
-                                 midy - 15 * (width / 1220),
-                                 (200 - 10) * ((loading / 11) * (width / 1220)),
-                                 30 * (width / 1220));
+                   midy - 15 * (width / 1220),
+                   (200 - 10) * ((loading / 11) * (width / 1220)),
+                   30 * (width / 1220));
     gameArena.fill();
 
     // why loading is 7 here ?? not much clear
