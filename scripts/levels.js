@@ -1382,12 +1382,12 @@ function drawGUI()
 		gameArena.beginPath();
 		gameArena.lineWidth = 4;
 		gameArena.strokeStyle = "#21E821";
-		gameArena.arc(ss[i].x+(30+20+20)*(width/1220),ss[i].y-15*(width/1220)+100,90,0,2*Math.PI*(ss[i].fh/100));
+		gameArena.arc(ss[i].x+(30+20+20+2)*(width/1220),ss[i].y-15*(width/1220)+100-1,90,0,2*Math.PI*(ss[i].fh/100));
 		gameArena.stroke();
 		if(ss[i].fh<99) {
 		gameArena.beginPath();
 		gameArena.fillStyle = "#21E821";
-		gameArena.arc(ss[i].x+(30+20+20)*(width/1220)+90, ss[i].y-15*(width/1220)+100, 2*(width/1220), 0, 2*Math.PI);
+		gameArena.arc(ss[i].x+(30+20+20+2)*(width/1220)+90, ss[i].y-15*(width/1220)+100-1, 2*(width/1220), 0, 2*Math.PI);
 		gameArena.fill();
 	    }
 	}
