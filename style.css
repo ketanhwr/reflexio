@@ -15,6 +15,11 @@ body
   margin: 0;
 }
 
+div
+{
+	text-align: center;
+}
+
 @font-face {
     font-family: Zorque;
     src: url("fonts/zorque.ttf");
