@@ -1,8 +1,9 @@
 function mainMenu()
 {
-	gameArena.clearRect(0,0, width, height);
+  bgm.pause();
+	
+  gameArena.clearRect(0,0, width, height);
 	drawMovingSpace();
-
 	var hoverCheck = 0;
 	var colorCheck;
 
@@ -87,7 +88,10 @@ function mainMenu_click()
 		clearInterval(gameTimer);
 		update();
 		lastClickCounter = 0;
-		if(volume) menu_click.play();
+		if(volume) {
+      menu_click.play();
+      nextBGM();
+    }
 	}
 	if(mousex >= midx-200*(width/1220) && mousex <= midx+200*(width/1220) && mousey >= midy-20*(width/1220) && mousey <= midy+50*(width/1220))
 	{
