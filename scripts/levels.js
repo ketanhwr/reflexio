@@ -9,11 +9,11 @@ var minutes = 0;
 var seconds = 0;
 var runtime = 0;
 var mark = false;
-var ex;
-var ey = 100;
+var ex;					// x position of enemy triangle
+var ey = 100;			// y position of enemy triangle
 var enemyDestroyed = false;
-var a = []; 
-var a1 = [];
+var a = [];				// asteriods array
+var a1 = [];			// moving asteroids array
 var gameOver = false;
 var eh = 100;
 var fh;
@@ -30,1221 +30,586 @@ var v7 = 0.73;
 var v8 = 0.73;
 var v10= 1.26;var v11= 0.3937;var v12= 0.3937;var v13= 1.26; 
 var v21= 1.2; var v22= 1.2;  
-var ss = [];
+var ss = [];		// space stations array
 var epsilon = .01;
 
+var levelsDefinition = [
+	{	// Level 1
+		ex: width-140*(width/1220), ey: 100*(width/1220), eh: 100,
+		mySpacestations: [{x: midx-70*(width/1220), y: 100*(width/1220), fh: 100}],
+		mirrors: [
+			{
+				x: 200*(width/1220),
+				width: 100*(width/1220),
+				y: 150*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 600*(width/1220),
+				width: 100*(width/1220),
+				y: 400*(width/1220),
+				height: -100*(width/1220),
+				drag: 1
+			}
+		],
+		asteroids: [
+			{x: 1000*(width/1220), y: 100*(width/1220)},
+			{x: 1000*(width/1220), y: 200*(width/1220)},
+			{x: 1100*(width/1220), y: 240*(width/1220)}
+		]
+	},
+	{	// Level 2
+		ex: 20*(width/1220), ey: 120*(width/1220), eh: 100*(width/1220),
+		mySpacestations: [{x: midx+100*(width/1220), y: 60*(width/1220), fh: 100}],
+		mirrors: [
+			{
+				x: 200*(width/1220),
+				width: 0*(width/1220),
+				y: 150*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 600*(width/1220),
+				width: 0*(width/1220),
+				y: 400*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 600*(width/1220),
+				width: 0*(width/1220),
+				y: 150*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 100*(width/1220),
+				width: 4*(width/1220),
+				y: 250*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			}
+		]
+	},
+	{	// Level 3
+		ex: width-300*(width/1220), ey: 20*(width/1220), eh: 100,
+		mySpacestations: [{x: midx*(3/2)*(width/1220), y: 200*(width/1220), fh: 100}],
+		mirrors: [
+			{
+				x: 200*(width/1220),
+				width: 0*(width/1220),
+				y: 150*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 600*(width/1220),
+				width: 0*(width/1220),
+				y: 400*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 100*(width/1220),
+				width: 4*(width/1220),
+				y: 250*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			}
+		]
+	},
+	{	// Level 4
+		ex: midx-60*(width/1220), ey: 60*(width/1220), eh: 100,
+		mySpacestations: [{x: midx-20*(width/1220), y: midy-40*(width/1220), fh: 100}],
+		mirrors: [
+			{
+				x: 200*(width/1220),
+				width: 0*(width/1220),
+				y: 150*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 600*(width/1220),
+				width: 0*(width/1220),
+				y: 420*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 700*(width/1220),
+				width: 0*(width/1220),
+				y: 150*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 100*(width/1220),
+				width: 4*(width/1220),
+				y: 250*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			}
+		],
+		asteroids: [
+			{x: 1100*(width/1220), y: 250*(width/1220)},
+			{x: 300*(width/1220), y: 300*(width/1220)},
+			{x: 1100*(width/1220), y: 150*(width/1220)},
+			{x: 400*(width/1220), y: 350*(width/1220)},
+			{x: 400*(width/1220), y: 250*(width/1220)},
+			{x: 500*(width/1220), y: 300*(width/1220)}
+		]
+	},
+	{	// Level 5
+		ex: 10*(width/1220), ey: 90*(width/1220), eh: 100,
+		mySpacestations: [{x: 180*(width/1220), y: midy-40*(width/1220), fh: 100}],
+		mirrors: [
+			{
+				x: 150*(width/1220),
+				width: 100*(width/1220),
+				y: midy+200*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 800*(width/1220),
+				width: 100*(width/1220),
+				y: midy-100*(width/1220),
+				height: -150*(width/1220),
+				drag: 1
+			},
+			{
+				x: 700*(width/1220),
+				width: 0*(width/1220),
+				y: 400*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 900*(width/1220),
+				width: 100*(width/1220),
+				y: 500*(width/1220),
+				height: 0*(width/1220),
+				drag: 1
+			}
+		],
+		asteroids: [
+			{x: 5*(width/1220), y: 220*(width/1220)},
+			{x: 78*(width/1220), y: 190*(width/1220)},
+			{x: 130*(width/1220), y: 120*(width/1220)}
+		]
+	},
+	{	// Level 6
+		ex: 10*(width/1220), ey: 90*(width/1220), eh: 100,
+		mySpacestations: [{x: midx, y: midy-230*(width/1220), fh: 100}],
+		mirrors: [
+			{
+				x: 250*(width/1220),
+				width: 100*(width/1220),
+				y: midy,
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 1000*(width/1220),
+				width: 100*(width/1220),
+				y: midy-100*(width/1220),
+				height: 70*(width/1220),
+				drag: 1
+			},
+			{
+				x: 10*(width/1220),
+				width: 16*(width/1220),
+				y: midy+200*(width/1220),
+				height: 90*(width/1220),
+				drag: 0
+			},
+			{
+				x: 500*(width/1220),
+				width: 100*(width/1220),
+				y: midy+290*(width/1220),
+				height: -100*(width/1220),
+				drag: 0
+			},
+			{
+				x: 450*(width/1220),
+				width: 100*(width/1220),
+				y: midy-250*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+		],
+		asteroids: [
+			{x: 5*(width/1220), y: 220*(width/1220)},
+			{x: 85*(width/1220), y: 210*(width/1220)},
+			{x: 110*(width/1220), y: 130*(width/1220)},
+			{x: midx+100*(width/1220), y: 270*(width/1220)},
+			{x: midx-200*(width/1220), y: 270*(width/1220)}
+		]
+	},
+	{	// Level 7
+		ex: (width/1220), ey: 250*(width/1220), eh: 100,
+		mySpacestations: [{x: midx-400*(width/1220), y: 55*(width/1220), fh: 100}],
+		mirrors: [
+			{
+				x: 700*(width/1220),
+				width: -15*(width/1220),
+				y: 360*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 30*(width/1220),
+				width: 13*(width/1220),
+				y: 500*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 900*(width/1220),
+				width: 100*(width/1220),
+				y: 200*(width/1220),
+				height: (width/1220),
+				drag: 1
+			},
+			{
+				x: 500*(width/1220),
+				width: 35*(width/1220),
+				y: 175*(width/1220),
+				height: (width/1220),
+				drag: 0
+			},
+		],
+		asteroids: [
+			{x: 80*(width/1220), y: 180*(width/1220)},
+			{x: 115*(width/1220), y: 250*(width/1220)},
+			{x: 110*(width/1220), y: 335*(width/1220)},
+			{x: 50*(width/1220), y: 385*(width/1220)}
+		]
+	},
+	{	// Level 8
+		ex: (width/1220), ey: 525*(width/1220), eh: 100,
+		mySpacestations: [{x: midx-70*(width/1220), y: 250*(width/1220), fh: 100}],
+		mirrors: [
+			{
+				x: 200*(width/1220),
+				width: -18*(width/1220),
+				y: 510*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 270*(width/1220),
+				width: 100*(width/1220),
+				y: 620*(width/1220),
+				height: 0*(width/1220),
+				drag: 1
+			},
+			{
+				x: 1100*(width/1220),
+				width: 95*(width/1220),
+				y: 530*(width/1220),
+				height: -100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 1200*(width/1220),
+				width: -95*(width/1220),
+				y: 150*(width/1220),
+				height: -100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 20*(width/1220),
+				width: 50*(width/1220),
+				y: 130*(width/1220),
+				height: -90*(width/1220),
+				drag: 1
+			},
+			{ 
+				x: 450*(width/1220),
+				width: 50*(width/1220),
+				y: 420*(width/1220),
+				height: 0*(width/1220),
+				drag: 0
+			},
+		],
+		asteroids: [
+			{x: (width/1220), y: 430*(width/1220)},
+			{x: 70*(width/1220), y: 440*(width/1220)},
+			{x: 110*(width/1220), y: 570*(width/1220)},
+		]
+	},
+	{	// Level 9
+		ex: -15*(width/1220), ey: 520*(width/1220), eh: 100,
+		mySpacestations: [
+			{x: 13*(width/1220), y: 90*(width/1220), fh: 100},
+			{x: 1067*(width/1220), y: 90*(width/1220), fh: 100}
+		],
+		mirrors: [
+			{
+				x: 350*(width/1220),
+				width: 17*(width/1220),
+				y: 520*(width/1220),
+				height: 80*(width/1220),
+				drag: 1
+			},
+			{
+				x: 1040*(width/1220),
+				width: -100*(width/1220),
+				y: 320*(width/1220),
+				height: -80*(width/1220),
+				drag: 1
+			},
+			{
+				x: 910*(width/1220),
+				width: 100*(width/1220),
+				y: 480*(width/1220),
+				height: -50*(width/1220),
+				drag: 1
+			},
+			{
+				x: 250*(width/1220),
+				width: 47.8*(width/1220),
+				y: 170*(width/1220),
+				height: -100*(width/1220),
+				drag: 1
+			}
+		],
+		asteroids: [
+			{x: 95*(width/1220), y: 545*(width/1220)},
+			{x: 105*(width/1220), y: 465*(width/1220)},
+			{x: 37*(width/1220), y: 430*(width/1220)}
+		]
+	},
+	{	// Level 10
+		ex: width-90*(width/1220), ey: 250*(width/1220), eh: 100,
+		mySpacestations: [
+			{x: midx+370*(width/1220), y: 200*(width/1220), fh: 100},
+			{x: 370*(width/1220), y: 100*(width/1220), fh: 100}
+		],
+		mirrors: [
+			{
+				x: 380*(width/1220),
+				width: 100*(width/1220),
+				y: 520*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 600*(width/1220),
+				width: 100*(width/1220),
+				y: 400*(width/1220),
+				height: 0*(width/1220),
+				drag: 1
+			}
+		],
+		circMirrors: [{x: 200*(width/1220), y: 300*(width/1220), drag: 1}],
+		asteroids: [
+			{x: 900*(width/1220),y: 150*(width/1220)},
+			{x: 900*(width/1220),y: 250*(width/1220)},
+			{x: 900*(width/1220),y: 350*(width/1220)},
+			{x: 900*(width/1220),y: 50*(width/1220)},
+			{x: 900*(width/1220),y: 1*(width/1220)},
+			{x: 1090*(width/1220),y: 170*(width/1220)},
+			{x: 1095*(width/1220),y: 350*(width/1220)},
+			{x: 1150*(width/1220),y: 390*(width/1220)}
+		]
+	},
+	{	// Level 11
+		ex: width-110*(width/1220), ey: 515*(width/1220), eh: 100,
+		mySpacestations: [
+			{x: 1*(width/1220), y: 270*(width/1220), fh: 100},
+			{x: 210*(width/1220), y: 30*(width/1220), fh: 100},
+			{x: (1080)*(width/1220), y: 240*(width/1220), fh: 100}
+		],
+		mirrors: [
+			{
+				x: 1135*(width/1220),
+				width: 70*(width/1220),
+				y: 360*(width/1220),
+				height: 0*(width/1220),
+				drag: 0
+			},
+			{
+				x: 1135*(width/1220),
+				width: 50*(width/1220),
+				y: 390*(width/1220),
+				height: 50*(width/1220),
+				drag: 1
+			},
+			{
+				x: 700*(width/1220),
+				width: 50*(width/1220),
+				y: 550*(width/1220),
+				height: 50*(width/1220),
+				drag: 1
+			},
+			{
+				x: 750*(width/1220),
+				width: -50*(width/1220),
+				y: 380*(width/1220),
+				height: 50*(width/1220),
+				drag: 1
+			}
+		],
+		asteroids: [
+			{x: 1152*(width/1220), y: 425*(width/1220)},
+			{x: 1082*(width/1220), y: 435*(width/1220)},
+			{x: 1007*(width/1220), y: 480*(width/1220)},
+			{x: 1005*(width/1220), y: 580*(width/1220)}
+		],
+		movingAsteroids: [
+			{x1: 230*(width/1220),y1: 283*(width/1220)},
+			{x1: 300*(width/1220),y1: 283*(width/1220)},
+			{x1: 370*(width/1220),y1: 283*(width/1220)},
+			{x1: 440*(width/1220),y1: 283*(width/1220)},
+			{x1: 510*(width/1220),y1: 283*(width/1220)},
+			{x1: 580*(width/1220),y1: 283*(width/1220)},
+			{x1: 650*(width/1220),y1: 283*(width/1220)},
+			{x1: 720*(width/1220),y1: 285*(width/1220)},
+			{x1: 790*(width/1220),y1: 285*(width/1220)},
+			{x1: 860*(width/1220),y1: 285*(width/1220)},
+			{x1: 930*(width/1220),y1: 287*(width/1220)}
+		]
+	},
+	{	// Level 12
+		ex: 450*(width/1220), ey: 250*(width/1220), eh: 100,
+		mySpacestations: [{x: 630*(width/1220), y: 335*(width/1220), fh: 100}],
+		mirrors: [
+			{
+				x: 800*(width/1220),
+				width: 11*(width/1220),
+				y: 530*(width/1220),
+				height: 70*(width/1220),
+				drag: 0
+			},
+			{
+				x: 830*(width/1220),
+				width: 0*(width/1220),
+				y: 395*(width/1220),
+				height: 50*(width/1220),
+				drag: 1
+			},
+			{
+				x: 900*(width/1220),
+				width: 0*(width/1220),
+				y: 370*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 90*(width/1220), 
+				width: 100*(width/1220),
+				y: 60*(width/1220),
+				height: 0*(width/1220),
+				drag: 0
+			},
+			{
+				x: 200*(width/1220), 
+				width: -4*(width/1220),
+				y: 260*(width/1220),
+				height: -60*(width/1220),
+				drag: 1
+			}
+		],
+		asteroids: [
+			{x: 450*(width/1220), y: 170*(width/1220)},
+			{x: 520*(width/1220), y: 185*(width/1220)},
+			{x: 580*(width/1220), y: 215*(width/1220)},
+			{x: 565*(width/1220), y: 450*(width/1220)},
+			{x: 475*(width/1220), y: 370*(width/1220)},
+			{x: 410*(width/1220), y: 345*(width/1220)},
+			{x: 380*(width/1220), y: 270*(width/1220)}
+		],
+		movingAsteroids: [{x1: 380*(width/1220), y1: 190*(width/1220)}]
+	},
+	{	// Level 13
+		ex: 0*(width/1220), ey: 80*(width/1220), eh: 100,
+		mySpacestations: [{x: 1060*(width/1220), y: 380*(width/1220), fh: 100}],
+		mirrors: [
+			{
+				x: 700*(width/1220),
+				width: -50*(width/1220),
+				y: 300*(width/1220),
+				height: 100*(width/1220),
+				drag: 1
+			},
+			{
+				x: 5*(width/1220), 
+				width: -4*(width/1220),
+				y: 600*(width/1220),
+				height: -60*(width/1220),
+				drag: 1
+			},
+			{
+				x: 350*(width/1220), 
+				width: 90*(width/1220),
+				y: 300*(width/1220),
+				height: 20*(width/1220),
+				drag: 1
+			}
+		],
+		asteroids: [
+			{x: 200*(width/1220), y: 451*(width/1220)},
+			{x: 520*(width/1220), y: 185*(width/1220)},
+			{x: 580*(width/1220), y: 215*(width/1220)},
+			{x: 93*(width/1220), y: 200*(width/1220)},
+			{x: 10*(width/1220), y: 200*(width/1220)},
+			{x: 220*(width/1220), y: 180*(width/1220)},
+			{x: 150*(width/1220), y: 200*(width/1220)},
+			{x: 100*(width/1220), y: 60*(width/1220)},
+			{x: 47*(width/1220), y: 220*(width/1220)}
+		]
+	},
+];
 
 function initialiseLevel()
-{ 
-    if(levelNumber == 1)
+{
+	resetGlobalVariables();
+	var selectedLevel = levelsDefinition[levelNumber-1];
+
+    if(selectedLevel)
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = []; 
-		a1 = [];    
-		CircMirrorDrag = [];
-		a = [];
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		//gameOver = false;
-		ex = width-140*(width/1220);       
-		ey = 100*(width/1220);
-		eh = 100; 
-
-		mySpacestation = {
-        	x: midx-70*(width/1220),
-        	y: 100*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                      
-		myMirror = {
-			x: 200*(width/1220),
-			width: 100*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 100*(width/1220),
-			y: 400*(width/1220),
-			height: -100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myAsteroid = {
-			x: 1000*(width/1220),
-			y: 100*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1000*(width/1220),
-			y: 200*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1100*(width/1220),
-			y: 240*(width/1220)
-		};
-		a.push(myAsteroid);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-	}
-	else if(levelNumber == 2)
-	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];  
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = 20*(width/1220);
-		ey = 120*(width/1220);
-		eh = 100*(width/1220);
-		mySpacestation = {
-        	x: midx+100*(width/1220),
-        	y: 60*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation); 
-		myMirror = {
-			x: 200*(width/1220),
-			width: 0*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 0*(width/1220),
-			y: 400*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 0*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 100*(width/1220),
-			width: 4*(width/1220),
-			y: 250*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-	}
-	else if(levelNumber == 3)
-	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = width-300*(width/1220);
-		ey = 20*(width/1220);
-		eh = 100;
-		mySpacestation = {
-        	x: midx*(3/2)*(width/1220),
-        	y: 200*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation); 
-		myMirror = {
-			x: 200*(width/1220),
-			width: 0*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 0*(width/1220),
-			y: 400*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 100*(width/1220),
-			width: 4*(width/1220),
-			y: 250*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-	}
-	else if(levelNumber == 4)
-	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = midx-60*(width/1220);
-		ey = 60*(width/1220);
-		eh = 100;
-		mySpacestation = {
-        	x: midx-20*(width/1220),
-        	y: midy-40*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);
-		myMirror = {
-			x: 200*(width/1220),
-			width: 0*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 0*(width/1220),
-			y: 420*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 700*(width/1220),
-			width: 0*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 100*(width/1220),
-			width: 4*(width/1220),
-			y: 250*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myAsteroid = {
-			x: 1100*(width/1220),
-			y: 250*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 300*(width/1220),
-			y: 300*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1100*(width/1220),
-			y: 150*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 400*(width/1220),
-			y: 350*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 400*(width/1220),
-			y: 250*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 500*(width/1220),
-			y: 300*(width/1220)
-		};
-		a.push(myAsteroid);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-	}
-	else if(levelNumber == 5)
-	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss= [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = 10*(width/1220);
-		ey = 90*(width/1220);
-		eh = 100;
-		mySpacestation = {
-        	x: 180*(width/1220),
-        	y: midy-40*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);
-		myMirror = {
-			x: 150*(width/1220),
-			width: 100*(width/1220),
-			y: midy+200*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 800*(width/1220),
-			width: 100*(width/1220),
-			y: midy-100*(width/1220),
-			height: -150*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 700*(width/1220),
-			width: 0*(width/1220),
-			y: 400*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 900*(width/1220),
-			width: 100*(width/1220),
-			y: 500*(width/1220),
-			height: 0*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myAsteroid = {
-			x: 5*(width/1220),
-			y: 220*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 78*(width/1220),
-			y: 190*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 130*(width/1220),
-			y: 120*(width/1220)
-		};
-		a.push(myAsteroid);
-		
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-	}
-	else if(levelNumber == 6)
-	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = 10*(width/1220);
-		ey = 90*(width/1220);
-		eh = 100;
-		mySpacestation = {
-        	x: midx,
-        	y: midy-230*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);
-		myMirror = {
-			x: 250*(width/1220),
-			width: 100*(width/1220),
-			y: midy,
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 1000*(width/1220),
-			width: 100*(width/1220),
-			y: midy-100*(width/1220),
-			height: 70*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 10*(width/1220),
-			width: 16*(width/1220),
-			y: midy+200*(width/1220),
-			height: 90*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 500*(width/1220),
-			width: 100*(width/1220),
-			y: midy+290*(width/1220),
-			height: -100*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 450*(width/1220),
-			width: 100*(width/1220),
-			y: midy-250*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myAsteroid = {
-			x: 5*(width/1220),
-			y: 220*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 85*(width/1220),
-			y: 210*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 110*(width/1220),
-			y: 130*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: midx+100*(width/1220),
-			y: 270*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: midx-200*(width/1220),
-			y: 270*(width/1220)
-		};
-		a.push(myAsteroid);
-		
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-	}
-	else if(levelNumber == 7)
-	{
-
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     //n
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = (width/1220);       // ex,ey is the position of enemytriangle
-		ey = 250*(width/1220);
-		eh = 100;
-		mySpacestation = {
-        	x: midx-400*(width/1220),
-        	y: 55*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                      
-		myMirror = {                
-			x: 700*(width/1220),
-			width: -15*(width/1220),
-			y: 360*(width/1220),
-			height: 100*(width/1220),       // increase the mirror by adding this  
-			drag: 1                              // drag is only for fixing the mirror.
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 30*(width/1220),
-			width: 13*(width/1220),
-			y: 500*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myMirror = {                
-			x: 900*(width/1220),
-			width: 100*(width/1220),
-			y: 200*(width/1220),
-			height: (width/1220),       // increase the mirror by adding this  
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-        
-        myMirror = {                
-			x: 500*(width/1220),
-			width: 35*(width/1220),
-			y: 175*(width/1220),
-			height: (width/1220),       // increase the mirror by adding this  
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-        myAsteroid = {
-			x: 80*(width/1220),
-			y: 180*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 115*(width/1220),
-			y: 250*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 110*(width/1220),
-			y: 335*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 50*(width/1220),
-			y: 385*(width/1220)
-		};
-		a.push(myAsteroid);
-
-
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;	
-	}
-	else if(levelNumber == 8)
-	{
-
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = (width/1220);       
-		ey = 525*(width/1220);
-		eh = 100;
-        mySpacestation = {
-        	x: midx-70*(width/1220),
-        	y: 250*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);
-		myMirror = {
-			x: 200*(width/1220),
-			width: -18*(width/1220),
-			y: 510*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false); 
-
-		myMirror = {
-			x: 270*(width/1220),
-			width: 100*(width/1220),
-			y: 620*(width/1220),
-			height: 0*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);                 
-
-		myMirror = {
-			x: 1100*(width/1220),
-			width: 95*(width/1220),
-			y: 530*(width/1220),
-			height: -100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myMirror = {
-			x: 1200*(width/1220),
-			width: -95*(width/1220),
-			y: 150*(width/1220),
-			height: -100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myMirror = {
-			x: 20*(width/1220),
-			width: 50*(width/1220),
-			y: 130*(width/1220),
-			height: -90*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myMirror = {                                        
-			x: 450*(width/1220),
-			width: 50*(width/1220),
-			y: 420*(width/1220),
-			height: 0*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false); 
-		
-		myAsteroid = {
-			x: (width/1220),
-			y: 430*(width/1220)
-		};
-		a.push(myAsteroid);
-
-		myAsteroid = {
-			x: 70*(width/1220),
-			y: 440*(width/1220)
-		};
-		a.push(myAsteroid);
-		  
-		myAsteroid = {
-			x: 110*(width/1220),
-			y: 570*(width/1220)
-		};
-		a.push(myAsteroid);  
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-	}
-	else if(levelNumber == 9)
-	{
-        mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = []; 
-		a1 = [];    
-		CircMirrorDrag = [];
-		a = [];
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = -15*(width/1220);       
-		ey = 520*(width/1220);
-		eh = 100; 
-
-        mySpacestation = {
-        	x: 13*(width/1220),
-        	y: 90*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);  
-        mySpacestation = {
-        	x: 1067*(width/1220),
-        	y: 90*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                    
-		myMirror = {
-			x: 350*(width/1220),
-			width: 17*(width/1220),
-			y: 520*(width/1220),
-			height: 80*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 1040*(width/1220),
-			width: -100*(width/1220),
-			y: 320*(width/1220),
-			height: -80*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-        myMirror = {
-			x: 910*(width/1220),
-			width: 100*(width/1220),
-			y: 480*(width/1220),
-			height: -50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 250*(width/1220),
-			width: 47.8*(width/1220),
-			y: 170*(width/1220),
-			height: -100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myAsteroid = {
-			x: 95*(width/1220),
-			y: 545*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 105*(width/1220),
-			y: 465*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 37*(width/1220),
-			y: 430*(width/1220)
-		};
-		a.push(myAsteroid); 
-
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-	}
-    else if(levelNumber == 10)
-	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];   
-		CircMirrorDrag = [];
-		a = [];
-		a1 = [];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = width-90*(width/1220);  
-		ey = 250*(width/1220);
-		eh = 100; 
-		mySpacestation = {
-        	x: midx+370*(width/1220),
-        	y: 200*(width/1220),
-        	fh: 100
-        };
-
-        ss.push(mySpacestation);
-        mySpacestation = {
-        	x: 370*(width/1220),
-        	y: 100*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                       
-		myMirror = {
-			x: 380*(width/1220),
-			width: 100*(width/1220),
-			y: 520*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 100*(width/1220),
-			y: 400*(width/1220),
-			height: 0*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myCircMirror ={
-			x: 200*(width/1220),
-			//width: 100*(width/1220),
-			y: 300*(width/1220),
-			//height: -100*(width/1220),
-			drag: 1
-		};
-		CircMirrors.push(myCircMirror);
-		CircMirrorDrag.push(false);
-
-		myAsteroid = {
-			x: 900*(width/1220),
-			y: 150*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 900*(width/1220),
-			y: 250*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 900*(width/1220),
-			y: 350*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 900*(width/1220),
-			y: 50*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 900*(width/1220),
-			y: 1*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1090*(width/1220),
-			y: 170*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1095*(width/1220),
-			y: 350*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1150*(width/1220),
-			y: 390*(width/1220)
-		};
-		a.push(myAsteroid);
-
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-
-	}
-	else if(levelNumber == 11)
-	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 = [];        
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = width-110*(width/1220);       
-		ey = 515*(width/1220);
-		eh = 100; 
-
-		mySpacestation = {
-        	x: 1*(width/1220),
-        	y: 270*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                      
-        mySpacestation = {
-        	x: 210*(width/1220),
-        	y: 30*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation)
-        mySpacestation = {
-        	x: (1080)*(width/1220),    
-        	y: 240*(width/1220),     
-        	fh: 100
-        };
-        ss.push(mySpacestation)
-        myMirror = {
-			x: 1135*(width/1220),
-			width: 70*(width/1220),
-			y: 360*(width/1220),
-			height: 0*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 1135*(width/1220),
-			width: 50*(width/1220),
-			y: 390*(width/1220),
-			height: 50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 700*(width/1220),
-			width: 50*(width/1220),
-			y: 550*(width/1220),
-			height: 50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 750*(width/1220),
-			width: -50*(width/1220),
-			y: 380*(width/1220),
-			height: 50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myAsteroid = {
-			x: 1152*(width/1220),
-			y: 425*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1082*(width/1220),
-			y: 435*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1007*(width/1220),
-			y: 480*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1005*(width/1220),
-			y: 580*(width/1220)
-		};
-		a.push(myAsteroid);
-		myMovingAsteroid = {
-			x1: 230*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 300*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 370*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 440*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 510*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 580*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 650*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 720*(width/1220),
-			y1: 285*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 790*(width/1220),
-			y1: 285*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 860*(width/1220),
-			y1: 285*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 930*(width/1220),
-			y1: 287*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-	}
-	else if(levelNumber == 12)
-	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = []; 
-		a1 = [];    
-		CircMirrorDrag = [];
-		a = [];
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = 450*(width/1220);       
-		ey = 250*(width/1220);
-		eh = 100; 
-
-		mySpacestation = {
-        	x: 630*(width/1220),
-        	y: 335*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                  
-		myMirror = {
-			x: 800*(width/1220),
-			width: 11*(width/1220),
-			y: 530*(width/1220),
-			height: 70*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 830*(width/1220),
-			width: 0*(width/1220),
-			y: 395*(width/1220),
-			height: 50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 900*(width/1220),
-			width: 0*(width/1220),
-			y: 370*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 90*(width/1220), 
-			width: 100*(width/1220),
-			y: 60*(width/1220),
-			height: 0*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-        myMirror = {
-			x: 200*(width/1220), 
-			width: -4*(width/1220),
-			y: 260*(width/1220),
-			height: -60*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myMovingAsteroid = {
-			x1: 380*(width/1220),
-			y1: 190*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-
-		myAsteroid = {
-			x: 450*(width/1220),
-			y: 170*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 520*(width/1220),
-			y: 185*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 580*(width/1220),
-			y: 215*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 565*(width/1220),
-			y: 450*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 475*(width/1220),
-			y: 370*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 410*(width/1220),
-			y: 345*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 380*(width/1220),
-			y: 270*(width/1220)
-		};
-		a.push(myAsteroid);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
-		init = true;
-	}
-	else if(levelNumber == 13)
-	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = []; 
-		a1 = [];    
-		CircMirrorDrag = [];
-		a = [];
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		ex = 0*(width/1220);       
-		ey = 80*(width/1220);
-		eh = 100; 
-
-		mySpacestation = {
-        	x: 1060*(width/1220),
-        	y: 380*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);
-		myMirror = {
-			x: 700*(width/1220),
-			width: -50*(width/1220),
-			y: 300*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-        myMirror = {
-			x: 5*(width/1220), 
-			width: -4*(width/1220),
-			y: 600*(width/1220),
-			height: -60*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 350*(width/1220), 
-			width: 90*(width/1220),
-			y: 300*(width/1220),
-			height: 20*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-		myAsteroid = {
-			x: 200*(width/1220),
-			y: 451*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 520*(width/1220),
-			y: 185*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 580*(width/1220),
-			y: 215*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 93*(width/1220),
-			y: 200*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 10*(width/1220),
-			y: 200*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 220*(width/1220),
-			y: 180*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 150*(width/1220),
-			y: 200*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 100*(width/1220),
-			y: 60*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 47*(width/1220),
-			y: 220*(width/1220)
-		};
-		a.push(myAsteroid);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
+		ex = selectedLevel.ex;
+		ey = selectedLevel.ey;
+		eh = selectedLevel.eh;
+		ss = selectedLevel.mySpacestations ? selectedLevel.mySpacestations.map(spaceStation => ({...spaceStation})) : ss;
+		mirrors = selectedLevel.mirrors ? selectedLevel.mirrors.map(mirror => ({...mirror})) : mirrors;
+		for (var i = mirrors.length - 1; i >= 0; i--) {
+			mirrorDrag.push(false);
+		}
+		CircMirrors = selectedLevel.circMirrors ? selectedLevel.circMirrors.map(cirMirr => ({...cirMirr})) : CircMirrors;
+		for (var i = CircMirrors.length - 1; i >= 0; i--) {
+			CircMirrorDrag.push(false);
+		}
+		a = selectedLevel.asteroids ? selectedLevel.asteroids.map(aster => ({...aster})) : a;
+		a1 = selectedLevel.movingAsteroids ? selectedLevel.movingAsteroids.map(movAste => ({...movAste})) : a1;
 		init = true;
 	}
 	else
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
 		GC = true;
 	}
+	mirrorCount = mirrors.length;
+	CircMirrorCount = CircMirrors.length;
+}
+
+function resetGlobalVariables()
+{
+	mirrors = [];
+	mirrorDrag = [];
+	CircMirrors = []; 
+	CircMirrorDrag = [];
+	a = [];
+	a1 = [];
+	ss = [];
+	minutes = 0;
+	seconds = 0;
+	runtime = 0;
+	enemyDestroyed = false;
 }
 
 // From here sab set ho raha hai
@@ -2303,14 +1668,14 @@ function LevelFinished()
 	canvas.style.cursor = "auto";
 	var sco = 0;
 	if(levelNumber <= 12) {
-		for(var i = 0;i<ss.length;i++){
-			var sco = sco + ss[i].fh;
-		}
-		var sco1 = sco/ss.length;
-		var score = (Math.floor(sco1+100*Math.pow(Math.E, -(minutes*60+seconds)/20)));       //????????????????changes the score to the average of space station
-		scoreToShow = currentScore;
-		currentScore += score;
-}
+			for(var i = 0;i<ss.length;i++){
+				var sco = sco + ss[i].fh;
+			}
+			var sco1 = sco/ss.length;
+			var score = (Math.floor(sco1+100*Math.pow(Math.E, -(minutes*60+seconds)/20)));       //????????????????changes the score to the average of space station
+			scoreToShow = currentScore;
+			currentScore += score;
+	}
 	minutes = 0;
 	seconds = 0;
 	runtime = 0;
