@@ -72,7 +72,7 @@ function settings()
 		color4 = "#E6FFFF";
 	}
 
-	if(particles)
+	if(particleIsEnabled())
 	{
 		color5 = "#E6FFFF";
 		color6 = "#18CAE6";
@@ -134,7 +134,7 @@ function settings()
 	gameArena.fillText("off",midx + (100 + 6)*(width/1220),midy-(80-60 - 50)*(width/1220));
 
 
-	if(hoverCheck == 5 && particles == 0)
+	if(hoverCheck == 5 && !particleIsEnabled())
 	{
 		gameArena.shadowBlur = 10;
 		gameArena.shadowColor = "#E6FFFF";
@@ -142,7 +142,7 @@ function settings()
 	}
 	drawLeftRoundedRectangle(midx + (100 - 100)*(width/1220), midy + (2 + 100)*(width/1220), (70)*(width/1220), (36)*(width/1220), color5, 3);
 	gameArena.shadowBlur = 0;
-	if(hoverCheck == 6 && particles == 1)
+	if(hoverCheck == 6 && particleIsEnabled())
 	{
 		gameArena.shadowBlur = 10;
 		gameArena.shadowColor = "#E6FFFF";
@@ -215,11 +215,16 @@ function settings_click()
 	if(mousex >= midx && mousex <= midx+(70)*(width/1220) && mousey >= midy+( 2 + 100)*(width/1220)&& mousey <= midy+(2 + 36 + 100)*(width/1220))
 	{
 		if(volume) menu_click.play();
-		particles = 1;
+		particles = particlesSetting.ON;
 	}
 	if(mousex >= midx + 73*(width/1220) && mousex <= midx+(143)*(width/1220) && mousey >= midy+( 2 + 100)*(width/1220) && mousey <= midy+( 2 + 36 + 100)*(width/1220))
 	{
 		if(volume) menu_click.play();
-		particles = 0;
+		particles = particlesSetting.OFF;
 	}
+}
+
+function particleIsEnabled()
+{
+	return particles == particlesSetting.ON;
 }

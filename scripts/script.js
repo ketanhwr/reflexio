@@ -7,6 +7,11 @@ var gameType = {
 	SURVIVAL: 1
 };
 
+var particlesSetting = {
+	OFF: 0,
+	ON: 1
+};
+
 var gameArena = canvas.getContext("2d");
 var rect = canvas.getBoundingClientRect();         // which rect area it gives
 var loading = 0;
@@ -15,7 +20,7 @@ var lives = 3;
 var iterations = 0;
 var gameMode = gameType.ARCADE;
 var volume = 1;
-var particles = 1;
+var particles = particlesSetting.ON;
 var runtime1 = 0;
 
 
