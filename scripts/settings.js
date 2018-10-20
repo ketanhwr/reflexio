@@ -50,7 +50,7 @@ function settings()
 
 	gameArena.shadowBlur = 0;
 
-	if(!gameMode)
+	if(isArcade())
 	{
 		color1 = "#E6FFFF";
 		color2 = "#18CAE6";
@@ -84,7 +84,7 @@ function settings()
 	}
 
 
-	if(hoverCheck == 1 && gameMode == 1)
+	if(hoverCheck == 1 && isSurvival())
 	{
 		gameArena.shadowBlur = 10;
 		gameArena.shadowColor = "#E6FFFF";
@@ -92,7 +92,7 @@ function settings()
 	}
 	drawLeftRoundedRectangle(midx , midy-92*(width/1220), 140*(width/1220), 36*(width/1220), color1, 3);
 	gameArena.shadowBlur = 0;
-	if(hoverCheck == 2 && gameMode == 0)
+	if(hoverCheck == 2 && isArcade())
 	{
 		gameArena.shadowBlur = 10;
 		gameArena.shadowColor = "#E6FFFF";
@@ -195,12 +195,12 @@ function settings_click()
 	if(mousex >= midx && mousex <= midx+140*(width/1220) && mousey >= midy-92*(width/1220) && mousey <= midy-(  92 - 36)*(width/1220))
 	{
 		if(volume) menu_click.play();
-		gameMode = 0;
+		gameMode = gameType.ARCADE;
 	}
 	if(mousex >= midx + 143*(width/1220) && mousex <= midx+(140 + 143)*(width/1220) && mousey >= midy-(92)*(width/1220) && mousey <= midy-(  92 - 36)*(width/1220))
 	{
 		if(volume) menu_click.play();
-		gameMode = 1;
+		gameMode = gameType.SURVIVAL;
 	}
 	if(mousex >= midx && mousex <= midx+(70)*(width/1220) && mousey >= midy-(  45 - 50)*(width/1220) && mousey <= midy-( 45 - 36 - 50)*(width/1220))
 	{
