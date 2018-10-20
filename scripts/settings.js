@@ -50,7 +50,7 @@ function settings()
 
 	gameArena.shadowBlur = 0;
 
-	if(!gameMode)
+	if(isArcade())
 	{
 		color1 = "#E6FFFF";
 		color2 = "#18CAE6";
@@ -72,7 +72,7 @@ function settings()
 		color4 = "#E6FFFF";
 	}
 
-	if(particles)
+	if(particleIsEnabled())
 	{
 		color5 = "#E6FFFF";
 		color6 = "#18CAE6";
@@ -84,7 +84,7 @@ function settings()
 	}
 
 
-	if(hoverCheck == 1 && gameMode == 1)
+	if(hoverCheck == 1 && isSurvival())
 	{
 		gameArena.shadowBlur = 10;
 		gameArena.shadowColor = "#E6FFFF";
@@ -92,7 +92,7 @@ function settings()
 	}
 	drawLeftRoundedRectangle(midx , midy-92*(width/1220), 140*(width/1220), 36*(width/1220), color1, 3);
 	gameArena.shadowBlur = 0;
-	if(hoverCheck == 2 && gameMode == 0)
+	if(hoverCheck == 2 && isArcade())
 	{
 		gameArena.shadowBlur = 10;
 		gameArena.shadowColor = "#E6FFFF";
@@ -134,7 +134,7 @@ function settings()
 	gameArena.fillText("off",midx + (100 + 6)*(width/1220),midy-(80-60 - 50)*(width/1220));
 
 
-	if(hoverCheck == 5 && particles == 0)
+	if(hoverCheck == 5 && !particleIsEnabled())
 	{
 		gameArena.shadowBlur = 10;
 		gameArena.shadowColor = "#E6FFFF";
@@ -142,7 +142,7 @@ function settings()
 	}
 	drawLeftRoundedRectangle(midx + (100 - 100)*(width/1220), midy + (2 + 100)*(width/1220), (70)*(width/1220), (36)*(width/1220), color5, 3);
 	gameArena.shadowBlur = 0;
-	if(hoverCheck == 6 && particles == 1)
+	if(hoverCheck == 6 && particleIsEnabled())
 	{
 		gameArena.shadowBlur = 10;
 		gameArena.shadowColor = "#E6FFFF";
@@ -195,12 +195,12 @@ function settings_click()
 	if(mousex >= midx && mousex <= midx+140*(width/1220) && mousey >= midy-92*(width/1220) && mousey <= midy-(  92 - 36)*(width/1220))
 	{
 		if(volume) menu_click.play();
-		gameMode = 0;
+		gameMode = gameType.ARCADE;
 	}
 	if(mousex >= midx + 143*(width/1220) && mousex <= midx+(140 + 143)*(width/1220) && mousey >= midy-(92)*(width/1220) && mousey <= midy-(  92 - 36)*(width/1220))
 	{
 		if(volume) menu_click.play();
-		gameMode = 1;
+		gameMode = gameType.SURVIVAL;
 	}
 	if(mousex >= midx && mousex <= midx+(70)*(width/1220) && mousey >= midy-(  45 - 50)*(width/1220) && mousey <= midy-( 45 - 36 - 50)*(width/1220))
 	{
@@ -215,11 +215,16 @@ function settings_click()
 	if(mousex >= midx && mousex <= midx+(70)*(width/1220) && mousey >= midy+( 2 + 100)*(width/1220)&& mousey <= midy+(2 + 36 + 100)*(width/1220))
 	{
 		if(volume) menu_click.play();
-		particles = 1;
+		particles = particlesSetting.ON;
 	}
 	if(mousex >= midx + 73*(width/1220) && mousex <= midx+(143)*(width/1220) && mousey >= midy+( 2 + 100)*(width/1220) && mousey <= midy+( 2 + 36 + 100)*(width/1220))
 	{
 		if(volume) menu_click.play();
-		particles = 0;
+		particles = particlesSetting.OFF;
 	}
+}
+
+function particleIsEnabled()
+{
+	return particles == particlesSetting.ON;
 }

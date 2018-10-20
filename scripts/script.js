@@ -2,15 +2,25 @@ var canvas = document.getElementById("arena");
 canvas.width = (0.9377402)*window.innerWidth;
 canvas.height = (0.508196721)*canvas.width;
 
+var gameType = {
+	ARCADE: 0,
+	SURVIVAL: 1
+};
+
+var particlesSetting = {
+	OFF: 0,
+	ON: 1
+};
+
 var gameArena = canvas.getContext("2d");
 var rect = canvas.getBoundingClientRect();         // which rect area it gives
 var loading = 0;
 var currentScore = 0;
 var lives = 3;
 var iterations = 0;
-var gameMode = 0;	//0 -> Arcade		1 -> Survival
+var gameMode = gameType.ARCADE;
 var volume = 1;
-var particles = 1;
+var particles = particlesSetting.ON;
 var runtime1 = 0;
 
 

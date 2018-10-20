@@ -1341,7 +1341,7 @@ function drawGUI()
 	gameArena.fillStyle = "#E6FFFF";
 	gameArena.fillText("Score: " + currentScore, midx-(55+250)*(width/1220), midy-273*(width/1220));
 
-	if(!gameMode) {                     //  gamemode is 1 for survival and 0 for arcard     // lives only in arcard mode
+	if(isArcade()) {                     // lives only in arcade mode
 		colorCheck = "#E6FFFF";
 		gameArena.shadowBlur = 20;
 		gameArena.shadowColor = "#18CAE6";
@@ -2440,6 +2440,16 @@ function drawGC()
 	{
 		canvas.style.cursor = "auto";
 	}
+}
+
+function isArcade()
+{
+	return gameMode == gameType.ARCADE;
+}
+
+function isSurvival()
+{
+	return gameMode == gameType.SURVIVAL;
 }
 
 // erreor may be at 1053    circ_wow
