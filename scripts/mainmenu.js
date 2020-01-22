@@ -45,6 +45,7 @@ function mainMenu() {
     //gameArena.fillText("play", midx, midy - 83 * (width / 1220));
     gameArena.fillText("play", midx, midy - 115 * (width / 1220));
     
+	
     //Rajdeep
     gameArena.shadowBlur = 20;
     gameArena.shadowColor = "#E6FFFF";
