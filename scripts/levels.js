@@ -1147,7 +1147,7 @@ function initialiseLevel()
 	}
 }
 
-// From here sab set ho raha hai
+// From here, we are setting up the game
 
 function drawGUI()
 {
