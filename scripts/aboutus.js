@@ -22,24 +22,36 @@ function aboutUs()
 
 	//Content Start
 
-	var str="This Game is being developed by Ketan Gupta and Harjot Singh";
-	var str1="We are currently studying in IIT Roorkee";
-	var str2="No Physics engine was used in the development of this Game";
-	var str3="All Ray Physics has been implemented purely";
-	var str4="using JavaScript";
-	var str5="This game is under the MIT License , Feel free to Contribute!";
-	var str6="Thanks to MillionthVector for sprites!"
+	const paragraph = [
+		"This Game is being developed by Ketan Gupta and Harjot Singh",
+		"We are currently studying in IIT Roorkee",
+		"No Physics engine was used in the development of this Game",
+		"All Ray Physics has been implemented purely",
+		"using JavaScript",
+		"This game is under the MIT License , Feel free to Contribute!",
+		"Thanks to MillionthVector for sprites!"
+	]
+
+	const yAxis = [
+		120-60,
+		72-60,
+		24-60,
+		24+60,
+		72+60,
+		120+60,
+		168+60
+	]
+
 	gameArena.shadowBlur = 20;
 	gameArena.shadowColor = "#18CAE6";
 	gameArena.font = "35px DJB";
 	gameArena.fillStyle = "#E6FFFF";
-	gameArena.fillText(str,midx,midy-((120-60))*(width/1220));
-	gameArena.fillText(str1,midx,midy-((72-60))*(width/1220));
-	gameArena.fillText(str2,midx,midy-((24-60))*(width/1220));
-	gameArena.fillText(str3,midx,midy+((24+60))*(width/1220));
-	gameArena.fillText(str4,midx,midy+((72+60))*(width/1220));
-	gameArena.fillText(str5,midx,midy+((120+60))*(width/1220));
-	gameArena.fillText(str6,midx,midy+((168+60))*(width/1220));
+
+	let i
+	for (i = 0; i < paragraph.length; i++) {
+		gameArena.fillText(paragraph[i],midx,midy-((yAxis[i]))*(width/1220));
+	}
+
 
 	//Content End
 
