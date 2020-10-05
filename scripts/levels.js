@@ -47,22 +47,30 @@ const resetLevel = () => {
 	enemyDestroyed = false;
 }
 
+const buildSpaceship = (x, y) => {
+	ss.push({
+		x,
+		y,
+		fh: 100
+	})
+}
+
 
 function initialiseLevel()
 { 
+	const basicSSWidthCalc = (width / 1220)
+
     if(levelNumber == 1)
 	{
 		resetLevel();
 		ex = width-140*(width/1220);       
 		ey = 100*(width/1220);
 		eh = 100; 
+	
+		const ssx = midx - 70 * basicSSWidthCalc
+		const ssy = 100 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
 
-		mySpacestation = {
-        	x: midx-70*(width/1220),
-        	y: 100*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                      
 		myMirror = {
 			x: 200*(width/1220),
 			width: 100*(width/1220),
@@ -107,12 +115,11 @@ function initialiseLevel()
 		ex = 20*(width/1220);
 		ey = 120*(width/1220);
 		eh = 100*(width/1220);
-		mySpacestation = {
-        	x: midx+100*(width/1220),
-        	y: 60*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation); 
+
+		ssx = midx + 100 * basicSSWidthCalc
+		ssy = 60 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
+
 		myMirror = {
 			x: 200*(width/1220),
 			width: 0*(width/1220),
@@ -160,12 +167,11 @@ function initialiseLevel()
 		ex = width-300*(width/1220);
 		ey = 20*(width/1220);
 		eh = 100;
-		mySpacestation = {
-        	x: midx*(3/2)*(width/1220),
-        	y: 200*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation); 
+		
+		ssx = midx * (3 / 2) * basicSSWidthCalc
+		ssy = 200 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
+
 		myMirror = {
 			x: 200*(width/1220),
 			width: 0*(width/1220),
@@ -205,12 +211,11 @@ function initialiseLevel()
 		ex = midx-60*(width/1220);
 		ey = 60*(width/1220);
 		eh = 100;
-		mySpacestation = {
-        	x: midx-20*(width/1220),
-        	y: midy-40*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);
+		
+		ssx = midx - 20 * basicSSWidthCalc
+		ssy = midy - 40 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
+
 		myMirror = {
 			x: 200*(width/1220),
 			width: 0*(width/1220),
@@ -289,12 +294,11 @@ function initialiseLevel()
 		ex = 10*(width/1220);
 		ey = 90*(width/1220);
 		eh = 100;
-		mySpacestation = {
-        	x: 180*(width/1220),
-        	y: midy-40*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);
+		
+		ssx = 180 * basicSSWidthCalc,
+		ssy = midy - 40 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
+
 		myMirror = {
 			x: 150*(width/1220),
 			width: 100*(width/1220),
@@ -359,12 +363,11 @@ function initialiseLevel()
 		ex = 10*(width/1220);
 		ey = 90*(width/1220);
 		eh = 100;
-		mySpacestation = {
-        	x: midx,
-        	y: midy-230*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);
+		
+		ssx = midx
+		ssy - midy - 230 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
+
 		myMirror = {
 			x: 250*(width/1220),
 			width: 100*(width/1220),
@@ -448,13 +451,12 @@ function initialiseLevel()
 
 		ex = (width/1220);       // ex,ey is the position of enemytriangle
 		ey = 250*(width/1220);
-		eh = 100;
-		mySpacestation = {
-        	x: midx-400*(width/1220),
-        	y: 55*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                      
+		eh = 100;     
+		
+		ssx = midx - 400 * basicSSWidthCalc
+		ssy = 55 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
+
 		myMirror = {                
 			x: 700*(width/1220),
 			width: -15*(width/1220),
@@ -528,12 +530,11 @@ function initialiseLevel()
 		ex = (width/1220);       
 		ey = 525*(width/1220);
 		eh = 100;
-        mySpacestation = {
-        	x: midx-70*(width/1220),
-        	y: 250*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);
+		
+		ssx = midx - 70 * basicSSWidthCalc
+		ssy = 250 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
+
 		myMirror = {
 			x: 200*(width/1220),
 			width: -18*(width/1220),
@@ -622,19 +623,15 @@ function initialiseLevel()
 		ex = -15*(width/1220);       
 		ey = 520*(width/1220);
 		eh = 100; 
+		
+		ssx = 13 * basicSSWidthCalc
+		ssy = 90 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
+		
+		ssx = 1067 * basicSSWidthCalc
+		ssy = 90 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
 
-        mySpacestation = {
-        	x: 13*(width/1220),
-        	y: 90*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);  
-        mySpacestation = {
-        	x: 1067*(width/1220),
-        	y: 90*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                    
 		myMirror = {
 			x: 350*(width/1220),
 			width: 17*(width/1220),
@@ -697,20 +694,16 @@ function initialiseLevel()
 
 		ex = width-90*(width/1220);  
 		ey = 250*(width/1220);
-		eh = 100; 
-		mySpacestation = {
-        	x: midx+370*(width/1220),
-        	y: 200*(width/1220),
-        	fh: 100
-        };
+		eh = 100;    
+		
+		ssx = midx + 370 * (width /1220)
+		ssy = 200 * (width / 122)
+		buildSpaceship(ssx, ssy)
 
-        ss.push(mySpacestation);
-        mySpacestation = {
-        	x: 370*(width/1220),
-        	y: 100*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                       
+		ssx = 370 * basicSSWidthCalc
+		ssy = 100 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
+
 		myMirror = {
 			x: 380*(width/1220),
 			width: 100*(width/1220),
@@ -792,26 +785,20 @@ function initialiseLevel()
 
 		ex = width-110*(width/1220);       
 		ey = 515*(width/1220);
-		eh = 100; 
+		eh = 100;
+		
+		ssx = 1 * basicSSWidthCalc
+		ssy = 270 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
 
-		mySpacestation = {
-        	x: 1*(width/1220),
-        	y: 270*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                      
-        mySpacestation = {
-        	x: 210*(width/1220),
-        	y: 30*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation)
-        mySpacestation = {
-        	x: (1080)*(width/1220),    
-        	y: 240*(width/1220),     
-        	fh: 100
-        };
-        ss.push(mySpacestation)
+		ssx = 210 * basicSSWidthCalc
+		ssy = 30 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
+
+		ssx = (1080) * basicSSWidthCalc
+		ssy = 30 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
+
         myMirror = {
 			x: 1135*(width/1220),
 			width: 70*(width/1220),
@@ -935,14 +922,12 @@ function initialiseLevel()
 
 		ex = 450*(width/1220);       
 		ey = 250*(width/1220);
-		eh = 100; 
+		eh = 100;
+		
+		ssx = 630 * basicSSWidthCalc
+		ssy = 335 * basicSSWidthCalc
+		buildSpaceship(ssx, ssy)
 
-		mySpacestation = {
-        	x: 630*(width/1220),
-        	y: 335*(width/1220),
-        	fh: 100
-        };
-        ss.push(mySpacestation);                  
 		myMirror = {
 			x: 800*(width/1220),
 			width: 11*(width/1220),
