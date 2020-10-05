@@ -1,10 +1,10 @@
-var mirrors = [];                         
-var CircMirrors = [];        //n
-var init = false;              
-var mirrorCount;                          
-var CircMirrorCount = 0;        //n
-var mirrorDrag = [];                      
-var CircMirrorDrag = [];     //n
+var mirrors = [];
+var CircMirrors = [];
+var init = false;
+var mirrorCount;
+var CircMirrorCount = 0;
+var mirrorDrag = [];
+var CircMirrorDrag = [];
 var minutes = 0;
 var seconds = 0;
 var runtime = 0;
@@ -12,8 +12,8 @@ var mark = false;
 var ex;
 var ey = 100;
 var enemyDestroyed = false;
-var a = []; 
-var a1 = [];              
+var a = [];
+var a1 = [];
 var gameOver = false;
 var eh = 100;
 var fh;
@@ -28,28 +28,31 @@ var v5 = 0.73;
 var v6 = 0.73;
 var v7 = 0.73;
 var v8 = 0.73;
-var v10= 1.26;var v11= 0.3937;var v12= 0.3937;var v13= 1.26; 
-var v21= 1.2; var v22= 1.2;  
+var v10= 1.26;var v11= 0.3937;var v12= 0.3937;var v13= 1.26;
+var v21= 1.2; var v22= 1.2;
 var ss = [];
 var epsilon = .01;
+
+const resetLevel = () => {
+	mirrors = [];
+	mirrorDrag = [];
+	CircMirrors = [];
+	a1 = [];
+	CircMirrorDrag = [];
+	a = [];
+	ss = [];
+	minutes = 0;
+	seconds = 0;
+	runtime = 0;
+	enemyDestroyed = false;
+}
 
 
 function initialiseLevel()
 { 
     if(levelNumber == 1)
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = []; 
-		a1 = [];    
-		CircMirrorDrag = [];
-		a = [];
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
-		//gameOver = false;
+		resetLevel();
 		ex = width-140*(width/1220);       
 		ey = 100*(width/1220);
 		eh = 100; 
@@ -100,17 +103,7 @@ function initialiseLevel()
 	}
 	else if(levelNumber == 2)
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
+		resetLevel();
 		ex = 20*(width/1220);
 		ey = 120*(width/1220);
 		eh = 100*(width/1220);
@@ -162,17 +155,8 @@ function initialiseLevel()
 	}
 	else if(levelNumber == 3)
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
+		resetLevel();
+
 		ex = width-300*(width/1220);
 		ey = 20*(width/1220);
 		eh = 100;
@@ -215,16 +199,8 @@ function initialiseLevel()
 	}
 	else if(levelNumber == 4)
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
+		resetLevel();
+
 		enemyDestroyed = false;
 		ex = midx-60*(width/1220);
 		ey = 60*(width/1220);
@@ -308,17 +284,8 @@ function initialiseLevel()
 	}
 	else if(levelNumber == 5)
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss= [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
+		resetLevel();
+
 		ex = 10*(width/1220);
 		ey = 90*(width/1220);
 		eh = 100;
@@ -387,17 +354,8 @@ function initialiseLevel()
 	}
 	else if(levelNumber == 6)
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
+		resetLevel();
+
 		ex = 10*(width/1220);
 		ey = 90*(width/1220);
 		eh = 100;
@@ -486,17 +444,8 @@ function initialiseLevel()
 	else if(levelNumber == 7)
 	{
 
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     //n
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
+		resetLevel();
+
 		ex = (width/1220);       // ex,ey is the position of enemytriangle
 		ey = 250*(width/1220);
 		eh = 100;
@@ -574,17 +523,8 @@ function initialiseLevel()
 	else if(levelNumber == 8)
 	{
 
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
+		resetLevel();
+
 		ex = (width/1220);       
 		ey = 525*(width/1220);
 		eh = 100;
@@ -677,17 +617,8 @@ function initialiseLevel()
 	}
 	else if(levelNumber == 9)
 	{
-        mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = []; 
-		a1 = [];    
-		CircMirrorDrag = [];
-		a = [];
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
+		resetLevel();
+
 		ex = -15*(width/1220);       
 		ey = 520*(width/1220);
 		eh = 100; 
@@ -762,17 +693,8 @@ function initialiseLevel()
 	}
     else if(levelNumber == 10)
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];   
-		CircMirrorDrag = [];
-		a = [];
-		a1 = [];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
+		resetLevel();
+
 		ex = width-90*(width/1220);  
 		ey = 250*(width/1220);
 		eh = 100; 
@@ -866,17 +788,8 @@ function initialiseLevel()
 	}
 	else if(levelNumber == 11)
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = [];     
-		CircMirrorDrag = [];
-		a = [];
-		a1 = [];        
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
+		resetLevel();
+
 		ex = width-110*(width/1220);       
 		ey = 515*(width/1220);
 		eh = 100; 
@@ -1018,17 +931,8 @@ function initialiseLevel()
 	}
 	else if(levelNumber == 12)
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		CircMirrors = []; 
-		a1 = [];    
-		CircMirrorDrag = [];
-		a = [];
-		ss =[];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
+		resetLevel();
+
 		ex = 450*(width/1220);       
 		ey = 250*(width/1220);
 		eh = 100; 
@@ -1132,15 +1036,8 @@ function initialiseLevel()
 	}
 	else
 	{
-		mirrors = [];
-		mirrorDrag = [];
-		a = [];
-		a1 =[];
-		ss = [];
-		minutes = 0;
-		seconds = 0;
-		runtime = 0;
-		enemyDestroyed = false;
+		resetLevel();
+
 		mirrorCount = mirrors.length;
 		CircMirrorCount = CircMirrors.length;
 		GC = true;
