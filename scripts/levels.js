@@ -33,174 +33,169 @@ var v21= 1.2; var v22= 1.2;
 var ss = [];
 var epsilon = .01;
 
-const resetLevel = () => {
-	mirrors = [];
-	mirrorDrag = [];
-	CircMirrors = [];
-	a1 = [];
-	CircMirrorDrag = [];
-	a = [];
-	ss = [];
-	minutes = 0;
-	seconds = 0;
-	runtime = 0;
-	enemyDestroyed = false;
-}
-
-const buildSpaceship = (x, y) => {
-	ss.push({
-		x,
-		y,
-		fh: 100
-	})
-}
-
-
 function initialiseLevel()
 { 
-	const basicSSWidthCalc = (width / 1220)
+	const basicWidthCalc = (width / 1220)
+	const resetLevel = () => {
+		mirrors = [];
+		mirrorDrag = [];
+		CircMirrors = [];
+		a1 = [];
+		CircMirrorDrag = [];
+		a = [];
+		ss = [];
+		minutes = 0;
+		seconds = 0;
+		runtime = 0;
+		enemyDestroyed = false;
+		mirrorCount = 0;
+		CircMirrorCount = 0;
+	}
+	const buildSpaceship = (x, y) => {
+		ss.push({
+			x: x,
+			y: y,
+			fh: 100
+		})
+	}
+	const buildMirror = (x, width, y, height, drag, dragBool) => {
+		const mirror = {
+			x: x,
+			width: width,
+			y: y,
+			height: height,
+			drag: drag
+		}
+		mirrors.push(mirror)
+		mirrorDrag.push(dragBool)
+		mirrorCount = mirrors.length;
+	}
+
+	const buildAsteroid = (x, y, moving) => {
+		console.log('moving? ', moving)
+		moving ? a1.push({x1: x, y1: y}) : a.push({x, y})
+	}
 
     if(levelNumber == 1)
 	{
 		resetLevel();
-		ex = width-140*(width/1220);       
-		ey = 100*(width/1220);
+		ex = width-140*basicWidthCalc;       
+		ey = 100*basicWidthCalc;
 		eh = 100; 
 	
-		const ssx = midx - 70 * basicSSWidthCalc
-		const ssy = 100 * basicSSWidthCalc
+		ssx = midx - 70 * basicWidthCalc
+		ssy = 100 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		myMirror = {
-			x: 200*(width/1220),
-			width: 100*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 100*(width/1220),
-			y: 400*(width/1220),
-			height: -100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
+		mX = 200*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = 150*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		myAsteroid = {
-			x: 1000*(width/1220),
-			y: 100*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1000*(width/1220),
-			y: 200*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1100*(width/1220),
-			y: 240*(width/1220)
-		};
-		a.push(myAsteroid);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
+		mX = 600*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = 400*basicWidthCalc
+		mHeight = -100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+
+		asteroidX = 1000*basicWidthCalc
+		asteroidY = 100*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 1000*basicWidthCalc
+		asteroidY = 200*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 1100*basicWidthCalc
+		asteroidY = 240*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
 		init = true;
 	}
 	else if(levelNumber == 2)
 	{
 		resetLevel();
-		ex = 20*(width/1220);
-		ey = 120*(width/1220);
-		eh = 100*(width/1220);
+		ex = 20*basicWidthCalc;
+		ey = 120*basicWidthCalc;
+		eh = 100*basicWidthCalc;
 
-		ssx = midx + 100 * basicSSWidthCalc
-		ssy = 60 * basicSSWidthCalc
+		ssx = midx + 100 * basicWidthCalc
+		ssy = 60 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		myMirror = {
-			x: 200*(width/1220),
-			width: 0*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 0*(width/1220),
-			y: 400*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 0*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 100*(width/1220),
-			width: 4*(width/1220),
-			y: 250*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
+		mX = 200*basicWidthCalc
+		mWidth = 0*basicWidthCalc
+		mY = 150*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 600*basicWidthCalc
+		mWidth = 0*basicWidthCalc
+		mY = 400*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 600*basicWidthCalc
+		mWidth = 0*basicWidthCalc
+		mY = 150*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 100*basicWidthCalc
+		mWidth = 4*basicWidthCalc
+		mY = 250*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
 		init = true;
 	}
 	else if(levelNumber == 3)
 	{
 		resetLevel();
 
-		ex = width-300*(width/1220);
-		ey = 20*(width/1220);
+		ex = width-300*basicWidthCalc;
+		ey = 20*basicWidthCalc;
 		eh = 100;
 		
-		ssx = midx * (3 / 2) * basicSSWidthCalc
-		ssy = 200 * basicSSWidthCalc
+		ssx = midx * (3 / 2) * basicWidthCalc
+		ssy = 200 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		myMirror = {
-			x: 200*(width/1220),
-			width: 0*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 0*(width/1220),
-			y: 400*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 100*(width/1220),
-			width: 4*(width/1220),
-			y: 250*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
+		mX = 200*basicWidthCalc
+		mWidth = 0*basicWidthCalc
+		mY = 150*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 600*basicWidthCalc
+		mWidth = 0*basicWidthCalc
+		mY = 400*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 100*basicWidthCalc
+		mWidth = 4*basicWidthCalc
+		mY = 250*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
 		init = true;
 	}
 	else if(levelNumber == 4)
@@ -208,240 +203,193 @@ function initialiseLevel()
 		resetLevel();
 
 		enemyDestroyed = false;
-		ex = midx-60*(width/1220);
-		ey = 60*(width/1220);
+		ex = midx-60*basicWidthCalc;
+		ey = 60*basicWidthCalc;
 		eh = 100;
 		
-		ssx = midx - 20 * basicSSWidthCalc
-		ssy = midy - 40 * basicSSWidthCalc
+		ssx = midx - 20 * basicWidthCalc
+		ssy = midy - 40 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		myMirror = {
-			x: 200*(width/1220),
-			width: 0*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 0*(width/1220),
-			y: 420*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 700*(width/1220),
-			width: 0*(width/1220),
-			y: 150*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 100*(width/1220),
-			width: 4*(width/1220),
-			y: 250*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
+		mX = 200*basicWidthCalc
+		mWidth = 0*basicWidthCalc
+		mY = 150*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		myAsteroid = {
-			x: 1100*(width/1220),
-			y: 250*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 300*(width/1220),
-			y: 300*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1100*(width/1220),
-			y: 150*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 400*(width/1220),
-			y: 350*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 400*(width/1220),
-			y: 250*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 500*(width/1220),
-			y: 300*(width/1220)
-		};
-		a.push(myAsteroid);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
+		mX = 600*basicWidthCalc
+		mWidth = 0*basicWidthCalc
+		mY = 420*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 700*basicWidthCalc
+		mWidth = 0*basicWidthCalc
+		mY = 150*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 100*basicWidthCalc
+		mWidth = 4*basicWidthCalc
+		mY = 250*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+
+		asteroidX = 1100*basicWidthCalc
+		asteroidY = 250*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 300*basicWidthCalc
+		asteroidY = 300*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 1100*basicWidthCalc
+		asteroidY = 150*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 400*basicWidthCalc
+		asteroidY = 350*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 400*basicWidthCalc
+		asteroidY = 250*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 500*basicWidthCalc
+		asteroidY = 300*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
 		init = true;
 	}
 	else if(levelNumber == 5)
 	{
 		resetLevel();
 
-		ex = 10*(width/1220);
-		ey = 90*(width/1220);
+		ex = 10*basicWidthCalc;
+		ey = 90*basicWidthCalc;
 		eh = 100;
 		
-		ssx = 180 * basicSSWidthCalc,
-		ssy = midy - 40 * basicSSWidthCalc
+		ssx = 180 * basicWidthCalc,
+		ssy = midy - 40 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		myMirror = {
-			x: 150*(width/1220),
-			width: 100*(width/1220),
-			y: midy+200*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 800*(width/1220),
-			width: 100*(width/1220),
-			y: midy-100*(width/1220),
-			height: -150*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 700*(width/1220),
-			width: 0*(width/1220),
-			y: 400*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 900*(width/1220),
-			width: 100*(width/1220),
-			y: 500*(width/1220),
-			height: 0*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
+		mX = 150*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = midy+200*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		myAsteroid = {
-			x: 5*(width/1220),
-			y: 220*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 78*(width/1220),
-			y: 190*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 130*(width/1220),
-			y: 120*(width/1220)
-		};
-		a.push(myAsteroid);
+		mX = 800*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = midy-100*basicWidthCalc
+		mHeight = -150*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 700*basicWidthCalc
+		mWidth = 0*basicWidthCalc
+		mY = 400*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 900*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = 500*basicWidthCalc
+		mHeight = 0*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+
+		asteroidX = 5*basicWidthCalc
+		asteroidY = 220*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 78*basicWidthCalc
+		asteroidY = 190*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 130*basicWidthCalc
+		asteroidY = 120*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
 		
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
 		init = true;
 	}
 	else if(levelNumber == 6)
 	{
 		resetLevel();
 
-		ex = 10*(width/1220);
-		ey = 90*(width/1220);
+		ex = 10*basicWidthCalc;
+		ey = 90*basicWidthCalc;
 		eh = 100;
 		
 		ssx = midx
-		ssy - midy - 230 * basicSSWidthCalc
+		ssy - midy - 230 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		myMirror = {
-			x: 250*(width/1220),
-			width: 100*(width/1220),
-			y: midy,
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 1000*(width/1220),
-			width: 100*(width/1220),
-			y: midy-100*(width/1220),
-			height: 70*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 10*(width/1220),
-			width: 16*(width/1220),
-			y: midy+200*(width/1220),
-			height: 90*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 500*(width/1220),
-			width: 100*(width/1220),
-			y: midy+290*(width/1220),
-			height: -100*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 450*(width/1220),
-			width: 100*(width/1220),
-			y: midy-250*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
+		mX = 250*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = midy
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		myAsteroid = {
-			x: 5*(width/1220),
-			y: 220*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 85*(width/1220),
-			y: 210*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 110*(width/1220),
-			y: 130*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: midx+100*(width/1220),
-			y: 270*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: midx-200*(width/1220),
-			y: 270*(width/1220)
-		};
-		a.push(myAsteroid);
+		mX = 1000*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = midy-100*basicWidthCalc
+		mHeight = 70*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 10*basicWidthCalc
+		mWidth = 16*basicWidthCalc
+		mY = midy+200*basicWidthCalc
+		mHeight = 90*basicWidthCalc
+		mDrag = 0
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 500*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = midy+290*basicWidthCalc
+		mHeight = -100*basicWidthCalc
+		mDrag = 0
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 450*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = midy-250*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+
+		asteroidX = 5*basicWidthCalc
+		asteroidY = 220*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 85*basicWidthCalc
+		asteroidY = 210*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 110*basicWidthCalc
+		asteroidY = 130*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = midx+100*basicWidthCalc
+		asteroidY = 270*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = midx-200*basicWidthCalc
+		asteroidY = 270*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
 		
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
 		init = true;
 	}
 	else if(levelNumber == 7)
@@ -449,77 +397,62 @@ function initialiseLevel()
 
 		resetLevel();
 
-		ex = (width/1220);       // ex,ey is the position of enemytriangle
-		ey = 250*(width/1220);
+		ex = basicWidthCalc;       // ex,ey is the position of enemytriangle
+		ey = 250*basicWidthCalc;
 		eh = 100;     
 		
-		ssx = midx - 400 * basicSSWidthCalc
-		ssy = 55 * basicSSWidthCalc
+		ssx = midx - 400 * basicWidthCalc
+		ssy = 55 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		myMirror = {                
-			x: 700*(width/1220),
-			width: -15*(width/1220),
-			y: 360*(width/1220),
-			height: 100*(width/1220),       // increase the mirror by adding this  
-			drag: 1                              // drag is only for fixing the mirror.
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 30*(width/1220),
-			width: 13*(width/1220),
-			y: 500*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
+		mX = 700*basicWidthCalc
+		mWidth = -15*basicWidthCalc
+		mY = 360*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		myMirror = {                
-			x: 900*(width/1220),
-			width: 100*(width/1220),
-			y: 200*(width/1220),
-			height: (width/1220),       // increase the mirror by adding this  
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
+		mX = 30*basicWidthCalc
+		mWidth = 13*basicWidthCalc
+		mY = 500*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+
+		mX = 900*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = 200*basicWidthCalc
+		mHeight = basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
         
-        myMirror = {                
-			x: 500*(width/1220),
-			width: 35*(width/1220),
-			y: 175*(width/1220),
-			height: (width/1220),       // increase the mirror by adding this  
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-
-        myAsteroid = {
-			x: 80*(width/1220),
-			y: 180*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 115*(width/1220),
-			y: 250*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 110*(width/1220),
-			y: 335*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 50*(width/1220),
-			y: 385*(width/1220)
-		};
-		a.push(myAsteroid);
+        mX = 500*basicWidthCalc
+		mWidth = 35*basicWidthCalc
+		mY = 175*basicWidthCalc
+		mHeight = basicWidthCalc
+		mDrag = 0
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
 
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
+        asteroidX = 80*basicWidthCalc
+		asteroidY = 180*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 115*basicWidthCalc
+		asteroidY = 250*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 110*basicWidthCalc
+		asteroidY = 335*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 50*basicWidthCalc
+		asteroidY = 385*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+
 		init = true;	
 	}
 	else if(levelNumber == 8)
@@ -527,255 +460,209 @@ function initialiseLevel()
 
 		resetLevel();
 
-		ex = (width/1220);       
-		ey = 525*(width/1220);
+		ex = basicWidthCalc;       
+		ey = 525*basicWidthCalc;
 		eh = 100;
 		
-		ssx = midx - 70 * basicSSWidthCalc
-		ssy = 250 * basicSSWidthCalc
+		ssx = midx - 70 * basicWidthCalc
+		ssy = 250 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		myMirror = {
-			x: 200*(width/1220),
-			width: -18*(width/1220),
-			y: 510*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false); 
+		mX = 200*basicWidthCalc
+		mWidth = -18*basicWidthCalc
+		mY = 510*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+ 
 
-		myMirror = {
-			x: 270*(width/1220),
-			width: 100*(width/1220),
-			y: 620*(width/1220),
-			height: 0*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);                 
+		mX = 270*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = 620*basicWidthCalc
+		mHeight = 0*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+                 
 
-		myMirror = {
-			x: 1100*(width/1220),
-			width: 95*(width/1220),
-			y: 530*(width/1220),
-			height: -100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
+		mX = 1100*basicWidthCalc
+		mWidth = 95*basicWidthCalc
+		mY = 530*basicWidthCalc
+		mHeight = -100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		myMirror = {
-			x: 1200*(width/1220),
-			width: -95*(width/1220),
-			y: 150*(width/1220),
-			height: -100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
 
-		myMirror = {
-			x: 20*(width/1220),
-			width: 50*(width/1220),
-			y: 130*(width/1220),
-			height: -90*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
+		mX = 1200*basicWidthCalc
+		mWidth = -95*basicWidthCalc
+		mY = 150*basicWidthCalc
+		mHeight = -100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		myMirror = {                                        
-			x: 450*(width/1220),
-			width: 50*(width/1220),
-			y: 420*(width/1220),
-			height: 0*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false); 
+
+		mX = 20*basicWidthCalc
+		mWidth = 50*basicWidthCalc
+		mY = 130*basicWidthCalc
+		mHeight = -90*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+
+		mX = 450*basicWidthCalc
+		mWidth = 50*basicWidthCalc
+		mY = 420*basicWidthCalc
+		mHeight = 0*basicWidthCalc
+		mDrag = 0
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+ 
 		
-		myAsteroid = {
-			x: (width/1220),
-			y: 430*(width/1220)
-		};
-		a.push(myAsteroid);
+		asteroidX = basicWidthCalc
+		asteroidY = 430*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
 
-		myAsteroid = {
-			x: 70*(width/1220),
-			y: 440*(width/1220)
-		};
-		a.push(myAsteroid);
+		asteroidX = 70*basicWidthCalc
+		asteroidY = 440*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
 		  
-		myAsteroid = {
-			x: 110*(width/1220),
-			y: 570*(width/1220)
-		};
-		a.push(myAsteroid);  
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
+		asteroidX = 110*basicWidthCalc
+		asteroidY = 570*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)  
 		init = true;
 	}
 	else if(levelNumber == 9)
 	{
 		resetLevel();
 
-		ex = -15*(width/1220);       
-		ey = 520*(width/1220);
+		ex = -15*basicWidthCalc;       
+		ey = 520*basicWidthCalc;
 		eh = 100; 
 		
-		ssx = 13 * basicSSWidthCalc
-		ssy = 90 * basicSSWidthCalc
+		ssx = 13 * basicWidthCalc
+		ssy = 90 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 		
-		ssx = 1067 * basicSSWidthCalc
-		ssy = 90 * basicSSWidthCalc
+		ssx = 1067 * basicWidthCalc
+		ssy = 90 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		myMirror = {
-			x: 350*(width/1220),
-			width: 17*(width/1220),
-			y: 520*(width/1220),
-			height: 80*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 1040*(width/1220),
-			width: -100*(width/1220),
-			y: 320*(width/1220),
-			height: -80*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-        myMirror = {
-			x: 910*(width/1220),
-			width: 100*(width/1220),
-			y: 480*(width/1220),
-			height: -50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 250*(width/1220),
-			width: 47.8*(width/1220),
-			y: 170*(width/1220),
-			height: -100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myAsteroid = {
-			x: 95*(width/1220),
-			y: 545*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 105*(width/1220),
-			y: 465*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 37*(width/1220),
-			y: 430*(width/1220)
-		};
-		a.push(myAsteroid); 
+		mX = 350*basicWidthCalc
+		mWidth = 17*basicWidthCalc
+		mY = 520*basicWidthCalc
+		mHeight = 80*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
+		mX = 1040*basicWidthCalc
+		mWidth = -100*basicWidthCalc
+		mY = 320*basicWidthCalc
+		mHeight = -80*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+        mX = 910*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = 480*basicWidthCalc
+		mHeight = -50*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 250*basicWidthCalc
+		mWidth = 47.8*basicWidthCalc
+		mY = 170*basicWidthCalc
+		mHeight = -100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		asteroidX = 95*basicWidthCalc
+		asteroidY = 545*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 105*basicWidthCalc
+		asteroidY = 465*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 37*basicWidthCalc
+		asteroidY = 430*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false) 
+
 		init = true;
 	}
     else if(levelNumber == 10)
 	{
 		resetLevel();
 
-		ex = width-90*(width/1220);  
-		ey = 250*(width/1220);
+		ex = width-90*basicWidthCalc;  
+		ey = 250*basicWidthCalc;
 		eh = 100;    
 		
 		ssx = midx + 370 * (width /1220)
 		ssy = 200 * (width / 122)
 		buildSpaceship(ssx, ssy)
 
-		ssx = 370 * basicSSWidthCalc
-		ssy = 100 * basicSSWidthCalc
+		ssx = 370 * basicWidthCalc
+		ssy = 100 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		myMirror = {
-			x: 380*(width/1220),
-			width: 100*(width/1220),
-			y: 520*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 600*(width/1220),
-			width: 100*(width/1220),
-			y: 400*(width/1220),
-			height: 0*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
+		mX = 380*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = 520*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 600*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = 400*basicWidthCalc
+		mHeight = 0*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
 
 		myCircMirror ={
-			x: 200*(width/1220),
-			//width: 100*(width/1220),
-			y: 300*(width/1220),
-			//height: -100*(width/1220),
+			x: 200*basicWidthCalc,
+			y: 300*basicWidthCalc,
+			//height: -100*basicWidthCalc,
 			drag: 1
 		};
 		CircMirrors.push(myCircMirror);
 		CircMirrorDrag.push(false);
 
-		myAsteroid = {
-			x: 900*(width/1220),
-			y: 150*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 900*(width/1220),
-			y: 250*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 900*(width/1220),
-			y: 350*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 900*(width/1220),
-			y: 50*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 900*(width/1220),
-			y: 1*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1090*(width/1220),
-			y: 170*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1095*(width/1220),
-			y: 350*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1150*(width/1220),
-			y: 390*(width/1220)
-		};
-		a.push(myAsteroid);
+		asteroidX = 900*basicWidthCalc
+		asteroidY = 150*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 900*basicWidthCalc
+		asteroidY = 250*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 900*basicWidthCalc
+		asteroidY = 350*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 900*basicWidthCalc
+		asteroidY = 50*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 900*basicWidthCalc
+		asteroidY = 1*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 1090*basicWidthCalc
+		asteroidY = 170*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 1095*basicWidthCalc
+		asteroidY = 350*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 1150*basicWidthCalc
+		asteroidY = 390*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
 
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
+				CircMirrorCount = CircMirrors.length;
 		init = true;
 
 	}
@@ -783,248 +670,185 @@ function initialiseLevel()
 	{
 		resetLevel();
 
-		ex = width-110*(width/1220);       
-		ey = 515*(width/1220);
+		ex = width-110*basicWidthCalc;       
+		ey = 515*basicWidthCalc;
 		eh = 100;
 		
-		ssx = 1 * basicSSWidthCalc
-		ssy = 270 * basicSSWidthCalc
+		ssx = 1 * basicWidthCalc
+		ssy = 270 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		ssx = 210 * basicSSWidthCalc
-		ssy = 30 * basicSSWidthCalc
+		ssx = 210 * basicWidthCalc
+		ssy = 30 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		ssx = (1080) * basicSSWidthCalc
-		ssy = 30 * basicSSWidthCalc
+		ssx = (1080) * basicWidthCalc
+		ssy = 30 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-        myMirror = {
-			x: 1135*(width/1220),
-			width: 70*(width/1220),
-			y: 360*(width/1220),
-			height: 0*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 1135*(width/1220),
-			width: 50*(width/1220),
-			y: 390*(width/1220),
-			height: 50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 700*(width/1220),
-			width: 50*(width/1220),
-			y: 550*(width/1220),
-			height: 50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 750*(width/1220),
-			width: -50*(width/1220),
-			y: 380*(width/1220),
-			height: 50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
+        mX = 1135*basicWidthCalc
+		mWidth = 70*basicWidthCalc
+		mY = 360*basicWidthCalc
+		mHeight = 0*basicWidthCalc
+		mDrag = 0
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		myAsteroid = {
-			x: 1152*(width/1220),
-			y: 425*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1082*(width/1220),
-			y: 435*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1007*(width/1220),
-			y: 480*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 1005*(width/1220),
-			y: 580*(width/1220)
-		};
-		a.push(myAsteroid);
-		myMovingAsteroid = {
-			x1: 230*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 300*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 370*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 440*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 510*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 580*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 650*(width/1220),
-			y1: 283*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 720*(width/1220),
-			y1: 285*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 790*(width/1220),
-			y1: 285*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 860*(width/1220),
-			y1: 285*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
-		myMovingAsteroid = {
-			x1: 930*(width/1220),
-			y1: 287*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
+		mX = 1135*basicWidthCalc
+		mWidth = 50*basicWidthCalc
+		mY = 390*basicWidthCalc
+		mHeight = 50*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
+		mX = 700*basicWidthCalc
+		mWidth = 50*basicWidthCalc
+		mY = 550*basicWidthCalc
+		mHeight = 50*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 750*basicWidthCalc
+		mWidth = -50*basicWidthCalc
+		mY = 380*basicWidthCalc
+		mHeight = 50*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+
+		asteroidX = 1152*basicWidthCalc
+		asteroidY = 425*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 1082*basicWidthCalc
+		asteroidY = 435*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 1007*basicWidthCalc
+		asteroidY = 480*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 1005*basicWidthCalc
+		asteroidY = 580*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 230*basicWidthCalc
+		asteroidY = 283*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+		asteroidX = 300*basicWidthCalc
+		asteroidY = 283*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+		asteroidX = 370*basicWidthCalc
+		asteroidY = 283*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+		asteroidX = 440*basicWidthCalc
+		asteroidY = 283*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+		asteroidX = 510*basicWidthCalc
+		asteroidY = 283*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+		asteroidX = 580*basicWidthCalc
+		asteroidY = 283*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+		asteroidX = 650*basicWidthCalc
+		asteroidY = 283*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+		asteroidX = 720*basicWidthCalc
+		asteroidY = 285*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+		asteroidX = 790*basicWidthCalc
+		asteroidY = 285*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+		asteroidX = 860*basicWidthCalc
+		asteroidY = 285*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+		asteroidX = 930*basicWidthCalc
+		asteroidY = 287*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+
 		init = true;
 	}
 	else if(levelNumber == 12)
 	{
 		resetLevel();
 
-		ex = 450*(width/1220);       
-		ey = 250*(width/1220);
+		ex = 450*basicWidthCalc;       
+		ey = 250*basicWidthCalc;
 		eh = 100;
 		
-		ssx = 630 * basicSSWidthCalc
-		ssy = 335 * basicSSWidthCalc
+		ssx = 630 * basicWidthCalc
+		ssy = 335 * basicWidthCalc
 		buildSpaceship(ssx, ssy)
 
-		myMirror = {
-			x: 800*(width/1220),
-			width: 11*(width/1220),
-			y: 530*(width/1220),
-			height: 70*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 830*(width/1220),
-			width: 0*(width/1220),
-			y: 395*(width/1220),
-			height: 50*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 900*(width/1220),
-			width: 0*(width/1220),
-			y: 370*(width/1220),
-			height: 100*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-		myMirror = {
-			x: 90*(width/1220), 
-			width: 100*(width/1220),
-			y: 60*(width/1220),
-			height: 0*(width/1220),
-			drag: 0
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
-        myMirror = {
-			x: 200*(width/1220), 
-			width: -4*(width/1220),
-			y: 260*(width/1220),
-			height: -60*(width/1220),
-			drag: 1
-		};
-		mirrors.push(myMirror);
-		mirrorDrag.push(false);
+		mX = 800*basicWidthCalc
+		mWidth = 11*basicWidthCalc
+		mY = 530*basicWidthCalc
+		mHeight = 70*basicWidthCalc
+		mDrag = 0
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		myMovingAsteroid = {
-			x1: 380*(width/1220),
-			y1: 190*(width/1220),
-		};
-		a1.push(myMovingAsteroid);
+		mX = 830*basicWidthCalc
+		mWidth = 0*basicWidthCalc
+		mY = 395*basicWidthCalc
+		mHeight = 50*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
 
-		myAsteroid = {
-			x: 450*(width/1220),
-			y: 170*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 520*(width/1220),
-			y: 185*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 580*(width/1220),
-			y: 215*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 565*(width/1220),
-			y: 450*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 475*(width/1220),
-			y: 370*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 410*(width/1220),
-			y: 345*(width/1220)
-		};
-		a.push(myAsteroid);
-		myAsteroid = {
-			x: 380*(width/1220),
-			y: 270*(width/1220)
-		};
-		a.push(myAsteroid);
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
+		mX = 900*basicWidthCalc
+		mWidth = 0*basicWidthCalc
+		mY = 370*basicWidthCalc
+		mHeight = 100*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		mX = 90*basicWidthCalc
+		mWidth = 100*basicWidthCalc
+		mY = 60*basicWidthCalc
+		mHeight = 0*basicWidthCalc
+		mDrag = 0
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+        mX = 200*basicWidthCalc
+		mWidth = -4*basicWidthCalc
+		mY = 260*basicWidthCalc
+		mHeight = -60*basicWidthCalc
+		mDrag = 1
+		mDragBool = false
+		buildMirror(mX, mWidth, mY, mHeight, mDrag, mDragBool)
+
+		asteroidX = 380*basicWidthCalc
+		asteroidY = 190*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, true)
+		asteroidX = 450*basicWidthCalc
+		asteroidY = 170*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 520*basicWidthCalc
+		asteroidY = 185*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 580*basicWidthCalc
+		asteroidY = 215*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 565*basicWidthCalc
+		asteroidY = 450*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 475*basicWidthCalc
+		asteroidY = 370*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 410*basicWidthCalc
+		asteroidY = 345*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
+		asteroidX = 380*basicWidthCalc
+		asteroidY = 270*basicWidthCalc
+		buildAsteroid(asteroidX, asteroidY, false)
 		init = true;
 	}
 	else
 	{
 		resetLevel();
 
-		mirrorCount = mirrors.length;
-		CircMirrorCount = CircMirrors.length;
 		GC = true;
 	}
 }
