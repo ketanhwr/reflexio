@@ -72,7 +72,6 @@ function initialiseLevel()
 	}
 
 	const buildAsteroid = (x, y, moving) => {
-		console.log('moving? ', moving)
 		moving ? a1.push({x1: x, y1: y}) : a.push({x, y})
 	}
 
