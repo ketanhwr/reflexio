@@ -1130,6 +1130,109 @@ function initialiseLevel()
 		CircMirrorCount = CircMirrors.length;
 		init = true;
 	}
+	else if(levelNumber == 13)
+	{
+		mirrors = [];
+		mirrorDrag = [];
+		CircMirrors = []; 
+		a1 = [];    
+		CircMirrorDrag = [];
+		a = [];
+		ss =[];
+		minutes = 0;
+		seconds = 0;
+		runtime = 0;
+		enemyDestroyed = false;
+		//gameOver = false;
+		ex = (width/1220);       
+		ey = 100*(width/1220);
+		eh = 100; 
+
+		mySpacestation = {
+        	x: midx-70*(width/1220),
+        	y: 100*(width/1220),
+        	fh: 100
+        };
+        ss.push(mySpacestation);
+		myMirror = {
+			x: 200*(width/1220),
+			width: 30*(width/1220),
+			y: 150*(width/1220),
+			height: 100*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 200*(width/1220),
+			width: 30*(width/1220),
+			y: 150*(width/1220),
+			height: 100*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 600*(width/1220),
+			width: 30*(width/1220),
+			y: 400*(width/1220),
+			height: -100*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myMirror = {
+			x: 630*(width/1220),
+			width: 30*(width/1220),
+			y: 430*(width/1220),
+			height: -100*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		myAsteroid = {
+			x: 130*(width/1220),
+			y: (width/1220)
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 180*(width/1220),
+			y: 50*(width/1220)
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 150*(width/1220),
+			y: 160*(width/1220)
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 90*(width/1220),
+			y: 200*(width/1220)
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: 40*(width/1220),
+			y: 240*(width/1220)
+		};
+		a.push(myAsteroid);
+		myMovingAsteroid = {
+			x1: 150*(width/1220),
+			y1: 100*(width/1220),
+		};
+		a1.push(myMovingAsteroid);
+		myMirror = {
+			x: 220*(width/1220),
+			width: 60*(width/1220),
+			y: 80*(width/1220),
+			height: 20*(width/1220),
+			drag: 0
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		mirrorCount = mirrors.length;
+		CircMirrorCount = CircMirrors.length;
+		init = true;
+	}
 	else
 	{
 		mirrors = [];
