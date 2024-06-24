@@ -44,7 +44,7 @@ function aboutUs()
 	//Content End
 
 	drawRay(initX1,initY1,initX2,initY2);
-	drawRay(initX1,initY1+400,initX2,initY2+400);
+	drawRay(initX1,initY1+470,initX2,initY2+470);
 
 	gameArena.drawImage(abtUs2,midx-600*(width/1220),midy-160*(width/1220));
 	gameArena.drawImage(abtUs2,midx-600*(width/1220),midy+240*(width/1220));
