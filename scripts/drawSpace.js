@@ -135,7 +135,7 @@ function drawLevelSpace()
 		initialisationFlag=0;
 	}
 	
-	for (var i = 0; i < 50; i++)
+	for (var i = 0; i < spaceParticles.length; i++)
 	{
 		var new_x = spaceParticles[i].x + initialOffset*spaceParticles[i].vX;
 		var new_y = spaceParticles[i].y + initialOffset*spaceParticles[i].vY;
