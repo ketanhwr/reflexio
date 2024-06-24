@@ -1,31 +1,31 @@
-canvas
-{
-	background-color: black;
-	margin-top: 15px;
-	box-shadow: 0px 0px 60px 10px #18CAE6;
-	border-radius: 25px;
-	border: 5px solid;
-	border-color: #E6FFFF;
+canvas {
+  background-color: black;
+  margin: 15px auto 0;
+  box-shadow: 0px 0px 60px 10px #18cae6;
+  border-radius: 25px;
+  border: 5px solid;
+  border-color: #e6ffff;
 }
-
-body
-{
-	background-color: #000000;
+#center {
+  display: flex;
+}
+body {
+  background-color: #000000;
   padding: 0;
   margin: 0;
 }
 
 @font-face {
-    font-family: Zorque;
-    src: url("fonts/zorque.ttf");
+  font-family: Zorque;
+  src: url("fonts/zorque.ttf");
 }
 
 @font-face {
-    font-family: Complex;
-    src: url("fonts/complex promo.ttf");
+  font-family: Complex;
+  src: url("fonts/complex promo.ttf");
 }
 
 @font-face {
-    font-family: DJB;
-    src: url("fonts/DJB Speak the Truth.ttf");
+  font-family: DJB;
+  src: url("fonts/DJB Speak the Truth.ttf");
 }
