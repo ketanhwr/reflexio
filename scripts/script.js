@@ -111,7 +111,7 @@ var enemyTriangle = {                 //??
 
 var width = canvas.width;
 var height = canvas.height;
-var cornerRadius = 20*(width/1220);            // any specific reason for choosing this radius 
+var cornerRadius = 20*(width/14000);            //value changed from 1220 to 14000 to allow for significantly better themed buttons 
 var midx = width/2;
 var midy = height/2;
 
