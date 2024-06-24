@@ -1130,6 +1130,175 @@ function initialiseLevel()
 		CircMirrorCount = CircMirrors.length;
 		init = true;
 	}
+	else if(levelNumber == 13)
+	{
+		mirrors = [];
+		mirrorDrag = [];
+		CircMirrors = [];   
+		CircMirrorDrag = [];
+		a = [];
+		a1 = [];
+		ss = [];
+		minutes = 0;
+		seconds = 0;
+		runtime = 0;
+		enemyDestroyed = false;
+		ex = width - 100*(width/1220);
+		ey = 250*(width/1220);
+		eh = 100; 
+		mySpacestation = {
+        	x: midx+100*(width/1220),
+        	y: 150*(width/1220),
+        	fh: 100
+        };
+		ss.push(mySpacestation);     
+
+		mySpacestation = {
+        	x: midx-200*(width/1220),
+        	y: 75*(width/1220),
+        	fh: 100
+        };
+		ss.push(mySpacestation);  
+
+		myMirror = {
+			x: 200*(width/1220),
+			y: 100*(width/1220),
+			height: 100*(width/1220),
+			width: 43*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+		
+		myMirror = {
+			x: 500*(width/1220),
+			y: 400*(width/1220),
+			height: 15*(width/1220),
+			width: -75*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+
+		myMirror = {
+			x: midx+155*(width/1220),
+			y: 130*(width/1220),
+			height: 0,
+			width: 275*(width/1220),
+			drag: 0
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+
+		myMirror = {
+			x: width-5*(width/1220),
+			y: 50*(width/1220),
+			height: 100*(width/1220),
+			width: 0,
+			drag: 0
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+
+		myMirror = {
+			x: width-55*(width/1220),
+			y: 200*(width/1220),
+			height: 0,
+			width: 50*(width/1220),
+			drag: 0
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+
+		myMirror = {
+			x: width-300*(width/1220),
+			y: 225*(width/1220),
+			height: 0,
+			width: 100*(width/1220),
+			drag: 1
+		};
+		mirrors.push(myMirror);
+		mirrorDrag.push(false);
+
+
+		myCircMirror = {
+			x: 400*(width/1220),
+			y: 200*(width/1220),
+			drag: 1
+		};
+		CircMirrors.push(myCircMirror);
+		CircMirrorDrag.push(false);
+
+		//surround the enemy ship with asteroids
+		
+		myAsteroid = {
+			x: ex - 75*(width/1220),
+			y: ey - 180
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: ex - 75*(width/1220),
+			y: ey - 90
+		};
+		a.push(myAsteroid);
+		myAsteroid = { 
+			x: ex - 75*(width/1220),
+			y: ey
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: ex - 75*(width/1220),
+			y: ey + 90
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: ex - 75*(width/1220),
+			y: ey + 180
+		};
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: ex - 15*(width/1220),
+			y: ey + 180
+		};
+		a.push(myAsteroid);
+		a.push(myAsteroid);
+		myAsteroid = {
+			x: ex + 45*(width/1220),
+			y: ey + 180
+		};
+		a.push(myAsteroid);
+		
+
+		//build additional walls
+		myAsteroid = {
+			x: midx + 25*(width/1220),
+        	y: 280*(width/1220)
+		};
+		a.push(myAsteroid);
+		
+		myAsteroid = {
+			x: midx + 25*(width/1220),
+        	y: 400*(width/1220)
+		};
+		a.push(myAsteroid);
+
+		myAsteroid = {
+			x: midx + 110*(width/1220),
+        	y: 490*(width/1220)
+		};
+		a.push(myAsteroid);
+
+		myAsteroid = {
+			x: midx + 180*(width/1220),
+        	y: 490*(width/1220)
+		};
+		a.push(myAsteroid);
+
+		mirrorCount = mirrors.length;
+		CircMirrorCount = CircMirrors.length;
+		init = true;
+
+	}
 	else
 	{
 		mirrors = [];
@@ -2202,7 +2371,7 @@ function LevelFinished()
 {
 	canvas.style.cursor = "auto";
 	var sco = 0;
-	if(levelNumber <= 12) {
+	if(levelNumber <= 13) {
 		for(var i = 0;i<ss.length;i++){
 			var sco = sco + ss[i].fh;
 		}
