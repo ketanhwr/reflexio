@@ -164,6 +164,13 @@ canvas.addEventListener('mouseup', function(evt) {
 	}
 })
 
+canvas.addEventListener('mouseleave', function(evt) {
+	if(sceneNumber == 6)
+	{
+		Level_mouseup();     //??
+	}
+})
+
 var gameTimer;
 var gameSpeed = 25;
 
