@@ -20,6 +20,12 @@ menu_click.onload = function() {
 }
 menu_click.src = "sounds/sound1.wav";
 
+var ray_intersection = new Audio();                     // why loading ??
+ray_intersection.onload = function() {          
+	loading++;
+}
+ray_intersection.src = "sounds/laser.wav";
+
 var mainShip = new Image();
 mainShip.onload = function() {
 	loading++;

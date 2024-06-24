@@ -1635,7 +1635,22 @@ function traceRay()
 
 	var currentAngle = 180.0;
 	var offset;
-
+	
+	for(var i = 0;i < mirrorCount;i++)
+	{
+		var flag;
+		if(checkLine(mirrors[i].x, mirrors[i].y, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height) == 1 && mirrors[i].drag == 1)
+		{
+			flag = true;
+		}
+		else
+		{
+			flag = false;
+		}
+	}
+	
+	
+	
 	let lastAngle; // for preventing infinite ray tracing
 	while(true)
 	{
@@ -1646,7 +1661,15 @@ function traceRay()
 		{
 			break;
 		}
-
+		
+		if (flag === true)
+		{
+		if(volume) 
+		{
+			ray_intersection.play();
+		}
+		}
+		
 		if(wow.isCircular) {
 		var xc = CircMirrors[wow.mirrorIndex].x;
 		var yc = CircMirrors[wow.mirrorIndex].y+50;
@@ -1657,6 +1680,14 @@ function traceRay()
 	    
 	}
 	    else{
+			
+		if (flag === true)
+		{
+		if(volume) 
+		{
+			ray_intersection.play();
+		}
+		}
 	    var x1 = mirrors[wow.mirrorIndex].x;
 		var x2 = mirrors[wow.mirrorIndex].width+x1;
 		var y1 = mirrors[wow.mirrorIndex].y;
@@ -1694,8 +1725,21 @@ function traceRay0()                // for tracing the ray path
 	var rayX = width-750*(width/1220), rayY = 110*(width/1220);         // position of starting point of ray
 	var currentAngle = 225.0;
 	var offset;
-
 	let lastAngle; // for preventing infinite ray tracing
+	
+	for(var i = 0;i < mirrorCount;i++)
+	{
+		var flag;
+		if(checkLine(mirrors[i].x, mirrors[i].y, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height) == 1 && mirrors[i].drag == 1)
+		{
+			flag = true;
+		}
+		else
+		{
+			flag = false;
+		}
+	}
+	
 	while(true)
 	{
 		var wow = intersection0(rayX, rayY, currentAngle);          // checking the intersection
@@ -1705,6 +1749,16 @@ function traceRay0()                // for tracing the ray path
 		{
 			break;
 		}
+		
+		if (flag === true && once === false)
+		{
+		if(volume) 
+		{
+			ray_intersection.play();
+			once = true;
+		}
+		}
+
 		var x1 = mirrors[wow.mirrorIndex].x;
 		var x2 = mirrors[wow.mirrorIndex].width+x1;
 		var y1 = mirrors[wow.mirrorIndex].y;
@@ -1742,6 +1796,19 @@ function traceRay1()                // for tracing the ray path
 	var offset;
 
 	let lastAngle; // for preventing infinite ray tracing
+	
+	for(var i = 0;i < mirrorCount;i++)
+	{
+		var flag;
+		if(checkLine(mirrors[i].x, mirrors[i].y, mirrors[i].x+mirrors[i].width, mirrors[i].y+mirrors[i].height) == 1 && mirrors[i].drag == 1)
+		{
+			flag = true;
+		}
+		else
+		{
+			flag = false;
+		}
+	}
 	while(true)
 	{
 		var wow = intersection1(rayX, rayY, currentAngle);          // checking the intersection
@@ -1750,6 +1817,14 @@ function traceRay1()                // for tracing the ray path
 		if(!wow.intersect)
 		{
 			break;
+		}
+		if (flag === true && once === false)
+		{
+		if(volume) 
+		{
+			ray_intersection.play();
+			once = true;
+		}
 		}
 		var x1 = mirrors[wow.mirrorIndex].x;
 		var x2 = mirrors[wow.mirrorIndex].width+x1;
