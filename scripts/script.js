@@ -13,12 +13,24 @@ var volume = 1;
 var particles = 1;
 var runtime1 = 0;
 
-
 var menu_click = new Audio();                     // why loading ??
 menu_click.onload = function() {          
 	loading++;
 }
 menu_click.src = "sounds/sound1.wav";
+
+availBGM = [
+            "bgm1.mp3",
+            "bgm2.mp3",
+            "bgm3.mp3"
+           ];
+
+var bgm = new Audio();
+var bgmIterator = -1;
+
+bgm.addEventListener('ended', function() {
+    nextBGM();
+});
 
 var mainShip = new Image();
 mainShip.onload = function() {
@@ -453,4 +465,12 @@ function drawRightRoundedRectangle(x, y, width, height, color, lineWidth)
 	gameArena.lineTo(x, y+height);
 	gameArena.lineTo(x, y);
 	gameArena.stroke();
+}
+
+function nextBGM() {
+  if (volume) {
+    bgmIterator = (bgmIterator + 1) % availBGM.length;
+    bgm.src = "sounds/" + availBGM[bgmIterator];
+    bgm.play();
+  }
 }
