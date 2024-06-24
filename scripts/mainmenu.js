@@ -82,7 +82,7 @@ function mainMenu_click()
 		currentScore = 0;
 		sceneNumber = 6;
 		levelNumber = 1;
-		if(gameMode) lives = 1;
+		if(isSurvival()) lives = 1;
 		else lives = 3;
 		clearInterval(gameTimer);
 		update();

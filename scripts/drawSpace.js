@@ -21,7 +21,7 @@ function initSpace()                       // ??
 
 function drawParticles()
 {
-	if(drawParticleFlag && particles)
+	if(drawParticleFlag && particleIsEnabled())
 	{
 		for (var i = 0; i < particleCount; i++)
 		{
@@ -41,7 +41,7 @@ function drawParticles()
 
 function drawParticlesLevel()
 {
-	if(drawParticleFlag && particles)
+	if(drawParticleFlag && particleIsEnabled())
 	{
 		for (var i = 0; i < 50; i++)
 		{
