@@ -1357,7 +1357,8 @@ function drawGUI()
 		else gameArena.drawImage(life1, midx+(280-2)*(width/1220), midy-305*(width/1220));
 	}
 
-	if(eh >= 2.0) {                              // for making the yellow color life line of enemytriangle
+    //creates healthbare for enemy ship.
+	if(eh >= 2.0) {
 		gameArena.shadowBlur = 50;
 		gameArena.shadowColor = "#21E821";
 		gameArena.beginPath();
@@ -1375,6 +1376,8 @@ function drawGUI()
 		gameArena.arc(ex+(30+50*(eh/100.0))*(width/1220), ey-5*(width/1220), 2*(width/1220), 0, 2*Math.PI);
 		gameArena.fill();
 	}
+    
+    //Creates the circular healthbar for your Space Ship.
 	for(var i = 0;i < ss.length;i++) {
 	if(ss[i].fh >= 2.0) {
 		gameArena.shadowBlur = 50;               
@@ -1382,7 +1385,7 @@ function drawGUI()
 		gameArena.beginPath();
 		gameArena.lineWidth = 4;
 		gameArena.strokeStyle = "#21E821";
-		gameArena.arc(ss[i].x+(30+20+20)*(width/1220),ss[i].y-15*(width/1220)+100,90,0,2*Math.PI*(ss[i].fh/100));
+		gameArena.arc(ss[i].x+(30+20+28)*(width/1220),ss[i].y-15*(width/1220)+98,90,0,2*Math.PI*(ss[i].fh/100));
 		gameArena.stroke();
 		if(ss[i].fh<99) {
 		gameArena.beginPath();
@@ -2115,6 +2118,7 @@ function intersection1(rayX, rayY, rayTheta)
 		}
 	}
 }
+
 
 function Level_click()
 {
